@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A new user's journey in a CoE-enabled organisation</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>
+  :root{
+    --purple:#2B1F4D;
+    --ink:#2E3645;
+    --grey:#6B7280;
+    --bg:#FAF9FC;
+    --card:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+  }
+  header{
+    padding:34px 48px 10px 48px;
+  }
+  header h1{
+    font-size:26px;
+    font-weight:700;
+    color:var(--purple);
+    letter-spacing:-0.2px;
+  }
+  header p{
+    margin-top:6px;
+    font-size:14.5px;
+    color:var(--grey);
+    max-width:760px;
+  }
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 18px;
+    padding:14px 48px 4px 48px;
+    font-size:12px;
+    color:var(--grey);
+  }
+  .legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .legend i{
+    width:10px;height:10px;border-radius:3px;display:inline-block;
+  }
+  #chart{
+    position:relative;
+    width:100%;
+    height:70vh;
+    min-height:480px;
+    overflow:hidden;
+    border-top:1px solid #ECE9F3;
+    border-bottom:1px solid #ECE9F3;
+    background:
+      linear-gradient(90deg, rgba(43,31,77,0.035) 1px, transparent 1px) 0 0/28px 28px,
+      linear-gradient(rgba(43,31,77,0.035) 1px, transparent 1px) 0 0/28px 28px,
+      var(--bg);
+    cursor:grab;
+  }
+  #chart.dragging{cursor:grabbing;}
+  svg{display:block;width:100%;height:100%;}
+  .controls{
+    position:absolute;
+    top:14px;
+    right:16px;
+    display:flex;
+    gap:6px;
+    z-index:5;
+  }
+  .controls button{
+    font-family:inherit;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--purple);
+    background:#fff;
+    border:1px solid #DDD8E8;
+    border-radius:9px;
+    padding:7px 12px;
+    cursor:pointer;
+    box-shadow:0 1px 3px rgba(43,31,77,0.08);
+  }
+  .controls button:hover{background:#F3F0FA;}
+  .controls button.icon{
+    width:34px;
+    padding:7px 0;
+    text-align:center;
+    font-size:15px;
+    line-height:1;
+  }
+  .link{
+    fill:none;
+    stroke-width:1.6px;
+    stroke-opacity:0.45;
+  }
+  .node-card{
+    border-radius:12px;
+    padding:9px 12px;
+    background:var(--card);
+    border:1px solid #E7E4EF;
+    box-shadow:0 1px 3px rgba(43,31,77,0.07);
+    height:100%;
+    overflow:hidden;
+  }
+  .node-card .rule{
+    font-size:12.5px;
+    font-weight:650;
+    color:var(--ink);
+    line-height:1.32;
+  }
+  .node-card .so{
+    margin-top:4px;
+    font-size:11.5px;
+    color:var(--grey);
+    line-height:1.35;
+  }
+  .stage-card{
+    border-radius:14px;
+    padding:10px 14px;
+    color:#fff;
+    height:100%;
+    cursor:pointer;
+    box-shadow:0 2px 6px rgba(43,31,77,0.18);
+  }
+  .stage-card .num{
+    font-size:11px;
+    font-weight:700;
+    opacity:0.85;
+    letter-spacing:1px;
+  }
+  .stage-card .name{
+    font-size:15.5px;
+    font-weight:700;
+    line-height:1.2;
+  }
+  .stage-card .ask{
+    margin-top:3px;
+    font-size:11.5px;
+    font-style:italic;
+    opacity:0.9;
+  }
+  .stage-card .chip{
+    display:inline-block;
+    margin-top:6px;
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:0.4px;
+    padding:2px 8px;
+    border-radius:8px;
+    background:rgba(255,255,255,0.22);
+  }
+  .root-card{
+    border-radius:16px;
+    padding:14px 16px;
+    background:var(--purple);
+    color:#fff;
+    height:100%;
+    box-shadow:0 3px 10px rgba(43,31,77,0.3);
+  }
+  .root-card .eyebrow{
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:1.2px;
+    opacity:0.75;
+  }
+  .root-card .say{
+    margin-top:4px;
+    font-size:16px;
+    font-weight:700;
+    line-height:1.25;
+  }
+  .root-card .sub{
+    margin-top:5px;
+    font-size:11.5px;
+    opacity:0.85;
+  }
+  .hint{
+    padding:2px 48px 6px 48px;
+    font-size:11.5px;
+    color:var(--grey);
+  }
+  footer{
+    margin:10px 48px 40px 48px;
+    background:var(--purple);
+    color:#fff;
+    border-radius:14px;
+    padding:16px 22px;
+    font-size:14px;
+    line-height:1.45;
+  }
+  footer b{font-weight:700;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>A new user's journey in a CoE-enabled organisation</h1>
+  <p>A new user joins and needs to create a report. At each step the CoE has already set the rules, so they always know what to do next.</p>
+</header>
+
+<div class="legend" id="legend"></div>
+<div class="hint">Drag to move around, scroll or pinch to zoom, click a stage to expand or collapse it. Use the buttons to expand all, collapse all, or fit the whole map on screen.</div>
+<div id="chart">
+  <div class="controls">
+    <button id="btnExpand">Expand all</button>
+    <button id="btnCollapse">Collapse all</button>
+    <button id="btnFit">Fit</button>
+    <button id="btnZoomIn" class="icon" aria-label="Zoom in">+</button>
+    <button id="btnZoomOut" class="icon" aria-label="Zoom out">−</button>
+  </div>
+</div>
+
+<footer>
+  At every step there is a rule, and the rule tells you what to do next. That is why a new user can get from joining to a published report without asking around. Discipline at the core, flexibility at the edge.
+</footer>
+
+<script>
+const STAGES = [
+  {
+    num:"STAGE 1", name:"Get ready", ask:"\u201cCan I have access?\u201d",
+    colour:"#1F9E94", chip:"Self-service",
+    children:[
+      {rule:"Access needs training first", so:"The CoE points you to the portal. Finish the training, or a quick exam, or sign the company data principles."},
+      {rule:"A short exam at the end", so:"Once you pass, you have access. No need to redo it."},
+      {rule:"Sign the data principles", so:"You know the rules and what you are responsible for before you start."},
+      {rule:"Access granted", so:"You start already knowing how things work here."}
+    ]
+  },
+  {
+    num:"STAGE 2", name:"Get a workspace", ask:"\u201cI need a workspace\u201d",
+    colour:"#D99A2B", chip:"Structure + Policies",
+    children:[
+      {rule:"You cannot create a workspace directly", so:"Only trained users can. You request one through the portal."},
+      {rule:"Naming conventions are enforced", so:"You cannot create a workspace with the wrong name. Policies check it for you."},
+      {rule:"Owner, domain and purpose recorded", so:"Every workspace has an owner from the moment it exists."},
+      {rule:"Every workspace is part of a deployment pipeline", so:"You cannot have a workspace outside a pipeline, and a pipeline cannot have fewer than three stages."},
+      {rule:"Production has its own capacity", so:"Your experiments cannot slow down production reports."}
+    ]
+  },
+  {
+    num:"STAGE 3", name:"Find data", ask:"\u201cWhere\u2019s the data?\u201d",
+    colour:"#4A3B6B", chip:"Trust",
+    children:[
+      {rule:"Search the OneLake catalog", so:"Filter by certified and you find the trusted models."},
+      {rule:"Access by request", so:"You request access and it goes through approval. You get what you need, not everything."},
+      {rule:"Sensitivity labels on the data", so:"You can see how sensitive the data is before you use it."}
+    ]
+  },
+  {
+    num:"STAGE 4", name:"Build", ask:"\u201cCreating the report\u201d",
+    colour:"#8B7BB8", chip:"Self-service + Trust",
+    children:[
+      {rule:"Connect to the certified model", so:"You build on it, not rebuild it. Your numbers match everyone else\u2019s."},
+      {rule:"Start from the template", so:"There is a template and theme you know you should use. Branding is already done."},
+      {rule:"Run the checks before review", so:"Best Practice Analyzer picks up issues early, while they are easy to fix."}
+    ]
+  },
+  {
+    num:"STAGE 5", name:"Ship", ask:"\u201cReady to publish\u201d",
+    colour:"#E8604C", chip:"Discipline + Policies",
+    children:[
+      {rule:"Commit to git, get a review", so:"Every change is tracked. You can always answer who changed what and when."},
+      {rule:"Promote through the pipeline", so:"Dev to test to prod. No manual publishing to production."},
+      {rule:"External sharing only for the approved group", so:"Not blocked for everyone, not open to everyone. A set group who understand the rules can do it."},
+      {rule:"If it is reusable, request endorsement", so:"Your model can be certified so others can build on it too."}
+    ]
+  },
+  {
+    num:"STAGE 6", name:"Keep it alive", ask:"\u201cAfter it ships\u201d",
+    colour:"#2E8B7A", chip:"Discipline",
+    children:[
+      {rule:"You are the recorded owner", so:"When something breaks, people know who to ask."},
+      {rule:"Refresh is monitored", so:"If a refresh fails, someone knows the same day, not when a user complains."},
+      {rule:"Access reviewed, retired when unused", so:"Old workspaces get cleaned up instead of piling up."}
+    ]
+  }
+];
+
+const data = {
+  type:"root",
+  say:"\u201cI need to build a report\u201d",
+  children: STAGES.map(s => ({
+    type:"stage", ...s,
+    children: s.children.map(c => ({type:"leaf", ...c, colour:s.colour}))
+  }))
+};
+
+// legend
+const legend = d3.select("#legend");
+STAGES.forEach(s=>{
+  legend.append("span").html(`<i style="background:${s.colour}"></i>${s.num.replace("STAGE ","")} \u00b7 ${s.name} <span style="opacity:.7">(${s.chip})</span>`);
+});
+
+// sizes
+const CARD_W = {root:230, stage:200, leaf:290};
+const CARD_H = {root:96, stage:96, leaf:78};
+const GAP_X  = {0:70, 1:64, 2:56};      // horizontal gap after each depth
+const NODE_V = 92;                       // vertical spacing between leaves
+const MARGIN = {top:20, left:26, right:40, bottom:20};
+
+const xAt = d => {
+  if (d.depth===0) return 0;
+  if (d.depth===1) return CARD_W.root + GAP_X[0];
+  return CARD_W.root + GAP_X[0] + CARD_W.stage + GAP_X[1];
+};
+const widthOf = d => d.depth===0 ? CARD_W.root : (d.depth===1 ? CARD_W.stage : CARD_W.leaf);
+const heightOf = d => d.depth===0 ? CARD_H.root : (d.depth===1 ? CARD_H.stage : CARD_H.leaf);
+
+const chart = d3.select("#chart");
+const svg = chart.append("svg");
+const gZoom = svg.append("g");            // zoom/pan layer
+const g = gZoom.append("g");              // layout layer (tree margins)
+const gLinks = g.append("g");
+const gNodes = g.append("g");
+
+const zoom = d3.zoom()
+  .scaleExtent([0.25, 2.5])
+  .on("zoom", (event) => gZoom.attr("transform", event.transform))
+  .on("start", () => chart.classed("dragging", true))
+  .on("end",   () => chart.classed("dragging", false));
+svg.call(zoom).on("dblclick.zoom", null);
+
+let layoutSize = {width: 0, height: 0};   // updated on every layout pass
+
+const root = d3.hierarchy(data);
+root.x0 = 0; root.y0 = 0;
+root.descendants().forEach(d => { d._children = d.children; });
+
+const tree = d3.tree().nodeSize([NODE_V, 1])
+  .separation((a, b) => {
+    // stage cards are ~96px tall on a 92px grid, so give sibling stages
+    // extra room; leaves keep the compact spacing
+    if (a.depth === 1 && b.depth === 1) return 1.45;
+    return a.parent === b.parent ? 1 : 1.15;
+  });
+
+function diagonal(s, t){
+  const sx = xAt(s) + widthOf(s);
+  const sy = s.x + heightOf(s)/2;
+  const tx = xAt(t);
+  const ty = t.x + heightOf(t)/2;
+  const mx = (sx + tx)/2;
+  return `M${sx},${sy} C${mx},${sy} ${mx},${ty} ${tx},${ty}`;
+}
+
+function update(source){
+  tree(root);
+
+  const nodes = root.descendants();
+  const links = root.links();
+
+  // vertical extent and re-centre
+  let minX = Infinity, maxX = -Infinity;
+  nodes.forEach(d => { minX = Math.min(minX, d.x); maxX = Math.max(maxX, d.x); });
+  const shift = -minX + MARGIN.top;
+  const height = (maxX - minX) + CARD_H.leaf + MARGIN.top + MARGIN.bottom + 20;
+  const width = CARD_W.root + GAP_X[0] + CARD_W.stage + GAP_X[1] + CARD_W.leaf + MARGIN.left + MARGIN.right;
+
+  layoutSize = {width, height};
+  g.attr("transform", `translate(${MARGIN.left},${shift})`);
+
+  // ----- nodes -----
+  const node = gNodes.selectAll("g.node")
+    .data(nodes, d => d.data.rule ? d.data.rule : (d.data.name || "root"));
+
+  const nodeEnter = node.enter().append("g")
+    .attr("class","node")
+    .attr("transform", d => `translate(${xAt(source)},${source.x0 ?? source.x})`)
+    .style("opacity", 0);
+
+  nodeEnter.append("foreignObject")
+    .attr("width", d => widthOf(d))
+    .attr("height", d => heightOf(d))
+    .append("xhtml:div")
+    .attr("class", d => d.depth===0 ? "root-card" : (d.depth===1 ? "stage-card" : "node-card"))
+    .style("background", d => d.depth===1 ? d.data.colour : null)
+    .html(d => {
+      if (d.depth===0){
+        return `<div class="eyebrow">NEW USER</div>
+                <div class="say">${d.data.say}</div>
+                <div class="sub">First week, no idea how things work here yet</div>`;
+      }
+      if (d.depth===1){
+        return `<div class="num">${d.data.num}</div>
+                <div class="name">${d.data.name}</div>
+                <div class="ask">${d.data.ask}</div>
+                <span class="chip">${d.data.chip}</span>`;
+      }
+      return `<div class="rule" style="border-left:3px solid ${d.data.colour}; padding-left:8px;">${d.data.rule}</div>
+              <div class="so">${d.data.so}</div>`;
+    });
+
+  nodeEnter.filter(d => d.depth===1)
+    .on("click", (event,d) => {
+      d.children = d.children ? null : d._children;
+      update(d);
+    });
+
+  const nodeMerge = nodeEnter.merge(node);
+  nodeMerge.transition().duration(400)
+    .attr("transform", d => `translate(${xAt(d)},${d.x})`)
+    .style("opacity", 1);
+
+  node.exit().transition().duration(300)
+    .attr("transform", d => `translate(${xAt(source)},${source.x})`)
+    .style("opacity", 0)
+    .remove();
+
+  // ----- links -----
+  const link = gLinks.selectAll("path.link")
+    .data(links, d => (d.target.data.rule||"") + (d.target.data.name||""));
+
+  link.enter().append("path")
+    .attr("class","link")
+    .attr("stroke", d => d.target.depth===1 ? "#2B1F4D" : d.target.data.colour)
+    .attr("d", d => diagonal(d.source, d.source))
+    .style("opacity",0)
+    .merge(link)
+    .transition().duration(400)
+    .attr("d", d => diagonal(d.source, d.target))
+    .style("opacity",1);
+
+  link.exit().transition().duration(300).style("opacity",0).remove();
+
+  nodes.forEach(d => { d.x0 = d.x; });
+}
+
+update(root);
+
+// ----- controls -----
+function fit(duration = 450){
+  const box = chart.node().getBoundingClientRect();
+  const pad = 30;
+  const scale = Math.min(
+    (box.width  - pad*2) / layoutSize.width,
+    (box.height - pad*2) / layoutSize.height,
+    1.6
+  );
+  const tx = (box.width  - layoutSize.width  * scale) / 2;
+  const ty = (box.height - layoutSize.height * scale) / 2;
+  svg.transition().duration(duration)
+     .call(zoom.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
+}
+
+function setAll(expand){
+  root.descendants().forEach(d => {
+    if (d.depth === 1) d.children = expand ? d._children : null;
+  });
+  update(root);
+  setTimeout(() => fit(), 420);
+}
+
+d3.select("#btnExpand").on("click", () => setAll(true));
+d3.select("#btnCollapse").on("click", () => setAll(false));
+d3.select("#btnFit").on("click", () => fit());
+d3.select("#btnZoomIn").on("click", () => svg.transition().duration(250).call(zoom.scaleBy, 1.3));
+d3.select("#btnZoomOut").on("click", () => svg.transition().duration(250).call(zoom.scaleBy, 1/1.3));
+
+window.addEventListener("resize", () => fit(0));
+
+// start fitted to the viewport
+setTimeout(() => fit(0), 60);
+</script>
+</body>
+</html>
