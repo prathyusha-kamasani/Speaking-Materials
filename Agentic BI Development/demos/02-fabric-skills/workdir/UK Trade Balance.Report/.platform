@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.1.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "UK Trade Balance"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ca1893b2-b7ae-4b7d-85b4-2fbc4934b92c"
+  }
+}

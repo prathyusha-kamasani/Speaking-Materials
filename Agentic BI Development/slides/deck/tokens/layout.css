@@ -1,0 +1,47 @@
+/* LAYOUT TOKENS
+ *
+ * Page-level dimensions: how wide content runs, how far it sits from the
+ * viewport edge, and how long a line of text is allowed to get. These are not
+ * spacing values and do not belong on the spacing scale.
+ *
+ * BREAKPOINTS are listed here as custom properties for documentation and for
+ * script that needs them, but a media query cannot read a custom property.
+ * The literal values in @media rules must be kept in step with this list by
+ * hand:
+ *   480px  phone       single column, tighter gutter
+ *   600px  phone wide  home hero and architecture strip reflow
+ *   800px  tablet      the main multi-column -> single-column switch
+ *   900px  laptop      home hero splits
+ */
+
+:root {
+  /* --- Content width ----------------------------------------------------- */
+  --dn-layout-max: 1080px;          /* the shell */
+  --dn-layout-article-max: 760px;   /* long-form column */
+  --dn-layout-dialog-max: 1200px;
+
+  /* --- Gutters ----------------------------------------------------------- */
+  --dn-layout-gutter: 40px;
+  --dn-layout-gutter-sm: 32px;      /* at and below the 480px breakpoint */
+
+  /* --- Fixed chrome ------------------------------------------------------ */
+  --dn-layout-header-height: 80px;
+  --dn-layout-header-height-sm: 72px;
+  --dn-layout-topbar-height: 4px;   /* the accent rule */
+
+  /* --- Measure ----------------------------------------------------------- */
+  /* Line length, in characters. Anything longer than --dn-measure-prose is
+     hard to track back to the start of the next line. */
+  --dn-measure-heading: 16ch;
+  --dn-measure-heading-wide: 18ch;
+  --dn-measure-narrow: 36ch;
+  --dn-measure-body: 58ch;
+  --dn-measure-lead: 62ch;
+  --dn-measure-prose: 64ch;
+
+  /* --- Breakpoints (documentation; see the note above) ------------------- */
+  --dn-bp-phone: 480px;
+  --dn-bp-phone-wide: 600px;
+  --dn-bp-tablet: 800px;
+  --dn-bp-laptop: 900px;
+}

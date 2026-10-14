@@ -1,0 +1,73 @@
+/* COLOR PRIMITIVES
+ *
+ * The raw Data Nova palette and nothing else. These are the only literal
+ * colour values in the system; every other colour token in tokens/ resolves
+ * to one of them.
+ *
+ * Components must NOT reference these directly. They carry no meaning on
+ * their own and no guarantee of contrast against any surface: --dn-teal is
+ * 2.2:1 on the page background, which is fine for a decorative fill and a
+ * failure for text. Use the semantic tokens in theme.css, which are chosen
+ * per mode and contrast-checked.
+ *
+ * Naming: --dn-<colour>-<step>, where a bare name is the brand value and a
+ * step suffix is a deliberate lightening or darkening of it.
+ */
+
+:root {
+  /* --- Brand ------------------------------------------------------------- */
+  --dn-navy: #1A1530;          /* primary ink, dark surfaces, button fill */
+  --dn-teal: #20B8A8;          /* the accent; a fill, not an ink */
+  --dn-violet: #5C4E8A;        /* secondary accent */
+  --dn-nova-gold: #E8A33D;     /* highlight, used sparingly */
+
+  /* --- Neutrals ---------------------------------------------------------- */
+  --dn-white: #FFFFFF;
+  --dn-off-white: #F2F2F2;     /* the page background */
+  --dn-lavender: #F0EEF8;      /* tinted surface, the binding one for contrast */
+  --dn-beige: #C9BFBA;         /* warm neutral, dark-mode graphics */
+  --dn-mid-grey: #888888;
+  --dn-charcoal: #4A4A4A;      /* body ink */
+
+  /* --- Brand, darkened for use as ink on light surfaces ------------------ */
+  /* Solved by hand against #FFFFFF, #F2F2F2 and #F0EEF8; lavender binds. */
+  --dn-teal-700: #0E6B62;      /* 5.55:1 on lavender */
+  --dn-gold-700: #8A5A12;      /* 5.15:1 on lavender */
+
+  /* --- Brand, lightened for use as ink on dark surfaces ------------------ */
+  --dn-violet-300: #A99BD4;    /* 5.77:1 on #2A2447 */
+  --dn-navy-100: #D8D5E0;      /* dark-mode body ink */
+  --dn-navy-200: #9A94AD;      /* dark-mode muted ink */
+  --dn-navy-700: #2A2447;      /* dark-mode tinted surface */
+  --dn-navy-800: #221C3D;      /* dark-mode raised surface */
+  --dn-navy-900: #110E1E;      /* deepest surface, document bookends */
+
+  /* --- Status ------------------------------------------------------------ */
+  /* Bare values are fills. The -700 / -300 steps are the ink variants,
+     because none of the bare values clears 4.5:1 as text on a light surface
+     (green 1.88, amber 1.59, red 3.41). */
+  --dn-success: #2ECC71;
+  --dn-success-700: #17703D;   /* 5.35:1 on lavender */
+  --dn-warning: #F7B731;
+  --dn-warning-700: #8A5A12;
+  --dn-error: #E74C3C;
+  --dn-error-700: #C0392B;     /* 4.74:1 on lavender, the tightest in the set */
+  --dn-error-300: #EF8478;     /* dark-mode error ink */
+
+  /* --- Tints -------------------------------------------------------------
+   * Low-opacity washes of a palette colour, for badge and hover grounds. They
+   * are FILLS: nothing meaningful is read off a tint, and none of them clears
+   * 3:1 on its own. Documented in guidelines/colors/tints.html.
+   * For a computed tint of a semantic token, prefer color-mix() at the point
+   * of use over adding a rung here.
+   */
+  --dn-navy-tint-08: rgba(26, 21, 48, 0.08);
+  --dn-navy-tint-10: rgba(26, 21, 48, 0.1);
+  --dn-teal-tint-15: rgba(32, 184, 168, 0.15);
+  --dn-violet-tint-15: rgba(92, 78, 138, 0.15);
+
+  /* --- Muted greys for meaningful strokes -------------------------------- */
+  /* Violet-tinted so a 3:1 border still reads as part of the palette. */
+  --dn-grey-500: #7A7490;      /* 3.87:1 on lavender */
+  --dn-grey-400: #847EA0;      /* 3.80:1 on #2A2447 */
+}

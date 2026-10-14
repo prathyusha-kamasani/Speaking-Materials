@@ -1,0 +1,17 @@
+/* BORDER WIDTH TOKENS
+ *
+ * Widths only; border COLOUR is semantic and lives in theme.css
+ * (--dn-border, --dn-border-strong, --dn-border-input).
+ *
+ * No hairlines below 1px: they disappear on paper and on non-integer device
+ * pixel ratios.
+ *
+ * The focus ring's width is NOT here. It lives with the rest of the focus
+ * decision as --dn-focus-width in theme.css, so the indicator is described in
+ * one place.
+ */
+
+:root {
+  --dn-border-width: 1px;         /* the default for every edge */
+  --dn-border-width-thick: 2px;   /* an edge that carries emphasis */
+}

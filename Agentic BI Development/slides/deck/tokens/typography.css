@@ -1,0 +1,244 @@
+/* TYPOGRAPHY TOKENS
+ *
+ * Two tiers, per the token model:
+ *   1. PRIMITIVES  --dn-font-size-*, --dn-font-weight-*, --dn-leading-*,
+ *                  --dn-tracking-*. The raw scale, numbered rather than named
+ *                  for a use. Not referenced from a component directly.
+ *   2. SEMANTIC    --dn-text-<role>-size / -weight / -line. What a component
+ *                  asks for. Each points at a primitive, so retuning the scale
+ *                  retunes every role sitting on it.
+ *
+ * TYPE IS THE ONE LAYER THAT IS NOT CONTEXT-FREE
+ * ----------------------------------------------
+ * Colour, spacing, radius and motion mean the same thing wherever they are
+ * used. Type size does not: a 48px heading is right in a browser, small on a
+ * 1920x1080 slide read across a room, and enormous on A4. Before this file
+ * had contexts, the slide templates and the one-pagers each wrote their own
+ * literal px sizes and ignored the type tokens completely, which is how the
+ * scale drifted out of the system.
+ *
+ * So the ROLE NAMES are fixed and their VALUES change per output context,
+ * exactly the way --dn-surface changes under data-theme:
+ *
+ *   (default)                    screen documents and web pages
+ *   data-type-context="slide"    1920x1080 decks, read at distance
+ *   data-type-context="print"    A4 and PDF client deliverables
+ *
+ * Put the attribute on <body>, next to data-theme:
+ *   <body data-theme="dark" data-type-context="slide">
+ *
+ * Weights, line heights and tracking ARE context-free and are not repeated in
+ * the context blocks.
+ */
+
+:root {
+  /* --- PRIMITIVE: families ------------------------------------------------ */
+  --dn-font-heading: 'General Sans', 'Avenir Next', 'Segoe UI', sans-serif;
+  --dn-font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --dn-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* --- PRIMITIVE: screen size scale --------------------------------------- */
+  /* rem-based on a 16px root. 12px is the floor for screen documents. */
+  --dn-font-size-50: 0.75rem;      /* 12px */
+  --dn-font-size-100: 0.8125rem;   /* 13px */
+  --dn-font-size-200: 0.875rem;    /* 14px */
+  --dn-font-size-300: 1rem;        /* 16px */
+  --dn-font-size-400: 1.0625rem;   /* 17px */
+  --dn-font-size-500: 1.125rem;    /* 18px */
+  --dn-font-size-600: 1.25rem;     /* 20px */
+  --dn-font-size-700: 1.375rem;    /* 22px */
+  --dn-font-size-800: 1.5rem;      /* 24px */
+  --dn-font-size-900: 1.75rem;     /* 28px */
+  --dn-font-size-1000: 2rem;       /* 32px */
+  --dn-font-size-1100: 4rem;       /* 64px */
+
+  /* Fluid steps, for pages that reflow. min is the 360px-viewport size, max
+     the 1080px-and-up size. A fixed-size output (slide, print) never uses
+     these, which is why they are primitives and not roles. */
+  --dn-font-size-fluid-lg: clamp(2rem, 4vw, 2.75rem);        /* 32 -> 44 */
+  --dn-font-size-fluid-xl: clamp(2.75rem, 4.25vw, 3.6rem);   /* 44 -> 58 */
+  --dn-font-size-fluid-2xl: clamp(2.5rem, 6vw, 4.75rem);     /* 40 -> 76 */
+
+  /* --- PRIMITIVE: slide size scale ---------------------------------------- */
+  /* Authored at 1920x1080 and scaled into the frame. 24px is the floor:
+     anything smaller is unreadable from the back of a room. */
+  --dn-slide-size-100: 24px;    /* mono labels, credit line */
+  --dn-slide-size-200: 32px;    /* dense body */
+  --dn-slide-size-300: 40px;    /* body */
+  --dn-slide-size-400: 64px;    /* slide heading */
+  --dn-slide-size-500: 72px;    /* large slide heading */
+  --dn-slide-size-600: 88px;    /* section divider */
+  --dn-slide-size-700: 112px;   /* deck title */
+
+  /* --- PRIMITIVE: print size scale ---------------------------------------- */
+  /* Physical units. 12pt is the body floor on paper; short labels and legal
+     lines may drop to 9pt but nothing else may. */
+  --dn-print-size-100: 9pt;
+  --dn-print-size-200: 10pt;
+  --dn-print-size-300: 12pt;    /* body */
+  --dn-print-size-400: 14pt;
+  --dn-print-size-500: 16pt;
+  --dn-print-size-600: 20pt;
+  --dn-print-size-700: 28pt;
+
+  /* --- PRIMITIVE: weights (context-free) ---------------------------------- */
+  /* Only these four are loaded (see fonts.css). Any other value synthesises. */
+  --dn-font-weight-regular: 400;
+  --dn-font-weight-medium: 500;
+  --dn-font-weight-semibold: 600;
+  --dn-font-weight-bold: 700;
+
+  /* --- PRIMITIVE: line heights (context-free) ----------------------------- */
+  --dn-leading-none: 1;
+  --dn-leading-flat: 1.02;
+  --dn-leading-slide: 1.08;
+  --dn-leading-tight: 1.12;
+  --dn-leading-snug: 1.2;
+  --dn-leading-heading: 1.3;
+  --dn-leading-lede: 1.45;
+  --dn-leading-normal: 1.5;
+  --dn-leading-body: 1.65;
+
+  /* --- PRIMITIVE: tracking (context-free) --------------------------------- */
+  --dn-tracking-normal: 0;
+  --dn-tracking-wide: 0.06em;
+  --dn-tracking-wider: 0.08em;
+  --dn-tracking-widest: 0.1em;
+  --dn-tracking-slide-label: 0.12em;
+
+  /* --- SEMANTIC ROLES: screen documents (the default) --------------------- */
+  --dn-text-h1-size: var(--dn-font-size-fluid-2xl);
+  --dn-text-h1-weight: var(--dn-font-weight-bold);
+  --dn-text-h1-line: var(--dn-leading-flat);
+
+  /* For an h1 set over several lines, which needs a smaller step. */
+  --dn-text-h1-compact-size: var(--dn-font-size-fluid-xl);
+
+  --dn-text-h2-size: var(--dn-font-size-fluid-lg);
+  --dn-text-h2-weight: var(--dn-font-weight-bold);
+  --dn-text-h2-line: var(--dn-leading-tight);
+
+  --dn-text-h3-size: var(--dn-font-size-800);
+  --dn-text-h3-weight: var(--dn-font-weight-semibold);
+  --dn-text-h3-line: var(--dn-leading-heading);
+
+  --dn-text-h4-size: var(--dn-font-size-500);
+  --dn-text-h4-weight: var(--dn-font-weight-semibold);
+  --dn-text-h4-line: var(--dn-leading-lede);
+
+  --dn-text-body-size: var(--dn-font-size-300);
+  --dn-text-body-weight: var(--dn-font-weight-regular);
+  --dn-text-body-line: var(--dn-leading-body);
+
+  /* Long-form article body: one step up from UI body, for reading at length. */
+  --dn-text-prose-size: var(--dn-font-size-400);
+  --dn-text-prose-line: var(--dn-leading-body);
+
+  /* Intro paragraph under a heading. */
+  --dn-text-lead-size: var(--dn-font-size-500);
+  --dn-text-lead-line: var(--dn-leading-body);
+
+  /* Article standfirst: heading face, larger, set tighter than body. */
+  --dn-text-lede-size: var(--dn-font-size-700);
+  --dn-text-lede-line: var(--dn-leading-lede);
+
+  --dn-text-quote-size: var(--dn-font-size-600);
+  --dn-text-quote-line: var(--dn-leading-heading);
+
+  --dn-text-small-size: var(--dn-font-size-200);
+  --dn-text-small-weight: var(--dn-font-weight-regular);
+  --dn-text-small-line: var(--dn-leading-normal);
+
+  /* Uppercase mono labels: eyebrows, table headers, metadata keys. */
+  --dn-text-label-size: var(--dn-font-size-100);
+  --dn-text-label-weight: var(--dn-font-weight-bold);
+  --dn-text-label-line: var(--dn-leading-normal);
+  --dn-text-label-tracking: var(--dn-tracking-wide);
+
+  /* The floor. Legal lines, chart tick labels, badge text. */
+  --dn-text-micro-size: var(--dn-font-size-50);
+  --dn-text-micro-line: var(--dn-leading-normal);
+
+  --dn-text-code-size: var(--dn-font-size-200);
+  --dn-text-code-weight: var(--dn-font-weight-regular);
+  --dn-text-code-line: var(--dn-leading-normal);
+
+  /* Big figures set in the heading face on the display line height. */
+  --dn-text-stat-size: var(--dn-font-size-1000);
+  --dn-text-stat-lg-size: var(--dn-font-size-1100);
+  --dn-text-stat-sm-size: var(--dn-font-size-900);
+  --dn-text-stat-weight: var(--dn-font-weight-bold);
+  --dn-text-stat-line: var(--dn-leading-none);
+}
+
+/* --- SEMANTIC ROLES: slides -----------------------------------------------
+ * Rhythm per slides/README.md: title 112, section 88, heading 64 to 72,
+ * body 32 to 40, mono labels 24. Nothing below 24.
+ */
+[data-type-context="slide"] {
+  --dn-text-h1-size: var(--dn-slide-size-700);
+  --dn-text-h1-line: var(--dn-leading-slide);
+  --dn-text-h1-compact-size: var(--dn-slide-size-600);
+
+  --dn-text-h2-size: var(--dn-slide-size-500);
+  --dn-text-h2-line: var(--dn-leading-slide);
+
+  --dn-text-h3-size: var(--dn-slide-size-400);
+  --dn-text-h3-line: var(--dn-leading-tight);
+
+  --dn-text-h4-size: var(--dn-slide-size-300);
+  --dn-text-h4-line: var(--dn-leading-snug);
+
+  --dn-text-body-size: var(--dn-slide-size-300);
+  --dn-text-prose-size: var(--dn-slide-size-300);
+  --dn-text-lead-size: var(--dn-slide-size-300);
+  --dn-text-lede-size: var(--dn-slide-size-400);
+  --dn-text-quote-size: var(--dn-slide-size-400);
+
+  --dn-text-small-size: var(--dn-slide-size-200);
+  --dn-text-code-size: var(--dn-slide-size-200);
+
+  /* The floor. A slide has no micro tier: 24px is as small as it goes. */
+  --dn-text-label-size: var(--dn-slide-size-100);
+  --dn-text-label-tracking: var(--dn-tracking-slide-label);
+  --dn-text-micro-size: var(--dn-slide-size-100);
+
+  --dn-text-stat-size: var(--dn-slide-size-600);
+  --dn-text-stat-lg-size: var(--dn-slide-size-700);
+  --dn-text-stat-sm-size: var(--dn-slide-size-500);
+}
+
+/* --- SEMANTIC ROLES: print -----------------------------------------------
+ * A4 and PDF client deliverables. Points, not pixels, because the output is
+ * physical. 12pt body floor; 9pt is for short labels only.
+ */
+[data-type-context="print"] {
+  --dn-text-h1-size: var(--dn-print-size-700);
+  --dn-text-h1-line: var(--dn-leading-tight);
+  --dn-text-h1-compact-size: var(--dn-print-size-600);
+
+  --dn-text-h2-size: var(--dn-print-size-600);
+  --dn-text-h2-line: var(--dn-leading-snug);
+
+  --dn-text-h3-size: var(--dn-print-size-500);
+  --dn-text-h3-line: var(--dn-leading-heading);
+
+  --dn-text-h4-size: var(--dn-print-size-400);
+  --dn-text-h4-line: var(--dn-leading-lede);
+
+  --dn-text-body-size: var(--dn-print-size-300);
+  --dn-text-prose-size: var(--dn-print-size-300);
+  --dn-text-lead-size: var(--dn-print-size-400);
+  --dn-text-lede-size: var(--dn-print-size-500);
+  --dn-text-quote-size: var(--dn-print-size-400);
+
+  --dn-text-small-size: var(--dn-print-size-200);
+  --dn-text-code-size: var(--dn-print-size-200);
+
+  --dn-text-label-size: var(--dn-print-size-100);
+  --dn-text-micro-size: var(--dn-print-size-100);
+
+  --dn-text-stat-size: var(--dn-print-size-700);
+  --dn-text-stat-lg-size: var(--dn-print-size-700);
+  --dn-text-stat-sm-size: var(--dn-print-size-600);
+}

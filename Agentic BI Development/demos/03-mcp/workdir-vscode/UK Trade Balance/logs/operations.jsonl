@@ -1,0 +1,1 @@
+{"v": 1, "ts": "2026-10-13T21:19:23+00:00", "op": "deploy", "status": "failed", "actor": "deploy_fabric.py", "detail": "workspace=<id> name=UK Trade Balance (MCP build) parts=14 mode=create id=? src=c7de2cd618a4", "refs": {"target": "other"}}

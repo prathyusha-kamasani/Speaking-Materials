@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic BI Development</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="deck.css">
+</head>
+<body data-type-context="slide">
+<div class="frame" id="frame">
+<section class="slide opener" id="s1" data-surface="warm">
+<div class="center-v">
+  <div class="h1">Agentic BI Development</div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">01 / 55</div><template class="notes">• Welcome
+• What it takes to trust an agent's BI work</template></section>
+<section class="slide" id="s2">
+<div class="bye">
+  <div class="portrait-ring"><img class="portrait" src="assets/prathy.webp" alt="Prathy Kamasani"></div>
+  <div class="bye-text">
+    <div class="eyebrow">About me</div>
+    <div class="h1c" style="margin-top:16px">Prathy Kamasani</div>
+    <div class="facts stagger" style="margin-top:40px"><div class="fact"><i data-lucide="briefcase" class="icon ink-accent"></i><div class="body">Solopreneur @ Data Nova, specialising in Microsoft Fabric and Power BI</div></div><div class="fact"><i data-lucide="award" class="icon ink-accent"></i><div class="body">Microsoft MVP</div></div><div class="fact"><i data-lucide="users" class="icon ink-accent"></i><div class="body">London Microsoft Fabric User Group organiser</div></div><div class="fact"><i data-lucide="mic" class="icon ink-accent"></i><div class="body">Blogger, speaker and budding YouTuber</div></div><div class="fact"><i data-lucide="map-pin" class="icon ink-accent"></i><div class="body">Remote first, lives in the UK and the Netherlands</div></div></div>
+    <div class="contact" style="margin-top:48px">
+      <div class="body"><i data-lucide="globe" class="icon ink-accent"></i>data-nova.io</div>
+      <div class="body"><i data-lucide="user-round" class="icon ink-accent"></i>linkedin.com/in/prathy</div>
+    </div>
+  </div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">02 / 55</div><template class="notes">• Solopreneur at Data Nova: Fabric and Power BI
+• MVP, London Fabric user group, blog, talks, YouTube
+• Everything else is on LinkedIn</template></section>
+<section class="slide" id="s3">
+<div class="center-v">
+  <div class="eyebrow">This session</div>
+  <div class="h1c" style="margin-top:24px">Agentic BI Development</div>
+  <div class="h4 ink-accent" style="margin-top:24px">Letting AI agents build your Fabric semantic models and reports</div>
+  <div class="body stagger" style="margin-top:48px;max-width:1400px;line-height:1.5">
+    <div>An AI agent can build a real semantic model and report from a written spec, if you know how to brief it and how to check its work.</div>
+    <div style="margin-top:24px">The interesting part is not the prompt. It is a spec it can act on without guessing, a quality bar set before it starts, and a proper review of what it built.</div>
+  </div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">03 / 55</div><template class="notes">• An agent can build a real model and report from a spec
+• What makes it reliable: a clear spec, a bar set before it starts, a proper review
+• You leave knowing what to check</template></section>
+<section class="slide" id="s4">
+<div class="center-v">
+  <div class="eyebrow">Hands up</div>
+  <div class="h2" style="margin-top:48px;max-width:1500px"><span data-morph="hands-q1" style="display:inline-block">Who uses AI for anything: recipes, holiday plans, emails?</span></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">04 / 55</div><template class="notes">• Show of hands: AI for anything at all
+• Most hands go up</template></section>
+<section class="slide" id="s5">
+<div class="center-v">
+  <div class="eyebrow">Hands up</div>
+  <div class="body muted" style="margin-top:48px;max-width:1500px"><span data-morph="hands-q1" style="display:inline-block">Who uses AI for anything: recipes, holiday plans, emails?</span></div>
+  <div class="h2 fresh" style="margin-top:40px;max-width:1500px">Who uses it for BI work?</div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">05 / 55</div><template class="notes">• Now: AI in your BI work
+• Fewer hands. That gap is today</template></section>
+<section class="slide opener" id="s6" data-surface="warm">
+<div class="eyebrow">Agenda</div>
+<div class="agenda-list dense"><div class="chap"><div class="chap-num"><span data-morph="chap-01" style="display:inline-block">01</span></div><div><div class="h3"><span data-morph="chapt-01" style="display:inline-block">What is BI development?</span></div><div class="small muted" style="margin-top:4px">Six steps from a question to a trusted report</div></div></div><div class="chap"><div class="chap-num"><span data-morph="chap-02" style="display:inline-block">02</span></div><div><div class="h3"><span data-morph="chapt-02" style="display:inline-block">Working with AI</span></div><div class="small muted" style="margin-top:4px">Context, skills, rules, algorithms, loops, hooks, gates, MCP</div></div></div><div class="chap"><div class="chap-num"><span data-morph="chap-03" style="display:inline-block">03</span></div><div><div class="h3"><span data-morph="chapt-03" style="display:inline-block">Agent roles</span></div><div class="small muted" style="margin-top:4px">Operator, builder, orchestrator, and you</div></div></div><div class="chap"><div class="chap-num"><span data-morph="chap-04" style="display:inline-block">04</span></div><div><div class="h3"><span data-morph="chapt-04" style="display:inline-block">Building the trade balance report</span></div><div class="small muted" style="margin-top:4px">Chat, Fabric skills, MCP, my setup, full delegation</div></div></div><div class="chap"><div class="chap-num"><span data-morph="chap-05" style="display:inline-block">05</span></div><div><div class="h3"><span data-morph="chapt-05" style="display:inline-block">How I built the tool</span></div><div class="small muted" style="margin-top:4px">Specs, engine, tests, prompts, deliverables</div></div></div><div class="chap"><div class="chap-num"><span data-morph="chap-06" style="display:inline-block">06</span></div><div><div class="h3"><span data-morph="chapt-06" style="display:inline-block">Cost and limits</span></div><div class="small muted" style="margin-top:4px">Time, tokens, and what still needs a person</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">06 / 55</div><template class="notes">• Six parts
+• Concepts first, then one brief through different tools, then how I built mine
+• Last: cost, and what still needs a person</template></section>
+<section class="slide opener" id="s7" data-surface="warm">
+<div class="sect">
+  <div class="sect-num" aria-hidden="true"><span data-morph="chap-01" style="display:inline-block">01</span></div>
+  <div class="sect-title"><div class="h1c">What is BI development?</div><div class="body sect-sub">Six steps, and most of the time is not in the visuals.</div></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">07 / 55</div><template class="notes">• Before agents: what the job is</template></section>
+<section class="slide" id="s8">
+<div class="eyebrow">01 &middot; BI development</div>
+<div class="h2">From a question to a trusted report</div>
+<div class="grid3 mt48" style="grid-template-rows:repeat(2, 1fr);gap:48px"><div class="card "><div class="label">01</div><div class="h4" style="margin-top:16px">Discovery</div><div class="small" style="margin-top:16px">Users, questions, acceptance criteria</div></div><div class="card "><div class="label">02</div><div class="h4" style="margin-top:16px">Design</div><div class="small" style="margin-top:16px">Layout, sketch, mockup</div></div><div class="card "><div class="label">03</div><div class="h4" style="margin-top:16px">Build</div><div class="small" style="margin-top:16px">Model changes, pages, visuals, theme</div></div><div class="card "><div class="label">04</div><div class="h4" style="margin-top:16px">Test</div><div class="small" style="margin-top:16px">Numbers, render, interaction</div></div><div class="card "><div class="label">05</div><div class="h4" style="margin-top:16px">Deploy</div><div class="small" style="margin-top:16px">Workspace, binding, refresh</div></div><div class="card "><div class="label">06</div><div class="h4" style="margin-top:16px">Govern</div><div class="small" style="margin-top:16px">Sign-off, audit trail, changes</div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">08 / 55</div><template class="notes">• Six steps, with or without an agent
+• Ask who does each one today
+• Discovery, Test and Govern are where trust is earned, and where agents are weakest
+• Most of the time is not in Build</template></section>
+<section class="slide opener" id="s9" data-surface="warm">
+<div class="sect">
+  <div class="sect-num" aria-hidden="true"><span data-morph="chap-02" style="display:inline-block">02</span></div>
+  <div class="sect-title"><div class="h1c">Working with AI</div><div class="body sect-sub">A capable graduate on day one</div></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">09 / 55</div><template class="notes">• An agent can help with every step
+• First: what kind of colleague are we handing work to</template></section>
+<section class="slide" id="s10">
+<div class="eyebrow">02 &middot; Working with AI</div>
+<div class="h2">Treat it like a new graduate</div>
+<div class="grid3 mt48 stagger" style="align-items:stretch"><div class="card roomy"><i data-lucide="graduation-cap" class="icon-xl "></i><div class="h4" style="margin-top:32px">Knows a lot</div><div class="small" style="margin-top:16px">DAX, Power BI, Fabric, public documentation</div></div><div class="card roomy"><i data-lucide="building-2" class="icon-xl "></i><div class="h4" style="margin-top:32px">Not how you work</div><div class="small" style="margin-top:16px">Your model, your names, your rules, your sign-offs</div></div><div class="card roomy"><i data-lucide="list-checks" class="icon-xl ink-accent"></i><div class="h4" style="margin-top:32px">So you give it</div><div class="small" style="margin-top:16px">Context, recipes, limits, and someone who checks</div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">10 / 55</div><template class="notes">• Knows the tools and the public docs
+• Does not know your model, your names, your sign-offs
+• So you tell it, give it recipes, set limits, check its work</template></section>
+<section class="slide" id="s11">
+<div class="eyebrow">02 &middot; Example 1</div>
+<div class="h2">Plain chat</div>
+<div class="ex mt48 wide"><div class="stack"><video class="clip" data-slot="example-1" data-playlist="media/chatVideo.m4v" data-rates="1" src="media/chatVideo.m4v#t=0.5" controls preload="auto" playsinline></video></div><div class="card roomy stretch"><div class="label">Setup</div><div class="body" style="margin-top:12px;line-height:1.4">Claude Code, no skills, no access to the model</div><div class="split"><div class="label ink-ok">Pro</div><div class="body" style="margin-top:12px;line-height:1.4">Zero setup, fast for DAX</div></div><div class="split"><div class="label ink-warn">Con</div><div class="body" style="margin-top:12px;line-height:1.4">Guesses table and column names</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">11 / 55</div><template class="notes">• What most of us do today. P to play
+• No skills, no access to the model
+• First prompt invents table names. With the schema pasted, it gets them right</template></section>
+<section class="slide" id="s12">
+<div class="eyebrow">02 &middot; Example 1</div>
+<div class="h2">Without the schema, then with it</div>
+<div class="grid2 mt32" style="gap:32px;align-items:stretch">
+  <div class="card codecard"><div class="label">Prompt 1: no model</div><pre class="code">Trade Balance =
+SUM(<mark>'Trade'[Exports]</mark>) - SUM(<mark>'Trade'[Imports]</mark>)</pre></div>
+  <div class="card codecard"><div class="label">Prompt 2: real names pasted in</div><pre class="code">Trade Balance =
+VAR Exports =
+  CALCULATE(
+    SUM('Trade Total Monthly'[Value GBP Millions]),
+    Flow[Direction] = "Export"
+  )
+VAR Imports =
+  CALCULATE(
+    SUM('Trade Total Monthly'[Value GBP Millions]),
+    Flow[Direction] = "Import"
+  )
+RETURN
+  Exports - Imports</pre></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">12 / 55</div><template class="notes">• Left: invented names. 'Trade'[Exports] does not exist
+• Right: real names, after I pasted the schema
+• It works, but I pasted it by hand, and it goes stale</template></section>
+<section class="slide" id="s13">
+<div class="eyebrow">02 &middot; Example 1: Plain chat</div>
+<div class="h2">What it changed</div>
+<div class="ex mt48 wide"><div class="stack"><div class="card codecard" style="height:100%;box-sizing:border-box"><div class="label">What you get: text to paste</div><pre class="code" style="white-space:pre-wrap;margin-top:16px">Trade Balance =
+VAR Exports =
+  CALCULATE(SUM('Trade Total Monthly'[Value GBP Millions]),
+    Flow[Direction] = "Export")
+VAR Imports =
+  CALCULATE(SUM('Trade Total Monthly'[Value GBP Millions]),
+    Flow[Direction] = "Import")
+RETURN Exports - Imports
+
+Balance Card Colour =
+IF([Trade Balance] >= 0, "#2E7D32", "#C62828")</pre></div></div><div class="card roomy stretch"><div class="label">The model</div><div class="row g16" style="margin-top:8px;align-items:baseline"><div class="h2 ink-accent" style="margin:0" data-countup>0</div><div class="small strong">changes</div></div><div class="cap muted">It cannot reach the model</div><div class="split"><div class="label">The report</div><div class="small" style="margin-top:8px;line-height:1.4">None. Two measures as text, to paste in by hand.</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">13 / 55</div><template class="notes">• Model: nothing. It cannot reach it
+• Report: none. DAX as text, the rest by hand
+• Fine for one measure</template></section>
+<section class="slide" id="s14">
+<div class="eyebrow">02 &middot; Working with AI</div>
+<div class="h2">How chat differs from an agent</div>
+<div class="grid2" style="margin-top:24px;grid-template-columns:5fr 7fr;align-items:stretch">
+  <div class="card">
+    <div class="h4">Chat: once through</div>
+    <div class="stack seq chatline" style="margin-top:24px;gap:4px"><div class="fnode"><div class="small strong">You ask</div><div class="cap muted">A measure for the balance</div></div><div class="farrow col"><i data-lucide="arrow-down" class="icon muted"></i></div><div class="fnode"><div class="small strong">It answers</div><div class="cap muted">From what it has seen before</div></div><div class="farrow col"><i data-lucide="arrow-down" class="icon muted"></i></div><div class="fnode"><div class="small strong">You paste it in</div><div class="cap muted">And find out if it works</div></div></div>
+  </div>
+  <div class="card inkcard">
+    <div class="h4">Agent: a loop</div>
+    <div class="loop seq" style="margin-top:24px"><div class="lnode" style="grid-area:a"><div class="small strong">Plan</div><div class="cap muted">Which table holds exports?</div></div><div class="larr" style="grid-area:ab"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="lnode" style="grid-area:b"><div class="small strong">Act with tools</div><div class="cap muted">Reads the model, runs a DAX query</div></div><div class="larr" style="grid-area:bc"><i data-lucide="arrow-down" class="icon muted"></i></div><div class="lnode" style="grid-area:c"><div class="small strong">Observe the result</div><div class="cap muted">Compares the figure with the source</div></div><div class="larr" style="grid-area:cd"><i data-lucide="arrow-left" class="icon muted"></i></div><div class="lnode" style="grid-area:d"><div class="small strong">Try again, or stop</div><div class="cap muted">Fixes and reruns, or hands back</div></div><div class="larr" style="grid-area:da"><i data-lucide="arrow-up" class="icon muted"></i></div></div>
+    <div class="small rose later" style="margin-top:20px"><i data-lucide="user-check" class="icon rose"></i> You approve before it ships</div>
+  </div>
+</div>
+<div class="takeaway">Chat answers once. An agent checks its own work, and you check the agent.</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">14 / 55</div><template class="notes">• Chat answers once
+• An agent loops: plan, act with tools, check the result, go again
+• It can fix its own mistakes, and build on them
+• The loop needs a gate. That is you</template></section>
+<section class="slide" id="s15">
+<div class="eyebrow">02 &middot; Working with AI</div>
+<div class="h2">The building blocks</div>
+<div class="tiles"><div class="tile"><i data-lucide="file-text" class="icon-xl ink-accent"></i><div class="name" data-morph="blk-Context">Context</div></div><div class="tile"><i data-lucide="book-open" class="icon-xl ink-accent"></i><div class="name" data-morph="blk-Skills">Skills</div></div><div class="tile"><i data-lucide="scale" class="icon-xl ink-accent"></i><div class="name" data-morph="blk-Rules">Rules</div></div><div class="tile"><i data-lucide="list-ordered" class="icon-xl ink-accent"></i><div class="name" data-morph="blk-Algorithms">Algorithms</div></div><div class="tile"><i data-lucide="repeat" class="icon-xl ink-accent"></i><div class="name" data-morph="blk-Loops">Loops</div></div><div class="tile"><i data-lucide="zap" class="icon-xl ink-accent"></i><div class="name" data-morph="blk-Hooks">Hooks</div></div><div class="tile"><i data-lucide="door-closed" class="icon-xl ink-accent"></i><div class="name" data-morph="blk-Gates">Gates</div></div><div class="tile"><i data-lucide="plug" class="icon-xl ink-accent"></i><div class="name" data-morph="blk-MCP">MCP</div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">15 / 55</div><template class="notes">• Eight ways to tell an agent how you work
+• Most people know two or three
+• Next: what kind each one is</template></section>
+<section class="slide" id="s16">
+<div class="eyebrow">02 &middot; Working with AI</div>
+<div class="h2">What kind each one is</div>
+<table class="cmp tight vocab vtight" style="margin-top:16px"><thead class="morph-fade"><tr><th class="">Block</th><th class="fresh">Kind</th><th class="hold">What it does</th></tr></thead><tbody><tr><td class=""><span class="blkname" data-morph="blk-Context">Context</span></td><td class=" fresh"><span class="label ink-violet" data-morph="kind-advisory" style="display:inline-block">Advisory</span></td><td class=" hold">Standing rules for every session</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Skills">Skills</span></td><td class=" fresh"><span class="label ink-violet">Advisory</span></td><td class=" hold">A repeatable recipe for one job</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Rules">Rules</span></td><td class=" fresh"><span class="label ink-violet">Advisory</span></td><td class=" hold">What good looks like, in words</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Algorithms">Algorithms</span></td><td class=" fresh"><span class="label ">Structure</span></td><td class=" hold">The steps of each phase</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Loops">Loops</span></td><td class=" fresh"><span class="label ink-accent">Blocking</span></td><td class=" hold">Repeat until a check passes</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Hooks">Hooks</span></td><td class=" fresh"><span class="label ink-accent" data-morph="kind-hook" style="display:inline-block">Blocking</span></td><td class=" hold">Block one action, on an event</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Gates">Gates</span></td><td class=" fresh"><span class="label ink-accent" data-morph="kind-gate" style="display:inline-block">Blocking</span></td><td class=" hold">No sign-off, no next phase</td></tr><tr><td class=""><span class="blkname" data-morph="blk-MCP">MCP</span></td><td class=" fresh"><span class="label muted">Reach</span></td><td class=" hold">Live access to tools and data</td></tr></tbody></table>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">16 / 55</div><template class="notes">• Advisory: it can skip them
+• Structure: algorithms set the order of the work
+• Blocking: loops, hooks, gates. It cannot walk past them
+• MCP is reach, not control</template></section>
+<section class="slide" id="s17">
+<div class="eyebrow">02 &middot; Working with AI</div>
+<div class="h2">What each one does</div>
+<table class="cmp tight vocab vtight" style="margin-top:16px"><thead class="morph-fade"><tr><th class="">Block</th><th class="">Kind</th><th class="fresh">What it does</th></tr></thead><tbody><tr><td class=""><span class="blkname" data-morph="blk-Context">Context</span></td><td class=""><span class="label ink-violet" data-morph="kind-advisory" style="display:inline-block">Advisory</span></td><td class=" fresh">Standing rules for every session</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Skills">Skills</span></td><td class=""><span class="label ink-violet">Advisory</span></td><td class=" fresh">A repeatable recipe for one job</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Rules">Rules</span></td><td class=""><span class="label ink-violet">Advisory</span></td><td class=" fresh">What good looks like, in words</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Algorithms">Algorithms</span></td><td class=""><span class="label ">Structure</span></td><td class=" fresh">The steps of each phase</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Loops">Loops</span></td><td class=""><span class="label ink-accent">Blocking</span></td><td class=" fresh">Repeat until a check passes</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Hooks">Hooks</span></td><td class=""><span class="label ink-accent" data-morph="kind-hook" style="display:inline-block">Blocking</span></td><td class=" fresh">Block one action, on an event</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Gates">Gates</span></td><td class=""><span class="label ink-accent" data-morph="kind-gate" style="display:inline-block">Blocking</span></td><td class=" fresh">No sign-off, no next phase</td></tr><tr><td class=""><span class="blkname" data-morph="blk-MCP">MCP</span></td><td class=""><span class="label muted">Reach</span></td><td class=" fresh">Live access to tools and data</td></tr></tbody></table>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">17 / 55</div><template class="notes">• One line each
+• Where each one lives in my setup comes later</template></section>
+<section class="slide" id="s18">
+<div class="eyebrow">02 &middot; Working with AI</div>
+<div class="h2">Advisory, hook or gate?</div>
+<div class="grid3 mt48 stagger" style="align-items:stretch"><div class="card"><div class="h4 ink-violet"><span data-morph="kind-advisory" style="display:inline-block">Advisory</span></div><div class="body strong" style="margin-top:24px">Context, skills, rules</div><div class="small" style="margin-top:16px;line-height:1.4">The agent decides whether to follow them. Nothing fails if it does not.</div><div class="split"><div class="label">Example</div><div class="small" style="margin-top:12px">A line in CLAUDE.md: never name a client</div></div></div><div class="card"><div class="h4 ink-accent"><span data-morph="kind-hook" style="display:inline-block">Hook</span></div><div class="body strong" style="margin-top:24px">Fires on an event</div><div class="small" style="margin-top:16px;line-height:1.4">A commit or an edit. It blocks that one action.</div><div class="split"><div class="label">Example</div><div class="small" style="margin-top:12px">An edit to the engine from a report branch</div></div></div><div class="card inkcard"><div class="h4 rose"><span data-morph="kind-gate" style="display:inline-block">Gate</span></div><div class="body strong" style="margin-top:24px">A checkpoint in the flow</div><div class="small" style="margin-top:16px;line-height:1.4">No evidence or signature, no next phase.</div><div class="split"><div class="label">Example</div><div class="small" style="margin-top:12px">No signed design, no build</div></div></div></div>
+<div class="takeaway">An agent edited the engine from a report branch. Now a hook blocks the edit.</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">18 / 55</div><template class="notes">• Advisory: it decides. Hook: blocks one action. Gate: no evidence, no next phase
+• Real story: an agent changed the engine from a report branch
+• A rule in the prompt was not enough. A hook fixed it</template></section>
+<section class="slide" id="s19">
+<div class="eyebrow">02 &middot; Working with AI</div>
+<div class="h2">An algorithm for each phase</div>
+<div class="grid3 stagger" style="margin-top:32px;grid-template-rows:repeat(2, 1fr);gap:32px"><div class="card "><div class="row" style="justify-content:space-between;align-items:flex-start"><div><div class="label">01 &middot; Discovery</div><div class="h4" style="margin-top:8px">Discovery</div></div><div class="stepcount"><div class="h2 ink-accent" data-countup>13</div><div class="label">steps</div></div></div><div class="small" style="margin-top:12px">Requirements, stories, feasibility, profile, proof points</div><div class="small ink-accent strong" style="margin-top:12px">Discovery gate</div></div><div class="card "><div class="row" style="justify-content:space-between;align-items:flex-start"><div><div class="label">02 &middot; Design</div><div class="h4" style="margin-top:8px">Design</div></div><div class="stepcount"><div class="h2 ink-accent" data-countup>15</div><div class="label">steps</div></div></div><div class="small" style="margin-top:12px">Contract, layout, sketch, visuals, mockup</div><div class="small ink-accent strong" style="margin-top:12px">Design gate</div></div><div class="card "><div class="row" style="justify-content:space-between;align-items:flex-start"><div><div class="label">03 &middot; Build</div><div class="h4" style="margin-top:8px">Develop</div></div><div class="stepcount"><div class="h2 ink-accent" data-countup>2</div><div class="label">steps</div></div></div><div class="small" style="margin-top:12px">Build, offline gates</div></div><div class="card "><div class="row" style="justify-content:space-between;align-items:flex-start"><div><div class="label">04 &middot; Test</div><div class="h4" style="margin-top:8px">Verify and QA</div></div><div class="stepcount"><div class="h2 ink-accent" data-countup>6</div><div class="label">steps</div></div></div><div class="small" style="margin-top:12px">Canary, live render, render review, QA</div><div class="small ink-accent strong" style="margin-top:12px">QA passes</div></div><div class="card "><div class="row" style="justify-content:space-between;align-items:flex-start"><div><div class="label">05 &middot; Deploy</div><div class="h4" style="margin-top:8px">Ship</div></div><div class="stepcount"><div class="h2 ink-accent" data-countup>5</div><div class="label">steps</div></div></div><div class="small" style="margin-top:12px">Ship approval, client deploy, deliverable pack</div><div class="small ink-accent strong" style="margin-top:12px">Ship approval</div></div><div class="card "><div class="row" style="justify-content:space-between;align-items:flex-start"><div><div class="label">06 &middot; Govern</div><div class="h4" style="margin-top:8px">Govern</div></div><div class="stepcount"><div class="h2 ink-accent" data-countup>3</div><div class="label">steps</div></div></div><div class="small" style="margin-top:12px">Audit trail, tidy, owner acceptance</div><div class="small ink-accent strong" style="margin-top:12px">Owner acceptance</div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">19 / 55</div><template class="notes">• 44 steps across six phases, each one written down
+• The labels map back to the six steps
+• Five gates, named on the cards</template></section>
+<section class="slide opener" id="s20" data-surface="warm">
+<div class="sect">
+  <div class="sect-num" aria-hidden="true"><span data-morph="chap-03" style="display:inline-block">03</span></div>
+  <div class="sect-title"><div class="h1c">Agent roles</div><div class="body sect-sub">Operator, builder, orchestrator, and you</div></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">20 / 55</div><template class="notes">• Who does what once the blocks are in place</template></section>
+<section class="slide" id="s21">
+<div class="eyebrow">03 &middot; Agent roles</div>
+<div class="h2">Four roles</div>
+<div class="grid4 mt48 stagger"><div class="card"><div class="rbadge r-op"><i data-lucide="play" class="icon-lg "></i></div><div class="h4" style="margin-top:32px">Operator</div><div class="body strong" style="margin-top:16px;line-height:1.3">Runs the tool on a brief</div><div class="small" style="margin-top:16px;line-height:1.4">Writes only the deliverables. Logs what the tool cannot do.</div></div><div class="card"><div class="rbadge r-build"><i data-lucide="wrench" class="icon-lg "></i></div><div class="h4" style="margin-top:32px">Builder</div><div class="body strong" style="margin-top:16px;line-height:1.3">Changes the tool</div><div class="small" style="margin-top:16px;line-height:1.4">On its own branch, with tests. You review each change.</div></div><div class="card"><div class="rbadge r-orch"><i data-lucide="network" class="icon-lg "></i></div><div class="h4" style="margin-top:32px">Orchestrator</div><div class="body strong" style="margin-top:16px;line-height:1.3">Plans and hands out work</div><div class="small" style="margin-top:16px;line-height:1.4">Sends each decision to a delegate and a checker, in order.</div></div><div class="card inkcard"><div class="rbadge r-you"><i data-lucide="user-check" class="icon-lg "></i></div><div class="h4" style="margin-top:32px">You</div><div class="body strong" style="margin-top:16px;line-height:1.3">Signs the gates</div><div class="small" style="margin-top:16px;line-height:1.4">Decides what may be delegated. Keeps the client deploy unless you grant it.</div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">21 / 55</div><template class="notes">• Operator runs the tool and writes only the deliverables
+• Builder changes the tool, on a branch, with tests
+• Orchestrator hands out decisions in order
+• You decide what can be delegated</template></section>
+<section class="slide" id="s22">
+<div class="eyebrow">03 &middot; Agent roles</div>
+<div class="h2">Who does what, step by step</div>
+<table class="cmp who autoplay" style="margin-top:32px"><thead><tr><th>Step</th>
+<th><span class="row g16"><i data-lucide="bot" class="icon "></i><span>The agent</span></span></th>
+<th><span class="row g16"><i data-lucide="user-check" class="icon ink-accent"></i><span class="ink-accent">You</span></span></th></tr></thead><tbody><tr><td>Discovery</td><td>Drafts user stories from the requirements</td><td>Sign off the requirements</td></tr><tr><td>Design</td><td>Profiles the model, drafts the layout and mockup</td><td>Sign the design before it builds</td></tr><tr><td>Build</td><td>Writes the model changes and the report files</td><td>Review the model changes</td></tr><tr><td>Test</td><td>Runs data, render and layout checks</td><td>Click what automated QA cannot</td></tr><tr><td>Deploy</td><td>Deploys through a gated pipeline</td><td>Approve the release</td></tr><tr><td>Govern</td><td>Records who approved what, and when</td><td>Accept the result</td></tr></tbody></table>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">22 / 55</div><template class="notes">• The same six steps, split by who does the work
+• The agent drafts, builds, checks, deploys and records
+• You sign off, review and accept</template></section>
+<section class="slide" id="s23">
+<div class="eyebrow">03 &middot; Agent roles</div>
+<div class="h2">How a report gets made</div>
+<div class="flowgrid mt48 seq"><div class="fnode rnode you"><div class="small strong">Requirement</div><span class="rchip r-you"><i data-lucide="user-check" class="icon-sm "></i>You</span></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode rnode "><div class="small strong">Drafts and improves it</div><span class="rchip r-op"><i data-lucide="play" class="icon-sm "></i>Operator</span></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode rnode gate"><div class="small strong">Approve or question</div><span class="rchip r-gate"><i data-lucide="door-closed" class="icon-sm "></i>Gate</span></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode rnode "><div class="small strong">Builds and checks</div><span class="rchip r-op"><i data-lucide="play" class="icon-sm "></i>Operator</span></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode rnode "><div class="small strong">Test deploy (canary)</div><span class="rchip r-op"><i data-lucide="play" class="icon-sm "></i>Operator</span></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode rnode you"><div class="small strong">Client deploy</div><span class="rchip r-you"><i data-lucide="user-check" class="icon-sm "></i>You</span></div><div class="backloop"><div class="bl-line"></div><div class="bl-label">A question sends it back to the operator</div></div></div>
+<div class="label later" style="margin-top:40px">Alongside</div>
+<div class="flow seq later" style="margin-top:16px"><div class="fnode rnode "><div class="small strong">Tool cannot do it</div><span class="rchip r-op"><i data-lucide="play" class="icon-sm "></i>Operator</span></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode rnode "><div class="small strong">Gap logged</div><span class="rchip r-op"><i data-lucide="play" class="icon-sm "></i>Operator</span></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode rnode "><div class="small strong">Fix on a branch</div><span class="rchip r-build"><i data-lucide="wrench" class="icon-sm "></i>Builder</span></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode rnode you"><div class="small strong">Review the change</div><span class="rchip r-you"><i data-lucide="user-check" class="icon-sm "></i>You</span></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">23 / 55</div><template class="notes">• Left to right: requirement to client deploy
+• A question at the gate sends it back
+• Underneath: a gap gets logged, a builder fixes it, I review</template></section>
+<section class="slide" id="s24">
+<div class="eyebrow">03 &middot; Agent roles</div>
+<div class="h2">Who signs the gates?</div>
+<div class="grid2 mt48 gatepair" style="align-items:start"><div class="card roomy" data-morph="gate-human"><div class="h4">Human gate</div><div class="body strong" style="margin-top:24px">You sign four gates</div><div class="small" style="margin-top:16px;line-height:1.4">Discovery, design, ship and acceptance. QA is a check that runs. Slow, and you are always in the loop.</div></div><div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">24 / 55</div><template class="notes">• Human gate: I sign four gates
+• QA is a check that runs
+• Safe, but I am in the loop all day</template></section>
+<section class="slide" id="s25">
+<div class="eyebrow">03 &middot; Agent roles</div>
+<div class="h2">Who signs the gates?</div>
+<div class="grid2 mt48 gatepair" style="align-items:start"><div class="card roomy" data-morph="gate-human"><div class="h4">Human gate</div><div class="body strong" style="margin-top:24px">You sign four gates</div><div class="small" style="margin-top:16px;line-height:1.4">Discovery, design, ship and acceptance. QA is a check that runs. Slow, and you are always in the loop.</div></div><div class="card inkcard roomy fresh"><div class="h4 rose">Full delegation</div><div class="body strong" style="margin-top:24px">A second model decides. At a gate, a third model checks.</div><div class="small" style="margin-top:16px;line-height:1.4">The client deploy stays yours unless you grant it. You read the decisions afterwards.</div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">25 / 55</div><template class="notes">• Full delegation: another model decides, a third checks the gates
+• The client deploy stays mine unless I grant it
+• In my runs the deciding model was the drafter's own. The tool now catches that</template></section>
+<section class="slide opener" id="s26" data-surface="warm">
+<div class="sect">
+  <div class="sect-num" aria-hidden="true"><span data-morph="chap-04" style="display:inline-block">04</span></div>
+  <div class="sect-title"><div class="h1c">Building the trade balance report</div><div class="body sect-sub">One brief through different tools. Where a tool did not get it, the slide says so.</div></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">26 / 55</div><template class="notes">• One brief through different tools, then full delegation</template></section>
+<section class="slide" id="s27">
+<div class="eyebrow">04 &middot; Examples</div>
+<div class="h2">UK trade, the balance</div>
+<div class="body muted" style="margin-top:8px">The brief given to Fabric skills and MCP</div>
+<div class="grid2" style="margin-top:32px;grid-template-columns:7fr 5fr;align-items:stretch">
+  <div><div class="label">What to build</div><div class="btiles stagger" style="margin-top:16px"><div class="btile"><i data-lucide="paint-bucket" class="icon-xl ink-accent"></i><div><div class="small strong">Balance card</div><div class="cap muted">Changes colour from surplus to deficit</div></div></div><div class="btile"><i data-lucide="chart-line" class="icon-xl ink-accent"></i><div><div class="small strong">Monthly trend</div><div class="cap muted">Exports, imports and the balance</div></div></div><div class="btile"><i data-lucide="chart-bar" class="icon-xl ink-accent"></i><div><div class="small strong">Breakdown</div><div class="cap muted">By partner country or commodity</div></div></div><div class="btile"><i data-lucide="sliders-horizontal" class="icon-xl ink-accent"></i><div><div class="small strong">Slicer</div><div class="cap muted">Switches the trend between measures</div></div></div></div>
+    <div class="label later" style="margin-top:28px">Also in the brief</div>
+    <div class="row later" style="margin-top:12px;gap:10px;flex-wrap:wrap"><span class="bchip">Who it is for</span><span class="bchip">The model, its tables and its rules</span><span class="bchip">One page, theme colours, native visuals</span><span class="bchip">What is out of scope</span><span class="bchip">What to hand back, with evidence</span><span class="bchip">Ask before guessing</span></div></div>
+  <div class="card inkcard">
+    <div class="label">Done means</div>
+    <div class="row g32 seq" style="margin-top:16px;align-items:flex-end">
+      <div><div class="h2 bfig" data-countup>£937.0bn</div><div class="cap">exports</div></div>
+      <div><div class="h2 bfig" data-countup>£980.4bn</div><div class="cap">imports</div></div>
+    </div>
+    <div class="cap" style="margin-top:4px">12 months to March 2026, published figures</div>
+    <div class="stack seq late" style="margin-top:24px;gap:14px"><div class="row g16"><i data-lucide="circle-check" class="icon rose"></i><div class="small">Card colour from a measure, not a fixed colour</div></div><div class="row g16"><i data-lucide="circle-check" class="icon rose"></i><div class="small">The slicer changes the plotted measure</div></div><div class="row g16"><i data-lucide="circle-check" class="icon rose"></i><div class="small">Every field it uses exists in the model</div></div></div>
+  </div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">27 / 55</div><template class="notes">• The brief: four things to build, three done checks
+• The figures to match: £937.0bn exports, £980.4bn imports
+• Chat got one prompt. Full delegation got a new brief</template></section>
+<section class="slide" id="s28">
+<div class="eyebrow">04 &middot; Example 2</div>
+<div class="h2">Fabric skills</div>
+<div class="ex mt48 wide"><div class="stack"><video class="clip" data-slot="example-2" data-playlist="media/Fabric skills-2.m4v" data-rates="12" src="media/Fabric skills-2.m4v#t=150" controls preload="auto" playsinline></video></div><div class="card roomy stretch"><div class="label">Setup</div><div class="body" style="margin-top:12px;line-height:1.4">Microsoft's Fabric skills, same brief</div><div class="split"><div class="label ink-ok">Pro</div><div class="body" style="margin-top:12px;line-height:1.4">Real file formats, a draft in minutes</div></div><div class="split"><div class="label ink-warn">Con</div><div class="body" style="margin-top:12px;line-height:1.4">Advice the agent can skip, and no record of who approved</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">28 / 55</div><template class="notes">• Microsoft's Fabric skills. P to play, 12 times speed
+• Real file formats, a draft in minutes
+• Advisory and opt-in</template></section>
+<section class="slide" id="s29">
+<div class="eyebrow">04 &middot; Example 2: Fabric skills</div>
+<div class="h2">What it changed</div>
+<div class="ex mt48 wide"><div class="stack"><div class="viewer" data-slot="outcome-2"><div class="viewer-scroll" tabindex="0"><img src="assets/fabric-skills-render.jpg" alt="The Fabric skills report as rendered by the Power BI Service"></div><div class="viewer-bar"><button class="vbtn" type="button" data-expand><i data-lucide="maximize-2" class="icon-sm "></i>Expand</button><button class="vbtn" type="button" data-href="https://app.powerbi.com/groups/0c5685bd-1817-447c-8460-ac5858ebf133/reports/6e10d632-18ba-42bc-a239-151808d81289"><i data-lucide="external-link" class="icon-sm "></i>Open the live report</button></div></div></div><div class="card roomy stretch"><div class="label">The model</div><div class="row g16" style="margin-top:8px;align-items:baseline"><div class="h2 ink-accent" style="margin:0" data-countup>0</div><div class="small strong">changes</div></div><div class="cap muted">It read the model with DAX queries and wrote nothing</div><div class="split"><div class="label">The report</div><div class="small" style="margin-top:8px;line-height:1.4">UK Trade Balance, published to folder 02. Brief: £937.0bn exports. Built: 30.3K, all years. One of four done checks.</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">29 / 55</div><template class="notes">• Model: nothing written
+• Report: published when asked, on the DirectLake model
+• One of four checks met: all-years totals, empty partners chart</template></section>
+<section class="slide" id="s30">
+<div class="eyebrow">04 &middot; Example 3</div>
+<div class="h2">MCP</div>
+<div class="ex mt48 wide"><div class="stack"><video class="clip" data-slot="example-3" data-playlist="media/mcp-chat-scroll.mov" data-rates="1" src="media/mcp-chat-scroll.mov#t=0.5" controls preload="auto" playsinline></video></div><div class="card roomy stretch"><div class="label">Setup</div><div class="body" style="margin-top:12px;line-height:1.4">GitHub Copilot in VS Code, with Microsoft's Power BI authoring MCP</div><div class="split"><div class="label ink-ok">Pro</div><div class="body" style="margin-top:12px;line-height:1.4">Reads the real model</div></div><div class="split"><div class="label ink-warn">Con</div><div class="body" style="margin-top:12px;line-height:1.4">Can change the model with your sign-in, and nothing records it. This run was read only.</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">30 / 55</div><template class="notes">• Copilot in VS Code with Microsoft's Power BI MCP. P to play
+• It read the real model and got the figures right</template></section>
+<section class="slide" id="s31">
+<div class="eyebrow">04 &middot; Example 3: MCP</div>
+<div class="h2">What it changed</div>
+<div class="ex mt48 wide"><div class="stack"><div class="shot live"><i data-lucide="file-x" class="icon-xl muted"></i><div class="h4">No report</div><div class="small muted" style="max-width:640px;text-align:center">PBIP files on the laptop. Copilot could not publish them.</div></div></div><div class="card roomy stretch"><div class="label">The model</div><div class="row g16" style="margin-top:8px;align-items:baseline"><div class="h2 ink-accent" style="margin:0" data-countup>0</div><div class="small strong">changes</div></div><div class="cap muted">Read only: it could not add the field parameter the slicer needs</div><div class="split"><div class="label">The report</div><div class="small" style="margin-top:8px;line-height:1.4">None by Copilot. It wrote PBIP files on the laptop. I published them myself: next slide.</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">31 / 55</div><template class="notes">• Model: nothing. The connection was read only
+• Report: PBIP files on the laptop. It could not publish
+• With a writable connection it can change the model, and nothing asks you first</template></section>
+<section class="slide" id="s32">
+<div class="eyebrow">04 &middot; Example 3: MCP</div>
+<div class="h2">Publishing the MCP report</div>
+<div class="ex mt48 wide"><div class="stack"><div class="viewer" data-slot="mcp-publish"><div class="viewer-scroll" tabindex="0"><img src="assets/mcp-build-render.jpg" alt="The MCP-built report in the Power BI Service, every visual empty"></div><div class="viewer-bar"><button class="vbtn" type="button" data-expand><i data-lucide="maximize-2" class="icon-sm "></i>Expand</button><button class="vbtn" type="button" data-href="https://app.powerbi.com/groups/0c5685bd-1817-447c-8460-ac5858ebf133/reports/550a1971-7189-48c1-abae-08ecfe8cb97a"><i data-lucide="external-link" class="icon-sm "></i>Open the live report</button></div></div></div><div class="card stretch mcpcard"><div class="label">As built</div><div class="small strong" style="margin-top:8px">The Service refused it</div><div class="cap muted" style="margin-top:16px">Microsoft's validator, 5 errors:</div><div class="stack" style="margin-top:4px;gap:2px"><div class="cap">No <code>.platform</code> file</div><div class="cap">No schema line in the <code>.pbip</code></div><div class="cap">Card colours set as theme colours, not hex (2)</div><div class="cap">A setting <code>report.json</code> does not allow</div></div><div class="split"><div class="label">After one fix</div><div class="small" style="margin-top:8px;line-height:1.4">I removed the setting by hand and it published. Every visual is empty, with or without filters.</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">32 / 55</div><template class="notes">• As built, the Service refused it. Five validator errors
+• One line removed by hand, and it published
+• Every visual is empty: right numbers, a report that does not work</template></section>
+<section class="slide" id="s33">
+<div class="eyebrow">04 &middot; Example 4</div>
+<div class="h2">My setup</div>
+<div class="ex mt48 wide"><div class="stack"><div class="shot live" data-slot="example-4"><i data-lucide="square-terminal" class="icon-xl ink-accent"></i><div class="h4">Live demo</div><div class="small muted" style="max-width:640px;text-align:center">Two steps in the terminal. A check stops a report whose design was not approved. Then one command builds the report and runs all the checks.</div></div></div><div class="card roomy stretch"><div class="label">Setup</div><div class="body" style="margin-top:12px;line-height:1.4">My skills, scripts, gates, and sign-offs</div><div class="split"><div class="label ink-ok">Pro</div><div class="body" style="margin-top:12px;line-height:1.4">Tested, gated, with an audit trail</div></div><div class="split"><div class="label ink-warn">Con</div><div class="body" style="margin-top:12px;line-height:1.4">Upfront cost, covers only what I encoded</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">33 / 55</div><template class="notes">• My setup, live in the terminal
+• First: a check stops a report whose design was not approved
+• Then one command builds the report and runs every check</template></section>
+<section class="slide" id="s34">
+<div class="eyebrow">04 &middot; Example 4</div>
+<div class="h2">Mission Control</div>
+<div class="ex mt48 wide"><div class="stack"><div class="viewer" data-slot="mission-control"><div class="viewer-scroll" tabindex="0"><img src="assets/mission-control.jpg" alt="Mission Control: 07 Trade Stripes, every phase done, go for launch"></div><div class="viewer-bar"><button class="vbtn" type="button" data-expand><i data-lucide="maximize-2" class="icon-sm "></i>Expand</button><button class="vbtn" type="button" data-href="http://127.0.0.1:8199/?client=uk-trade-data"><i data-lucide="external-link" class="icon-sm "></i>Open Mission Control</button></div></div></div><div class="card stretch"><div class="label">What it shows</div><div class="mcrow"><div class="small strong">Every page</div><div class="cap muted">Its phase, and green or red</div></div><div class="mcrow"><div class="small strong">The rail</div><div class="cap muted">44 steps over six phases, with the evidence for each</div></div><div class="mcrow"><div class="small strong">Every gate</div><div class="cap muted">Who decided it, and which model</div></div><div class="mcrow"><div class="small strong">Go or no-go</div><div class="cap muted">One call per station before a release</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">34 / 55</div><template class="notes">• Where every page stands, in one view
+• The rail: 44 steps, the evidence for each, who decided each gate
+• Open it live: python3 scripts/mission_control.py serve, then the button
+• Page 07 reads go for launch</template></section>
+<section class="slide" id="s35">
+<div class="eyebrow">04 &middot; Example 4: My setup</div>
+<div class="h2">What it changed</div>
+<div class="ex mt48 wide"><div class="stack"><div class="viewer" data-slot="outcome-4"><div class="viewer-scroll" tabindex="0"><img src="assets/the-balance-render.jpg" alt="The Balance report as rendered by the Power BI Service"></div><div class="viewer-bar"><button class="vbtn" type="button" data-expand><i data-lucide="maximize-2" class="icon-sm "></i>Expand</button><button class="vbtn" type="button" data-href="https://app.powerbi.com/groups/0c5685bd-1817-447c-8460-ac5858ebf133/reports/a6fa2842-ad87-4599-a826-af7d73747eb3"><i data-lucide="external-link" class="icon-sm "></i>Open the live report</button></div></div></div><div class="card roomy stretch"><div class="label">The model</div><div class="row g16" style="margin-top:8px;align-items:baseline"><div class="h2 ink-accent" style="margin:0" data-countup>19</div><div class="small strong">measures added</div></div><div class="cap muted">Plus 3 calculated columns, each verified on the live model</div><div class="row" style="margin-top:12px;gap:8px;flex-wrap:wrap"><span class="mchip">_Verdict</span><span class="mchip">_Colour Balance</span><span class="mchip">_Thesis Sentence</span><span class="mchip more">+16 more</span></div><div class="split"><div class="label">The report</div><div class="small" style="margin-top:8px;line-height:1.4">The Balance, built earlier on the same model. Against this brief: no slicer, no breakdown.</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">35 / 55</div><template class="notes">• 19 measures and 3 columns, each verified on the live model
+• The Balance was built before this brief, on the same model
+• Against this brief: no slicer, no breakdown</template></section>
+<section class="slide" id="s36">
+<div class="eyebrow">04 &middot; Example 5</div>
+<div class="h2">Full delegation</div>
+<div class="ex mt48 wide"><div class="stack"><video class="clip" data-slot="example-4b" data-playlist="media/stripes-session-scroll.mov" data-rates="1" src="media/stripes-session-scroll.mov#t=0.5" controls preload="auto" playsinline></video></div><div class="card roomy stretch"><div class="label">Setup</div><div class="body" style="margin-top:12px;line-height:1.4">A new brief on the same model, every decision delegated</div><div class="split"><div class="label ink-ok">Pro</div><div class="body" style="margin-top:12px;line-height:1.4">Brief to client deploy, no questions</div></div><div class="split"><div class="label ink-warn">Con</div><div class="body" style="margin-top:12px;line-height:1.4">5 hours, 10 engine gaps</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">36 / 55</div><template class="notes">• A new brief, every decision delegated. P to play
+• Discovery gate at 37 minutes, design gate at 62, first canary at 68
+• Engine limits logged, not patched: 10 gaps</template></section>
+<section class="slide" id="s37">
+<div class="eyebrow">04 &middot; Example 5: Full delegation</div>
+<div class="h2">What it changed</div>
+<div class="ex mt48 wide"><div class="stack"><div class="viewer fit" data-slot="outcome-4b"><div class="viewer-scroll" tabindex="0"><img src="assets/trade-stripes-render.jpg" alt="The Trade stripes report as rendered by the Power BI Service"></div><div class="viewer-bar"><button class="vbtn" type="button" data-expand><i data-lucide="maximize-2" class="icon-sm "></i>Expand</button><button class="vbtn" type="button" data-href="https://app.powerbi.com/groups/d0c6c169-2e38-4d56-b8e6-6b0fa2fa7420/reports/65bb19f3-04e4-4522-861a-b2d6734c7b80"><i data-lucide="external-link" class="icon-sm "></i>Open the live report</button></div></div></div><div class="card roomy stretch"><div class="label">The model</div><div class="row g16" style="margin-top:8px;align-items:baseline"><div class="h2 ink-accent" style="margin:0" data-countup>16</div><div class="small strong">measures added</div></div><div class="cap muted">Plus 2 calculated columns, each verified on the live model</div><div class="row" style="margin-top:12px;gap:8px;flex-wrap:wrap"><span class="mchip">_Stripe Colour</span><span class="mchip">_Stripes Headline</span><span class="mchip">_Stripes Month Count</span><span class="mchip more">+13 more</span></div><div class="split"><div class="label">The report</div><div class="small" style="margin-top:8px;line-height:1.4">Trade stripes, deployed to the client workspace. QA 34 of 34.</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">37 / 55</div><template class="notes">• 16 measures and 2 columns, each verified on the live model
+• Trade stripes: 315 months on one page
+• Client workspace, QA 34 of 34</template></section>
+<section class="slide" id="s38">
+<div class="eyebrow">04 &middot; Examples</div>
+<div class="h2">The five, compared</div>
+<table class="cmp autoplay vtight" style="margin-top:32px"><thead><tr><th>Approach</th><th>Sees the model</th><th>Can be stopped</th><th>Records decisions</th><th>Report against the brief</th></tr></thead><tbody><tr><td>Chat</td><td><span class="muted">No</span></td><td><span class="muted">No</span></td><td><span class="muted">No</span></td><td><span class="muted">No, DAX as text</span></td></tr><tr><td>Fabric skills</td><td><span class="ink-ok strong">Yes, it queries the model</span></td><td><span class="muted">No</span></td><td><span class="muted">No</span></td><td><span class="muted">Published, 1 of 4 checks</span></td></tr><tr><td>MCP</td><td><span class="ink-ok strong">Yes, live</span></td><td><span class="muted">No</span></td><td><span class="muted">No</span></td><td><span class="muted">No, visuals empty</span></td></tr><tr><td>My setup</td><td><span class="ink-ok strong">Yes, checked against live</span></td><td><span class="ink-ok strong">Yes, hooks and gates</span></td><td><span class="ink-ok strong">Yes, every decision</span></td><td><span class="muted">Earlier build, same model</span></td></tr><tr><td>Full delegation</td><td><span class="ink-ok strong">Yes, checked against live</span></td><td><span class="ink-ok strong">Yes, hooks and gates</span></td><td><span class="ink-ok strong">Yes, every decision</span></td><td><span class="ink-ok strong">Yes, its own brief, QA 34 of 34</span></td></tr></tbody></table>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">38 / 55</div><template class="notes">• Four questions for each approach
+• Only my setup can be stopped and records its decisions
+• Full delegation met its own brief; The Balance predates this one
+• The upfront cost is real</template></section>
+<section class="slide opener" id="s39" data-surface="warm">
+<div class="sect">
+  <div class="sect-num" aria-hidden="true"><span data-morph="chap-05" style="display:inline-block">05</span></div>
+  <div class="sect-title"><div class="h1c">How I built the tool</div><div class="body sect-sub">Specs first, then the engine, then the checks</div></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">39 / 55</div><template class="notes">• How my setup is built, so you can build your own</template></section>
+<section class="slide" id="s40">
+<div class="eyebrow">05 &middot; How I built the tool</div>
+<div class="h2">How the tool fits together</div>
+<div class="flow mt48 seq"><div class="fnode snode "><i data-lucide="file-text" class="icon ink-accent"></i><div class="small strong" style="margin-top:12px">Specs</div><div class="cap muted">19 written algorithms</div></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode snode "><i data-lucide="cog" class="icon ink-accent"></i><div class="small strong" style="margin-top:12px">Engine</div><div class="cap muted">One generator</div></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode snode "><i data-lucide="file-json" class="icon ink-accent"></i><div class="small strong" style="margin-top:12px">Report files</div><div class="cap muted">Checked against Microsoft's schemas</div></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode snode gate"><i data-lucide="shield-check" class="icon ink-accent"></i><div class="small strong" style="margin-top:12px">Checks</div><div class="cap muted">Hooks, gates and the pipeline</div></div><div class="farrow"><i data-lucide="arrow-right" class="icon muted"></i></div><div class="fnode snode you"><i data-lucide="rocket" class="icon ink-accent"></i><div class="small strong" style="margin-top:12px">Deploy</div><div class="cap muted">Only through the pipeline</div></div></div>
+<div class="label later" style="margin-top:56px">What feeds the engine</div>
+<div class="grid4 later" style="margin-top:16px;gap:16px"><div class="fnode snode "><i data-lucide="book-open" class="icon ink-accent"></i><div class="small strong" style="margin-top:12px">Knowledge</div><div class="cap muted">Visuals, tricks, gotchas</div></div><div class="fnode snode "><i data-lucide="wrench" class="icon ink-accent"></i><div class="small strong" style="margin-top:12px">Microsoft tools</div><div class="cap muted">CLI validator, sample report</div></div><div class="fnode snode "><i data-lucide="sparkles" class="icon ink-accent"></i><div class="small strong" style="margin-top:12px">Skills</div><div class="cap muted">9 recipes for agents</div></div><div class="fnode snode "><i data-lucide="briefcase" class="icon ink-accent"></i><div class="small strong" style="margin-top:12px">Engagement</div><div class="cap muted">Brief, model, decisions</div></div></div>
+<div class="takeaway">A fix goes in the spec or the engine, never in a report file.</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">40 / 55</div><template class="notes">• Specs, then the engine, then checks, then deploy
+• Knowledge, Microsoft's tools, skills and the engagement feed the engine
+• A fix goes in the spec or the engine, never in a report file</template></section>
+<section class="slide" id="s41">
+<div class="eyebrow">05 &middot; How I built the tool</div>
+<div class="h2">The building blocks, in my setup</div>
+<table class="cmp tight vocab vtight" style="margin-top:16px"><thead class="morph-fade"><tr><th class="">Block</th><th class="">Kind</th><th class="">What it does</th><th class="fresh">In my setup</th></tr></thead><tbody><tr><td class=""><span class="blkname" data-morph="blk-Context">Context</span></td><td class=""><span class="label ink-violet" data-morph="kind-advisory" style="display:inline-block">Advisory</span></td><td class="">Standing rules for every session</td><td class="mono nowrap fresh">CLAUDE.md, AGENTS.md</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Skills">Skills</span></td><td class=""><span class="label ink-violet">Advisory</span></td><td class="">A repeatable recipe for one job</td><td class="mono nowrap fresh">.claude/skills/ (9)</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Rules">Rules</span></td><td class=""><span class="label ink-violet">Advisory</span></td><td class="">What good looks like, in words</td><td class="mono nowrap fresh">PRINCIPLES.md</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Algorithms">Algorithms</span></td><td class=""><span class="label ">Structure</span></td><td class="">The steps of each phase</td><td class="mono nowrap fresh">algorithms/ (19)</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Loops">Loops</span></td><td class=""><span class="label ink-accent">Blocking</span></td><td class="">Repeat until a check passes</td><td class="mono nowrap fresh">render-fix and QA loops</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Hooks">Hooks</span></td><td class=""><span class="label ink-accent" data-morph="kind-hook" style="display:inline-block">Blocking</span></td><td class="">Block one action, on an event</td><td class="mono nowrap fresh">pre-commit (29), edit hooks</td></tr><tr><td class=""><span class="blkname" data-morph="blk-Gates">Gates</span></td><td class=""><span class="label ink-accent" data-morph="kind-gate" style="display:inline-block">Blocking</span></td><td class="">No sign-off, no next phase</td><td class="mono nowrap fresh">the rail: 44 steps</td></tr><tr><td class=""><span class="blkname" data-morph="blk-MCP">MCP</span></td><td class=""><span class="label muted">Reach</span></td><td class="">Live access to tools and data</td><td class="mono nowrap fresh">none: REST and XMLA queries</td></tr></tbody></table>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">41 / 55</div><template class="notes">• The same table, plus where each one lives
+• Open two or three in VS Code</template></section>
+<section class="slide" id="s42">
+<div class="eyebrow">05 &middot; How I built the tool</div>
+<div class="h2">Testing in five layers</div>
+<table class="cmp tight vtight autoplay" style="margin-top:24px"><thead><tr><th>Layer</th><th>Proves</th><th>How</th></tr></thead><tbody><tr><td>0 &middot; Repo</td><td>The engine still behaves</td><td>About 3,100 tests on every push</td></tr><tr><td>1 &middot; Contract</td><td>The config matches the design</td><td>Blocking rules, Microsoft's validator</td></tr><tr><td>2 &middot; Data</td><td>Every measure resolves, with plausible values</td><td>Queried live after each deploy</td></tr><tr><td>3 &middot; Render</td><td>Every text whole, the page reviewed</td><td>Live page measured, reviewed by another model</td></tr><tr><td>4 &middot; Interaction</td><td>Clicks and hovers do what was promised</td><td>A headless QA runner, a person as fallback</td></tr></tbody></table>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">42 / 55</div><template class="notes">• Five layers, from the repo to the interactions
+• Each catches what the layer before cannot</template></section>
+<section class="slide" id="s43">
+<div class="eyebrow">05 &middot; How I built the tool</div>
+<div class="h2">Design rules</div>
+<div class="grid2 mt32" style="grid-template-columns:3fr 2fr;align-items:stretch">
+  <div class="card "><div class="h4">The design order</div><div class="list" style="margin-top:24px;gap:14px"><div class="small"><span class="label" style="margin-right:16px">0</span>The surface: report, dashboard or app</div><div class="small"><span class="label" style="margin-right:16px">1</span>The person and their job</div><div class="small"><span class="label" style="margin-right:16px">2</span>Flow and empty states</div><div class="small"><span class="label" style="margin-right:16px">3</span>The canvas, then fixed</div><div class="small"><span class="label" style="margin-right:16px">4</span>Layout: one hero, the rest quiet</div><div class="small"><span class="label" style="margin-right:16px">5</span>Interaction: remove what you can</div><div class="small"><span class="label" style="margin-right:16px">6</span>Accessibility</div><div class="small"><span class="label" style="margin-right:16px">7</span>Data honesty</div><div class="small"><span class="label" style="margin-right:16px">8</span>Critique: cut what does not serve the job</div></div></div>
+  <div class="card inkcard"><div class="h4 rose">Fails the build</div><div class="list" style="margin-top:24px;gap:24px"><div class="small"><i data-lucide="shield-check" class="icon rose"></i> Every text whole in the live render</div><div class="small"><i data-lucide="shield-check" class="icon rose"></i> No em dashes in visible copy</div><div class="label" style="margin-top:16px">Warns only</div><div class="small"><i data-lucide="triangle-alert" class="icon rose"></i> Text contrast</div></div></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">43 / 55</div><template class="notes">• The order every page follows: the person first, pixels last
+• Two checks block a build. Contrast is advisory</template></section>
+<section class="slide" id="s44">
+<div class="eyebrow">05 &middot; How I built the tool</div>
+<div class="h2">Three prompts</div>
+<div class="grid3 mt32 stagger" style="gap:32px;align-items:stretch;grid-template-columns:repeat(3, minmax(0, 1fr))"><div class="card stretch"><span class="rchip r-op" style="margin-top:0"><i data-lucide="play" class="icon-sm "></i>Operator</span><div class="prompt">New page for uk-trade-data, report name "UK Trade - Trade stripes". The brief is below. You are the operator: run the tool and write only under clients/. When the tool cannot do something, log a gap, use the nearest supported option, and carry on. Never ask me.</div><div class="split"><div class="label ink-accent">What it stops</div><div class="small strong" style="margin-top:8px">The build session editing the engine, with a hook behind it</div></div></div><div class="card stretch"><span class="rchip r-build" style="margin-top:0"><i data-lucide="wrench" class="icon-sm "></i>Builder</span><div class="prompt">Fix this in the engine, never in a report file. Reproduce it, find the root cause, write the spec first if the behaviour has none, add a test that fails without the fix, and open a pull request. Do not merge.</div><div class="split"><div class="label ink-accent">What it stops</div><div class="small strong" style="margin-top:8px">A fix in a report file that the next build overwrites</div></div></div><div class="card stretch"><span class="rchip r-orch" style="margin-top:0"><i data-lucide="compass" class="icon-sm "></i>Architecture</span><div class="prompt">Before you build anything new: is there a spec for it? If not, write the algorithm first, then the engine, then the check that enforces it. One generator, no second path.</div><div class="split"><div class="label ink-accent">What it stops</div><div class="small strong" style="margin-top:8px">A second way of doing the same thing</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">44 / 55</div><template class="notes">• Shortened from the real ones
+• Each one guards against one mistake</template></section>
+<section class="slide" id="s45">
+<div class="eyebrow">05 &middot; How I built the tool</div>
+<div class="h2">Deliverables for one report</div>
+<div class="grid2 mt32" style="gap:96px"><div class="lines stagger"><div class="line"><div class="h4">Report</div><div class="small" style="margin-top:8px">On the canary and in the client workspace</div></div><div class="line"><div class="h4">Design contract</div><div class="small" style="margin-top:8px">Challenged by a second model, then decided</div></div><div class="line"><div class="h4">Mockup</div><div class="small" style="margin-top:8px">Drawn from a sample of live data</div></div><div class="line"><div class="h4">Design brief</div><div class="small" style="margin-top:8px">Acceptance tests for every element</div></div></div><div class="lines stagger later"><div class="line"><div class="h4">Decision records</div><div class="small" style="margin-top:8px">16, each with its reasoning</div></div><div class="line"><div class="h4">QA report</div><div class="small" style="margin-top:8px">34 of 34 items passed</div></div><div class="line"><div class="h4">Deliverable pack</div><div class="small" style="margin-top:8px">Walkthrough, measures, proof points</div></div><div class="line"><div class="h4">Report guide</div><div class="small" style="margin-top:8px">Plain English, for the reader; shown next</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">45 / 55</div><template class="notes">• Everything one run hands over
+• All in the engagement folder</template></section>
+<section class="slide" id="s46">
+<div class="eyebrow">05 &middot; How I built the tool</div>
+<div class="h2">The report guide</div>
+<div class="grid2 mt32" style="grid-template-columns:3fr 1fr;gap:48px;align-items:start">
+  <div style="height:600px"><div class="viewer" data-slot="guide"><div class="viewer-scroll" tabindex="0"><img src="assets/report-guide.png" alt="The generated report guide for The Balance"></div><div class="viewer-bar"><button class="vbtn" type="button" data-expand><i data-lucide="maximize-2" class="icon-sm "></i>Expand</button><button class="vbtn" type="button" data-href="docs/the-balance/4-Governance/DOCUMENTATION-01-the-balance.html"><i data-lucide="external-link" class="icon-sm "></i>Open the report guide</button></div></div></div>
+  <div class="lines"><div class="line"><div class="h4">For the reader</div><div class="small" style="margin-top:8px">Not for the people who built it</div></div>
+  <div class="line"><div class="h4">Matches gov.uk</div><div class="small" style="margin-top:8px">Every figure, to within 0.005%</div></div>
+  <div class="line"><div class="h4">Explains the design</div><div class="small" style="margin-top:8px">What it shows, and why it looks the way it does</div></div></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">46 / 55</div><template class="notes">• For the people who use the report
+• Every figure matches gov.uk
+• Open it with the button</template></section>
+<section class="slide opener" id="s47" data-surface="warm">
+<div class="sect">
+  <div class="sect-num" aria-hidden="true"><span data-morph="chap-06" style="display:inline-block">06</span></div>
+  <div class="sect-title"><div class="h1c">Cost and limits</div><div class="body sect-sub">Time, tokens, and what still needs a person</div></div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">47 / 55</div><template class="notes">• The honest part</template></section>
+<section class="slide" id="s48">
+<div class="eyebrow">06 &middot; Cost and limits</div>
+<div class="h2">What one delegated report cost</div>
+<div class="grid3 stagger" style="margin-top:32px;grid-template-rows:repeat(2, 1fr);gap:32px"><div class="card "><div class="h2" style="margin:0" data-countup>5 h 11 min</div><div class="small" style="margin-top:16px">On the clock, brief to client deploy</div></div><div class="card "><div class="h2" style="margin:0" data-countup>3 h 9 min</div><div class="small" style="margin-top:16px">Working, after a 2 hour usage-limit pause</div></div><div class="card "><div class="h2" style="margin:0" data-countup>0</div><div class="small" style="margin-top:16px">Questions to me</div></div><div class="card "><div class="h2" style="margin:0" data-countup>225 million</div><div class="small" style="margin-top:16px">Tokens read from cache, mostly the session re-reading its own history</div></div><div class="card "><div class="h2" style="margin:0" data-countup>6</div><div class="small" style="margin-top:16px">Render fixes, none by me</div></div><div class="card "><div class="h2" style="margin:0" data-countup>10</div><div class="small" style="margin-top:16px">Engine gaps logged, each fixed by a builder</div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">48 / 55</div><template class="notes">• 5 h 11 on the clock, about 3 h of work
+• Most tokens are the session re-reading its own history
+• No questions to me. 10 gaps, all fixed by builders</template></section>
+<section class="slide" id="s49">
+<div class="eyebrow">06 &middot; Cost and limits</div>
+<div class="h2">Limits</div>
+<div class="grid2" style="margin-top:32px;gap:96px"><div class="lines stagger"><div class="line"><div class="h4">A new kind of page finds gaps</div><div class="small" style="margin-top:8px">One page, ten engine gaps. The engine only does what it has been taught.</div></div><div class="line"><div class="h4">The deciding model was not the one asked for</div><div class="small" style="margin-top:8px">The delegate asked for one model and was served the drafting model. The tool now records which model answered and blocks the drafter's.</div></div><div class="line"><div class="h4">Approvals reopen on harmless changes</div><div class="small" style="margin-top:8px">A colour written as a hex instead of a name re-ran the whole sign-off chain.</div></div></div><div class="lines stagger later"><div class="line"><div class="h4">Usage limits pause long runs</div><div class="small" style="margin-top:8px">Two hours of waiting in a five-hour run.</div></div><div class="line"><div class="h4">Someone has to own the grant</div><div class="small" style="margin-top:8px">What may be delegated, and the client deploy, stay with a person.</div></div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">49 / 55</div><template class="notes">• A new kind of page finds gaps
+• Prove which model decided
+• Usage limits pause long runs
+• Someone owns the grant</template></section>
+<section class="slide" id="s50">
+<div class="eyebrow">06 &middot; Cost and limits</div>
+<div class="h2">Two bugs the checks missed</div>
+<div class="grid2 mt48 stagger" style="align-items:stretch">
+  <div class="card roomy"><div class="h4">The slicer did not filter the chart</div><div class="small" style="margin-top:12px;line-height:1.4">It was on the page and you could click it. The chart never changed.</div><div class="label" style="margin-top:28px">Checks that passed</div><div class="row g16" style="margin-top:12px;flex-wrap:wrap"><span class="tick"><i data-lucide="circle-check" class="icon-sm ink-ok"></i>Gates</span><span class="tick"><i data-lucide="circle-check" class="icon-sm ink-ok"></i>DAX</span><span class="tick"><i data-lucide="circle-check" class="icon-sm ink-ok"></i>Mockup match</span></div><div class="split"><div class="label ink-accent">How it was found</div><div class="small strong" style="margin-top:8px">Clicking it in the Service.</div></div></div>
+  <div class="card roomy"><div class="h4">The headline card clipped its figures</div><div class="small" style="margin-top:12px;line-height:1.4">The figures were clipped inside the card.</div><div class="label" style="margin-top:28px">Checks that passed</div><div class="row g16" style="margin-top:12px;flex-wrap:wrap"><span class="tick"><i data-lucide="circle-check" class="icon-sm ink-ok"></i>Gates</span><span class="tick"><i data-lucide="circle-check" class="icon-sm ink-ok"></i>DAX</span><span class="tick"><i data-lucide="circle-check" class="icon-sm ink-ok"></i>Mockup match</span></div><div class="split"><div class="label ink-accent">How it was found</div><div class="small strong" style="margin-top:8px">A person looked at the published page, after it had gone out three times.</div></div></div>
+</div>
+<div class="takeaway">No check read the published page.</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">50 / 55</div><template class="notes">• Both passed every check
+• No check read the published page
+• Now: a live text check, a render review, and QA that clicks</template></section>
+<section class="slide" id="s51">
+<div class="eyebrow">06 &middot; Cost and limits</div>
+<div class="h2">Which approach, when</div>
+<table class="cmp autoplay" style="margin-top:32px"><thead><tr><th>Use</th><th>When</th><th>Trade-off</th></tr></thead><tbody><tr><td>Chat</td><td>One measure or a quick question</td><td>No setup, nothing checked</td></tr><tr><td>Fabric skills</td><td>A prototype, or a report you will not rebuild</td><td>Real file formats, advice only</td></tr><tr><td>MCP</td><td>You need the live model's real answers</td><td>Real figures, but nothing stops a wrong write</td></tr><tr><td>My setup</td><td>Reports you rebuild, check and hand over</td><td>Upfront cost and upkeep</td></tr></tbody></table>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">51 / 55</div><template class="notes">• Chat for one measure
+• Fabric skills for a prototype
+• MCP for live answers
+• My setup for reports you rebuild and hand over</template></section>
+<section class="slide" id="s52">
+<div class="eyebrow">06 &middot; Cost and limits</div>
+<div class="h2">What to check, and what you do yourself</div>
+<div class="grid2 mt48" style="gap:96px;align-items:start">
+  <div><div class="label">A check that runs</div><div class="lines"><div class="line"><div class="h4">Measures resolve live</div><div class="small" style="margin-top:8px">Every one, against the real model</div></div><div class="line"><div class="h4">Every text whole</div><div class="small" style="margin-top:8px">Measured on the deployed page</div></div><div class="line"><div class="h4">It survives a refresh</div><div class="small" style="margin-top:8px">Colours, sorts, and filters on new data</div></div></div></div>
+  <div><div class="label ink-accent">You</div><div class="lines"><div class="line"><div class="h4">Write the brief</div><div class="small" style="margin-top:8px">Who it is for, and what done means</div></div><div class="line"><div class="h4">Decide what to delegate</div><div class="small" style="margin-top:8px">Which gates, and never the client deploy by default</div></div><div class="line"><div class="h4">Review what the builder changed</div><div class="small" style="margin-top:8px">Every engine fix is yours to merge</div></div></div></div>
+</div>
+<div class="takeaway">Checks find the mistakes. You decide what done means.</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">52 / 55</div><template class="notes">• Left: checks that can run
+• Right: yours, even under full delegation</template></section>
+<section class="slide" id="s53">
+<div class="eyebrow">Next steps</div>
+<div class="h2">Three things to try</div>
+<div class="grid3 mt48 stagger" style="align-items:stretch"><div class="card roomy"><div class="label">01</div><div class="h4" style="margin-top:16px">Write down how you work</div><div class="small" style="margin-top:16px">A CLAUDE.md or AGENTS.md: your model, your names, your rules</div></div><div class="card roomy"><div class="label">02</div><div class="h4" style="margin-top:16px">Add one hook</div><div class="small" style="margin-top:16px">Block the one mistake you have made twice</div></div><div class="card roomy"><div class="label">03</div><div class="h4" style="margin-top:16px">Ask for a check before every deploy</div><div class="small" style="margin-top:16px">And read it before you approve</div></div></div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">53 / 55</div><template class="notes">• Write down how you work
+• Add one hook
+• Ask for a check before every deploy</template></section>
+<section class="slide opener" id="s54" data-surface="warm">
+<div class="bye">
+  <div class="portrait-ring"><img class="portrait" src="assets/prathy.webp" alt="Prathy Kamasani"></div>
+  <div class="bye-text">
+    <div class="eyebrow">Thank you</div>
+    <div class="h1c" style="margin-top:16px">Prathy Kamasani</div>
+    <div class="facts stagger" style="margin-top:40px"><div class="fact"><i data-lucide="briefcase" class="icon ink-accent"></i><div class="body">Solopreneur @ Data Nova, specialising in Microsoft Fabric and Power BI</div></div><div class="fact"><i data-lucide="award" class="icon ink-accent"></i><div class="body">Microsoft MVP</div></div><div class="fact"><i data-lucide="users" class="icon ink-accent"></i><div class="body">London Microsoft Fabric User Group organiser</div></div><div class="fact"><i data-lucide="mic" class="icon ink-accent"></i><div class="body">Blogger, speaker and budding YouTuber</div></div><div class="fact"><i data-lucide="map-pin" class="icon ink-accent"></i><div class="body">Remote first, lives in the UK and the Netherlands</div></div></div>
+    <div class="contact" style="margin-top:48px">
+      <div class="body"><i data-lucide="globe" class="icon ink-accent"></i>data-nova.io</div>
+      <div class="body"><i data-lucide="user-round" class="icon ink-accent"></i>linkedin.com/in/prathy</div>
+    </div>
+  </div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">54 / 55</div><template class="notes">• Thank you. Questions
+• data-nova.io and LinkedIn</template></section>
+<section class="slide opener" id="s55" data-surface="warm">
+<div class="feedback">
+  <div class="qrbox"><img src="assets/feedback-qr.svg" alt="QR code for the session feedback form"></div>
+  <div>
+    <div class="eyebrow">Feedback</div>
+    <div class="h1c" style="margin-top:16px">How was this session?</div>
+    <div class="body" style="margin-top:32px">Scan the code to fill in the feedback form.</div>
+    <div class="small muted" style="margin-top:16px">data-nova.notion.site</div>
+  </div>
+</div>
+<div class="credit">Prathy Kamasani <span>&middot; Data Nova &middot; Data Alchemy</span></div><div class="pageno">55 / 55</div><template class="notes">• Leave this up during questions
+• Ask them to scan it now</template></section>
+</div>
+<div id="notes"></div>
+<div id="hint">arrows: move &nbsp; N: notes &nbsp; P: play video &nbsp; F: fullscreen &nbsp; A: overview &nbsp; S: presenter view &nbsp; B: black &nbsp; E: expand image</div>
+<script src="vendor/lucide.min.js"></script>
+<script src="deck.js"></script>
+</body></html>

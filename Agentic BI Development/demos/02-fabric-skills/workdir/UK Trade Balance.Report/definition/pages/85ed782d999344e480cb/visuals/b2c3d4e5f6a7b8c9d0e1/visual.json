@@ -1,0 +1,42 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "b2c3d4e5f6a7b8c9d0e1",
+  "position": { "x": 32, "y": 96, "z": 2000, "height": 160, "width": 1856, "tabOrder": 1000 },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": { "Measure": { "Expression": { "SourceRef": { "Entity": "fact_trade_total_monthly" } }, "Property": "Trade Balance (GBP bn)" } },
+              "queryRef": "fact_trade_total_monthly.Trade Balance (GBP bn)",
+              "nativeQueryRef": "Trade Balance (GBP bn)"
+            },
+            {
+              "field": { "Measure": { "Expression": { "SourceRef": { "Entity": "fact_trade_total_monthly" } }, "Property": "Total Exports (GBP bn)" } },
+              "queryRef": "fact_trade_total_monthly.Total Exports (GBP bn)",
+              "nativeQueryRef": "Total Exports (GBP bn)"
+            },
+            {
+              "field": { "Measure": { "Expression": { "SourceRef": { "Entity": "fact_trade_total_monthly" } }, "Property": "Total Imports (GBP bn)" } },
+              "queryRef": "fact_trade_total_monthly.Total Imports (GBP bn)",
+              "nativeQueryRef": "Total Imports (GBP bn)"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "value": [{ "properties": { "fontSize": { "expr": { "Literal": { "Value": "40D" } } } }, "selector": { "id": "default" } }],
+      "label": [{ "properties": { "fontSize": { "expr": { "Literal": { "Value": "14D" } } } }, "selector": { "id": "default" } }],
+      "padding": [{ "properties": { "paddingUniform": { "expr": { "Literal": { "Value": "8D" } } } }, "selector": { "id": "default" } }],
+      "layout": [{ "properties": { "paddingUniform": { "expr": { "Literal": { "Value": "0D" } } } }, "selector": { "id": "default" } }]
+    },
+    "visualContainerObjects": {
+      "background": [{ "properties": { "show": { "expr": { "Literal": { "Value": "true" } } }, "color": { "solid": { "color": { "expr": { "Literal": { "Value": "'#FFFFFF'" } } } } } } }],
+      "border": [{ "properties": { "show": { "expr": { "Literal": { "Value": "false" } } } } }],
+      "padding": [{ "properties": { "top": { "expr": { "Literal": { "Value": "16D" } } }, "bottom": { "expr": { "Literal": { "Value": "16D" } } }, "left": { "expr": { "Literal": { "Value": "24D" } } }, "right": { "expr": { "Literal": { "Value": "24D" } } } }, "selector": { "id": "default" } }]
+    }
+  }
+}

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Balance — Power BI page preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Segoe+UI:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   PBI-FAITHFUL preview of the Power BI report "The Balance".
+   NOT a Data Nova HTML deliverable — no agency bookend, no
+   data-nova.io footer, no theme toggle. It previews exactly what
+   Fabric renders. Every PAGE the report emits is mocked here so
+   the design (fonts · layers · sizes · foreground/background) is
+   real, not stubbed: the main page, the Year-detail drill-through
+   page, and the hover tooltip page — all to scale.
+   ============================================================ */
+:root{
+  --export:#1F7A5C; --import:#C25A3C;
+  --paper:#FBFAF7; --paper-warm:#F4F1EA; --card:#FFFFFF;
+  --ink:#1C2230; --ink-light:#2E3645; --ink-muted:#5A6172; --ink-faint:#8A91A0;
+  --rule:#E7E2D7; --grid:rgba(28,34,48,0.07);
+  --serif:'Newsreader',Georgia,serif; --sans:'Segoe UI',system-ui,sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#E6E4DF;font-family:var(--sans);color:var(--ink);padding:28px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.frame-label{font-size:12px;color:#7A776F;font-family:var(--mono);align-self:flex-start;max-width:1180px;width:100%;margin-top:14px}
+.frame-label b{color:#4A4844}
+
+/* the PBI canvas — fixed 16:9, scaled to fit the review width (1180/1920 = .6146) */
+.canvas{width:1180px;height:663.75px;background:var(--paper);position:relative;
+  box-shadow:0 2px 10px rgba(0,0,0,.12);overflow:hidden}
+
+/* ── chrome-baked header band (E0): the report's OWN title, editorial type ── */
+.hdr{position:absolute;left:0;top:0;width:100%;height:78px;background:var(--paper);border-bottom:1px solid var(--rule);
+  padding:14px 34px;display:flex;justify-content:space-between;align-items:flex-end}
+.hdr .eyebrow{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--export);font-weight:700}
+.hdr h1{font-family:var(--serif);font-size:30px;font-weight:500;line-height:1;margin-top:5px;letter-spacing:-.01em}
+.hdr .right{text-align:right;font-size:11px;color:var(--ink-muted);line-height:1.6;align-self:flex-start}
+.hdr .right .pill{display:inline-block;background:rgba(31,122,92,.1);color:var(--export);border-radius:999px;
+  padding:3px 9px;font-weight:600;font-size:10.5px;margin-bottom:4px}
+.baked{position:absolute;top:6px;right:8px;font-size:9px;font-family:var(--mono);color:var(--ink-faint);
+  background:rgba(244,241,234,.85);padding:2px 6px;border-radius:4px}
+
+/* ── thesis line (E1) ── */
+.thesis{position:absolute;left:34px;top:92px;width:1100px;font-size:14px;color:var(--ink-light)}
+.thesis b{color:var(--ink)} .thesis .def{color:var(--import);font-weight:600}
+
+/* ── KPI cards (E2-E5): OKViz "Card with States" look — label · value · inline sparkline ── */
+.kpi{position:absolute;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:12px 16px 8px;
+  display:flex;flex-direction:column;align-items:center;text-align:center}
+.kpi .lab{font-size:11px;color:var(--ink-muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.kpi .val{font-family:var(--serif);font-weight:500;line-height:1;margin:6px 0 2px;letter-spacing:-.01em}
+.kpi.hero .val{font-size:38px} .kpi .val{font-size:29px}
+.kpi .val .u{font-size:1em;color:inherit;font-family:inherit} /* medium truth: OKViz dataLabel is single-style — unit renders at value style (verified 2026-07-05) */
+.kpi .spark{margin-top:auto;height:26px;width:100%}
+.kpi .spark canvas{width:100%!important;height:26px!important}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.dot.e{background:var(--export)} .dot.i{background:var(--import)}
+.export .val{color:var(--export)} .import .val{color:var(--import)} .balance .val{color:var(--import)}
+.state-tag{font-size:9px;font-family:var(--mono);color:var(--import);border:1px solid var(--import);
+  border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+
+/* ── chart panels (E6, E7): PBI visual look ── */
+.viz{position:absolute;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:12px 16px}
+.viz .vt{font-size:12px;font-weight:600;color:var(--ink-light);margin-bottom:2px}
+.viz .vs{font-size:10.5px;color:var(--ink-faint);margin-bottom:6px}
+.viz canvas{width:100%!important}
+.hint{position:absolute;font-size:7.4px;color:var(--ink-faint);font-family:var(--mono)}
+.src{position:absolute;left:34px;bottom:8px;font-size:7.4px;color:var(--ink-faint);font-family:var(--mono)}
+
+/* ── drill-through page chrome (E9) ── */
+.backbtn{position:absolute;display:flex;align-items:center;gap:6px;background:var(--card);
+  border:1px solid var(--rule);border-radius:6px;font-size:12px;font-weight:600;color:var(--ink-light);
+  padding:0 14px;font-family:var(--sans)}
+.ctxtitle{position:absolute;font-family:var(--serif);font-weight:500;color:var(--ink);letter-spacing:-.01em}
+.ctxtitle .sub{font-family:var(--sans);font-size:11px;font-weight:400;color:var(--ink-muted);display:block;margin-top:3px;letter-spacing:0}
+table.detail{position:absolute;border-collapse:collapse;font-size:11px;background:var(--card);
+  border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+table.detail th{background:var(--paper-warm);color:var(--ink-muted);font-weight:600;text-align:right;padding:6px 12px;font-size:10px;text-transform:uppercase;letter-spacing:.03em}
+table.detail th:first-child,table.detail td:first-child{text-align:left}
+table.detail td{padding:5px 12px;text-align:right;border-top:1px solid var(--rule);font-variant-numeric:tabular-nums}
+table.detail td.e{color:var(--export)} table.detail td.i{color:var(--import)} table.detail td.b{color:var(--import);font-weight:600}
+
+/* ── tooltip page (E10): shown ACTUAL size (a 640×200 hover card, 3 mini cards across) ── */
+.tooltip{width:640px;height:200px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;
+  box-shadow:0 6px 20px rgba(0,0,0,.16);position:relative;padding:14px;display:flex;gap:14px}
+.tooltip .tt-card{flex:1;background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center}
+.tooltip .tt-card .k{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-muted)}
+.tooltip .tt-card .v{font-family:var(--serif);font-size:26px;font-weight:500;margin-top:6px;letter-spacing:-.01em}
+.tooltip .tt-card.e .v{color:var(--export)} .tooltip .tt-card.i .v{color:var(--import)} .tooltip .tt-card.b .v{color:var(--import)}
+.tooltip .tt-card .u{font-size:1em;color:inherit;font-family:inherit} /* medium truth: cardVisual value is single-style */
+</style>
+</head>
+<body>
+
+<!-- ══════════════ PAGE 1 · THE BALANCE (main) ══════════════ -->
+<div class="frame-label"><b>Page 1 · The Balance</b> — report "UK Trade · The Balance", 1920×1080 canvas (shown at 61%). Customs House theme. Native + certified-custom visuals only.</div>
+<!-- data-page/data-canvas/data-mockw + per-element data-viz link this mockup to the config: scripts/
+     sync_mockup_layout.py scales these positions (1180→1920) into the report YAML, so this mockup DRIVES
+     the config layout. Every LIVE visual carries data-viz; the baked header (title+eyebrow) does not. -->
+<div class="canvas" data-page="ReportSection_the_balance" data-canvas="1920x1080" data-mockw="1180">
+  <!-- E0 chrome-baked header: title + eyebrow ONLY (data-independent → baked, not synced) -->
+  <div class="hdr">
+    <div>
+      <div class="eyebrow">UK Trade Intelligence</div>
+      <h1>The Balance</h1>
+    </div>
+    <div class="right"></div>
+  </div>
+
+  <!-- E0 verdict (LIVE _Verdict, sign-driven) + period (LIVE _Period Label, rolling) -->
+  <!-- PBI-faithful: the verdict is a LIVE measure textbox — it renders in the theme family (sans), never
+       Newsreader (the honest design-for-refresh trade-off; only the baked title gets the serif). -->
+  <div data-viz="period_label" style="position:absolute;left:420px;top:46px;width:720px;height:18px;text-align:right;font-size:10px;color:var(--ink-muted)">Latest 12 months (rolling, to March 2026) · ONS MRET, seasonally adjusted · single basis</div>
+  <div class="thesis" data-viz="verdict_line" style="left:34px;top:100px;width:1120px;height:24px"><b>Britain buys more than it sells.</b> £1,917.3 bn traded in the year to March 2026, a <span class="def">£43.4 bn deficit</span>. Imports outpaced exports by 4.6%.</div>
+
+
+  <!-- E2-E5 KPI cards — OKViz Card with States: label · value · inline 12-mo sparkline (visualType PBI_CV_…) -->
+  <div class="kpi hero" data-viz="kpi_total_trade" style="left:34px;top:152px;width:266px;height:104px">
+    <div class="val">£1,917.3<span class="u"> bn</span></div><div class="lab" style="text-transform:none">Total Trade</div>
+    <div class="spark"><canvas id="sp_total"></canvas></div>
+  </div>
+  <div class="kpi export" data-viz="kpi_exports" style="left:314px;top:152px;width:266px;height:104px">
+    <div class="val">£937.0<span class="u"> bn</span></div><div class="lab" style="color:var(--export);text-transform:none">Exports</div>
+    <div class="spark"><canvas id="sp_exp"></canvas></div>
+  </div>
+  <div class="kpi import" data-viz="kpi_imports" style="left:594px;top:152px;width:266px;height:104px">
+    <div class="val">£980.4<span class="u"> bn</span></div><div class="lab" style="color:var(--import);text-transform:none">Imports</div>
+    <div class="spark"><canvas id="sp_imp"></canvas></div>
+  </div>
+  <div class="kpi balance" data-viz="kpi_balance" style="left:874px;top:152px;width:266px;height:104px">
+    <div class="val">−£43.4<span class="u"> bn</span></div><div class="lab" style="text-transform:none">Trade Balance</div>
+    <div class="spark"><canvas id="sp_bal"></canvas></div>
+  </div>
+
+  <!-- the state chip is LIVE (sign-driven DEFICIT/SURPLUS textbox) -->
+  <div data-viz="state_chip" style="position:absolute;left:1063px;top:205px;width:58px;height:17px;font-size:8px;font-family:var(--mono);color:var(--import);border:1px solid var(--import);border-radius:4px;text-align:center;line-height:13px">DEFICIT</div>
+
+  <!-- E6 trend (hero) — stacked-area shaded deficit band -->
+  <div class="viz" data-viz="trend_exports_vs_imports" style="left:34px;top:274px;width:694px;height:332px">
+    <div class="vt">Exports vs imports, five years</div>
+    <div class="vs">GBP bn by fiscal year · the shaded band IS the deficit</div>
+    <div style="height:272px"><canvas id="trend"></canvas></div>
+  </div>
+  <!-- E7 deficit bars -->
+  <div class="viz" data-viz="deficit_by_year" style="left:740px;top:274px;width:388px;height:332px">
+    <div class="vt">The deficit, year by year</div>
+    <div class="vs">Trade balance (GBP bn) · latest year emphasised</div>
+    <div style="height:272px"><canvas id="bal"></canvas></div>
+  </div>
+
+  <div class="hint" data-viz="interaction_hint" style="left:46px;top:610px;width:700px;height:17px">↳ right-click a year to drill through · hover a point for the year tooltip</div>
+  <div class="src" data-viz="source_line" style="left:34px;top:631px;width:860px;height:17px">Source: ONS MRET · HMRC OTS · model SM_UKT · reproduces the gov.uk UK Trade in Numbers methodology</div>
+</div>
+
+<!-- ══════════════ PAGE 2 · YEAR DETAIL (E9 · drill-through, hidden) ══════════════ -->
+<div class="frame-label"><b>Page 2 · Year detail</b> — drill-through target (hidden), 1920×1080. Reached by right-click → drill through on a year. Back button returns to Page 1.</div>
+<div class="canvas" data-page="ReportSection_year_detail" data-canvas="1920x1080" data-mockw="1180">
+  <!-- E9 header (Prathy 2026-07-03): back button + title on ONE row, sub-header underneath the title. -->
+  <div class="backbtn" data-viz="back_btn" style="left:37px;top:33px;width:30px;height:30px;justify-content:center;padding:0;font-size:15px">←</div>
+  <!-- The title NAMES the drilled year (R-DYNAMIC-TITLE-REFLECTS-CONTEXT): bound live to
+       [_Drilled Period Label], never typed, so a screenshot of this page says which year it shows.
+       "Fiscal year 2024/25" here is the representative render of that measure, not a baked value. -->
+  <div class="ctxtitle" data-viz="detail_title" style="left:78px;top:30px;width:860px;height:34px;font-size:22px">Fiscal year 2024/25</div>
+  <div class="ctxtitle" data-viz="detail_subheader" style="left:78px;top:66px;width:920px;height:21px"><span class="sub" style="margin-top:0">Monthly breakdown of exports, imports and the balance for the drilled fiscal year</span></div>
+
+  <!-- E9 the three KPIs re-scoped to the drilled year -->
+  <!-- ONE multi-measure card, three tiles (R-KPI-STRIP-IS-ONE-CARD): the container is the visual -->
+  <div data-viz="detail_kpis" style="position:absolute;left:34px;top:116px;width:722px;height:74px">
+    <div class="kpi export" style="left:0;top:0;width:230px;height:74px;padding:9px 14px">
+      <div class="lab">Exports</div><div class="val" style="font-size:24px">£937.0<span class="u"> bn</span></div></div>
+    <div class="kpi import" style="left:246px;top:0;width:230px;height:74px;padding:9px 14px">
+      <div class="lab">Imports</div><div class="val" style="font-size:24px">£980.4<span class="u"> bn</span></div></div>
+    <div class="kpi balance" style="left:492px;top:0;width:230px;height:74px;padding:9px 14px">
+      <div class="lab">Balance</div><div class="val" style="font-size:24px">−£43.4<span class="u"> bn</span></div></div>
+  </div>
+
+  <!-- E9 monthly trend (left) -->
+  <div class="viz" data-viz="detail_monthly_trend" style="left:34px;top:218px;width:560px;height:360px">
+    <div class="vt">Exports vs imports, by month</div>
+    <div class="vs">GBP bn · the drilled fiscal year</div>
+    <div style="height:296px"><canvas id="detail_trend"></canvas></div>
+  </div>
+  <!-- E9 monthly table (right) -->
+  <table class="detail" data-viz="detail_table" style="left:610px;top:218px;width:534px;height:360px">
+    <thead><tr><th>Month</th><th>Exports</th><th>Imports</th><th>Balance</th></tr></thead>
+    <tbody>
+      <tr><td>Apr</td><td class="e">76.4</td><td class="i">79.1</td><td class="b">−2.7</td></tr>
+      <tr><td>May</td><td class="e">77.9</td><td class="i">81.0</td><td class="b">−3.1</td></tr>
+      <tr><td>Jun</td><td class="e">78.6</td><td class="i">82.4</td><td class="b">−3.8</td></tr>
+      <tr><td>Jul</td><td class="e">79.2</td><td class="i">83.0</td><td class="b">−3.8</td></tr>
+      <tr><td>Aug</td><td class="e">77.1</td><td class="i">81.5</td><td class="b">−4.4</td></tr>
+      <tr><td>Sep</td><td class="e">78.8</td><td class="i">81.9</td><td class="b">−3.1</td></tr>
+      <tr><td>Oct</td><td class="e">79.5</td><td class="i">82.2</td><td class="b">−2.7</td></tr>
+      <tr><td>Nov</td><td class="e">78.0</td><td class="i">81.7</td><td class="b">−3.7</td></tr>
+      <tr><td>Dec</td><td class="e">77.3</td><td class="i">80.9</td><td class="b">−3.6</td></tr>
+    </tbody>
+  </table>
+  <div class="src" data-viz="detail_source" style="left:34px;top:631px;width:860px;height:17px">Source: ONS MRET · HMRC OTS · model SM_UKT · filtered to the drilled fiscal year</div>
+</div>
+
+<!-- ══════════════ PAGE 3 · TRADE TOOLTIP (E10 · report-page tooltip, hidden) ══════════════ -->
+<div class="frame-label"><b>Page 3 · Trade tooltip</b> — report-page tooltip (hidden), shown ACTUAL SIZE (640×200, the canvas floor). Appears on hover over a year on Page 1's trend/bars: the year's three figures as mini cards. Compact so it never crops in the hover card.</div>
+<div class="tooltip" data-page="ReportSection_trade_tooltip" data-canvas="640x200" data-mockw="640" style="position:relative">
+  <!-- The hovered year, named. Without it the tooltip's three figures are correct but contextless: a
+       screenshot of the hover card cannot say WHICH year it is showing (BUG-01-003, same
+       R-DYNAMIC-TITLE-REFLECTS-CONTEXT class as the drill title). Bound live to [_Drilled Period Label],
+       which resolves from the hovered point's filter context. It occupies the canvas's existing top
+       band, so tt_kpis keeps its position and the card stays sized-to-content. -->
+  <div class="ctxtitle" data-viz="tt_period" style="position:absolute;left:16px;top:16px;width:608px;height:24px;font-size:13px;color:var(--ink-muted)">Fiscal year 2024/25</div>
+  <!-- ONE multi-measure card, three tiles (R-KPI-STRIP-IS-ONE-CARD). Compact: card sized to content (104px)
+       and centred in the 200px canvas (the P_CANVAS_SANE floor), not a 200px box the text floats inside. -->
+  <div data-viz="tt_kpis" style="position:absolute;left:16px;top:48px;width:608px;height:104px">
+    <div class="tt-card e" style="position:absolute;left:0;top:0;width:192px;height:104px"><div class="k">Exports</div><div class="v">£937.0<span class="u"> bn</span></div></div>
+    <div class="tt-card i" style="position:absolute;left:208px;top:0;width:192px;height:104px"><div class="k">Imports</div><div class="v">£980.4<span class="u"> bn</span></div></div>
+    <div class="tt-card b" style="position:absolute;left:416px;top:0;width:192px;height:104px"><div class="k">Balance</div><div class="v">−£43.4<span class="u"> bn</span></div></div>
+  </div>
+</div>
+
+<script>
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+const exp=css('--export'),imp=css('--import'),ink=css('--ink'),grid=css('--grid'),mut=css('--ink-muted');
+Chart.defaults.font.family=css('--sans');Chart.defaults.font.size=10;Chart.defaults.color=mut;
+
+// E2-E5 inline sparklines (OKViz trend line): 12 monthly points, current dot emphasised, colour = card colour
+function spark(id,data,colour){
+  new Chart(document.getElementById(id),{type:'line',
+    data:{labels:data.map((_,i)=>i),datasets:[{data,borderColor:colour,borderWidth:1.6,tension:.4,
+      pointRadius:data.map((_,i)=>i===data.length-1?2.4:0),pointBackgroundColor:colour,fill:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},
+      scales:{x:{display:false},y:{display:false}},elements:{line:{capBezierPoints:true}}}});
+}
+spark('sp_total',[151,152,154,156,155,157,158,159,160,159,160,159.8],ink);
+spark('sp_exp',[74,75,76,77,78,79,78,79,80,78,79,78.1],exp);
+spark('sp_imp',[80,81,80,82,83,82,81,82,83,80,82,81.7],imp);
+spark('sp_bal',[-6,-5.5,-4,-5,-5,-3,-3,-3.7,-3.6,-2,-3,-3.6],imp);
+
+// E6 hero trend — shaded deficit band (imports area filled, exports as a line on top)
+const yrs=['FY21','FY22','FY23','FY24','FY25','FY26'];
+new Chart(document.getElementById('trend'),{type:'line',
+  data:{labels:yrs,datasets:[
+    {label:'Imports',data:[640,734,902,978,995,980.4],borderColor:imp,backgroundColor:'rgba(194,90,60,.14)',borderWidth:2.5,tension:.3,pointRadius:3,pointBackgroundColor:imp,fill:'+1'},
+    {label:'Exports',data:[612,690,812,905,921,937.0],borderColor:exp,borderWidth:2.5,tension:.3,pointRadius:3,pointBackgroundColor:exp,fill:false}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    // BUG-01-011 back-port: thousands separators, matching the shipped render's £1,000 style
+    scales:{y:{beginAtZero:true,grid:{color:grid},ticks:{callback:v=>'£'+v.toLocaleString('en-GB')}},x:{grid:{display:false}}}},
+  // BUG-01-011 back-port: the shipped series end-labels (anchored to opposite ends, BUG-01-006)
+  plugins:[{id:'endLabels',afterDatasetsDraw(c){const {ctx}=c;ctx.save();ctx.font='600 13px Inter,sans-serif';
+    c.data.datasets.forEach((ds,i)=>{const m=c.getDatasetMeta(i),p=m.data[m.data.length-1];
+      ctx.fillStyle=ds.borderColor;ctx.textBaseline=i===0?'bottom':'top';
+      ctx.fillText(ds.label,p.x-ctx.measureText(ds.label).width,p.y+(i===0?-8:8));});ctx.restore();}}]});
+
+// E7 deficit bars
+const bal=[-28,-44,-90,-73,-74,-43.4];
+new Chart(document.getElementById('bal'),{type:'bar',
+  data:{labels:yrs,datasets:[{data:bal,backgroundColor:bal.map((v,i)=>i===bal.length-1?imp:'rgba(194,90,60,.28)')}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    // BUG-01-011 back-port: sign before the £ (the render's -£10 typography, not £-10)
+    scales:{y:{grid:{color:grid},ticks:{callback:v=>(v<0?'-£'+Math.abs(v):'£'+v)}},x:{grid:{display:false}}}}});
+
+// E9 detail monthly trend
+const mo=['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+new Chart(document.getElementById('detail_trend'),{type:'line',
+  data:{labels:mo,datasets:[
+    {label:'Imports',data:[79.1,81.0,82.4,83.0,81.5,81.9,82.2,81.7,80.9],borderColor:imp,borderWidth:2,tension:.3,pointRadius:2.5,pointBackgroundColor:imp},
+    {label:'Exports',data:[76.4,77.9,78.6,79.2,77.1,78.8,79.5,78.0,77.3],borderColor:exp,borderWidth:2,tension:.3,pointRadius:2.5,pointBackgroundColor:exp}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:{grid:{color:grid},ticks:{callback:v=>'£'+v}},x:{grid:{display:false}}}}});
+</script>
+</body>
+</html>

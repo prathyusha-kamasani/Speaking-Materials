@@ -1,0 +1,77 @@
+/* CLIENT THEME TEMPLATE
+ *
+ * Copy this file per client, fill the seed values from the onboarding answers
+ * (see client-onboarding.md), and import it AFTER styles.css so it wins.
+ *
+ * WHAT A CLIENT THEME MAY CHANGE: colour, type, icon choice. That is all.
+ * Everything else in tokens/ is the structural layer and stays fixed: the
+ * spacing scale, radius steps, border widths, elevation, z-index ladder,
+ * motion, layout widths, and every rule in guidelines/design-rules-light.html.
+ * A client theme re-points values. It never changes the rules.
+ *
+ * Whatever you set here must still pass rules/validate.html at 100.
+ */
+
+:root {
+  /* --- Brand colours (client supplied) ----------------------------------- */
+  --dn-client-primary: #1A1530;          /* headers, primary button fill */
+  --dn-client-accent: #20B8A8;           /* links, active states, small marks */
+  --dn-client-accent-secondary: #5C4E8A; /* labels, badges */
+  --dn-client-highlight: #E8A33D;        /* highlight moments, used sparingly */
+
+  /* --- Type (client supplied; webfont-licensed, or Google / Fontshare) --- */
+  --dn-client-font-heading: 'General Sans', sans-serif;
+  --dn-client-font-body: 'Inter', sans-serif;
+  --dn-client-font-mono: 'JetBrains Mono', monospace;
+
+  /* --- Remap the system to the client values ----------------------------- */
+  --dn-font-heading: var(--dn-client-font-heading);
+  --dn-font-body: var(--dn-client-font-body);
+  --dn-font-mono: var(--dn-client-font-mono);
+
+  /* Raw client values are FILLS only. Anything carrying text or a meaningful
+     stroke uses a darkened value, set by hand below. */
+  --dn-accent: var(--dn-client-accent);
+  --dn-highlight: var(--dn-client-highlight);
+  --dn-accent-secondary: var(--dn-client-accent-secondary);
+
+  --dn-button-fill: var(--dn-client-primary);
+  --dn-bookend-bg: var(--dn-client-primary);
+
+  /* --- SET BY HAND, NOT DERIVED ------------------------------------------
+   * Most brand accents fail 4.5:1 as text on light surfaces. Darken each one
+   * until it clears 4.5:1 on ALL THREE light surfaces (#FFFFFF, #F2F2F2 and
+   * #F0EEF8, the lavender one binds), and until rules/validate.html reports
+   * rule 2 and rule 3 as PASS. guidelines/client-intake.html derives these.
+   */
+  --dn-accent-ink: #0E6B62;
+  --dn-accent-secondary-ink: #5C4E8A;
+  --dn-highlight-ink: #8A5A12;
+
+  /* Two more that are easy to miss, and both fail loudly when wrong:
+   * - button-text must clear 4.5:1 on --dn-client-primary. The default here
+   *   assumes a DARK primary. A client with a light primary needs the navy
+   *   value instead, or the button ships light-on-light.
+   * - focus-color must clear 3:1 against the page AND against any fill it
+   *   lands on. It is usually the same value as --dn-accent-ink. */
+  --dn-button-text: var(--dn-off-white);
+  --dn-focus-color: var(--dn-accent-ink);
+
+  /* Meaningful strokes: a control's only boundary needs 3:1. Tint this
+     towards the client's primary rather than leaving it neutral grey. */
+  --dn-border-input: #7A7490;
+}
+
+[data-theme="dark"] {
+  /* Lighten the accents that fail on the dark surface, same test as above. */
+  --dn-accent-ink: var(--dn-client-accent);
+  --dn-accent-secondary-ink: #A99BD4;
+  --dn-highlight-ink: var(--dn-client-highlight);
+  --dn-accent-secondary: #A99BD4;
+
+  --dn-button-fill: var(--dn-off-white);
+  --dn-button-text: var(--dn-navy);
+
+  --dn-focus-color: var(--dn-client-accent);
+  --dn-border-input: #847EA0;
+}

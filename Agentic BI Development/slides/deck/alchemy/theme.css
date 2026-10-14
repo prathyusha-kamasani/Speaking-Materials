@@ -1,0 +1,122 @@
+/* Data Alchemy Studio: theme mapping.
+ *
+ * This file deliberately redefines the SAME token names data-nova-design uses
+ * (--dn-*) rather than inventing a --das-* surface vocabulary. That is what
+ * makes every Nova component, the base layer and the document components work
+ * here with no forking: they resolve --dn-surface, --dn-text and so on, and
+ * this file decides what those mean for Data Alchemy Studio.
+ *
+ * LIGHT ONLY, by decision. Rose-gold is a light signature with no dark
+ * equivalent, so there is no [data-theme="dark"] block. Do not add one without
+ * choosing a dark surface family first; a half-built dark mode is worse than
+ * none, because the checker will pass a page whose brand has quietly vanished.
+ *
+ * TWO SURFACE MODES, one attribute.
+ *
+ *   default        calm:  warm-white page. For anything read at length.
+ *   data-surface="warm"   parchment page. For covers, handouts, short editorial.
+ *
+ * Set it on <html> or on any section, exactly like Nova's data-theme. Both modes
+ * use the same ink, the same semantics and the same components; only the field
+ * and the emphasis surface move.
+ *
+ * Why two, and what each costs:
+ *
+ *   CALM. Rose-gold is the signature, not the field, because a saturated warm
+ *   page is heavy for material someone reads for twenty minutes. Rose-gold works
+ *   as a band instead (1.34:1 against the page, above the 1.3 bar). The cost is
+ *   that a white card separates by only 1.08:1, so tone carries almost none of
+ *   the work: the card border and shadow are NOT optional here.
+ *
+ *   WARM. The field itself is the signature, so cards separate on tone alone
+ *   (1.31:1) and need less chrome. The cost is that Rose-gold and Parchment sit
+ *   1.10:1 apart, so a Rose-gold band on a Parchment page does not read. In warm
+ *   mode Rose-gold belongs at full-bleed scale (covers, hero panels, section
+ *   openers), not as a band inside the page. Emphasis inside the page runs the
+ *   other way, via the lighter surface.
+ *
+ * That is the one thing to remember: emphasis is difference from the field, and
+ * the direction flips. Calm emphasises warmer, warm emphasises lighter.
+ */
+:root {
+  --dn-surface:        var(--das-warm-white);
+  --dn-surface-raised: var(--das-white);
+  --dn-surface-subtle: var(--das-parchment);
+
+  /* The signature band. Use it deliberately for callouts, pull quotes, module
+   * intros and tinted blocks: the moments that should read as Data Alchemy.
+   * Not for hovers or table stripes, which want the quieter Parchment. */
+  --das-band: var(--das-rose-gold);
+
+  --dn-border:        var(--das-ink-tint-12);   /* mandatory on cards, see the note above */
+  --dn-border-strong: rgba(43, 32, 19, 0.24);
+  --dn-separator:        var(--das-ink-tint-08);
+  --dn-separator-strong: var(--das-ink-tint-12);
+
+  --dn-text-strong: var(--das-ink);
+  --dn-text:        var(--das-ink);
+  --dn-text-muted:  var(--das-ink-muted);
+
+  /* Gold is a FILL and a STROKE. Anything carrying text uses the -ink token. */
+  --dn-accent:           var(--das-gold);
+  --dn-accent-ink:       var(--das-gold-ink);
+  --dn-accent-secondary: var(--das-ink-muted);
+  --dn-highlight:        var(--das-gold);
+  --dn-highlight-ink:    var(--das-gold-ink);
+
+  --dn-success-ink: var(--das-success-ink);
+  --dn-warning-ink: var(--das-warning-ink);
+  --dn-error-ink:   var(--das-error-ink);
+
+  /* Stronger than Data Nova's, because tone is doing almost none of the work
+   * here: a white card on the warm-white page is 1.08:1. */
+  --dn-shadow-card: 0 1px 2px rgba(43, 32, 19, 0.05), 0 3px 10px rgba(43, 32, 19, 0.07);
+
+  /* Bookends and primary buttons: ink fill, light text. White on ink is
+   * 15.92:1. Gold is never a fill under text, so it is not a button fill. */
+  --dn-bookend-bg:    var(--das-ink);
+  --dn-bookend-text:  var(--das-parchment);
+  --dn-bookend-muted: rgba(232, 224, 208, 0.72);
+
+  --dn-button-fill:       var(--das-ink);
+  --dn-button-fill-hover: #3D2E1B;
+  --dn-button-text:       var(--das-parchment);
+
+  --dn-focus-ring: 0 0 0 3px rgba(139, 101, 8, 0.45);
+
+  /* Charts are out of scope for this palette (see SKILL.md), but the inherited
+   * component layer re-themes Plotly chrome from these two tokens. Defining
+   * them means an embedded Data Nova chart on a white card still reads
+   * correctly instead of resolving to nothing. */
+  --dn-chart-axis: var(--das-ink-muted);
+  --dn-chart-grid: var(--das-ink-tint-08);
+}
+
+/* Warm mode: Parchment field, emphasis by the lighter surface. */
+[data-surface="warm"] {
+  --dn-surface: var(--das-parchment);
+
+  /* Emphasis runs lighter here, because Rose-gold on Parchment is 1.10:1 and
+   * would vanish. Rose-gold is still the signature in this mode, used full
+   * bleed for covers and section openers rather than as a band in the page. */
+  --das-band: var(--das-warm-white);
+
+  /* Tone does real work at 1.31:1, so the card needs less chrome than in calm
+   * mode. Back to Nova's lighter shadow. */
+  --dn-shadow-card: 0 2px 8px rgba(43, 32, 19, 0.06);
+}
+
+/* Light only, defensively.
+ *
+ * data-nova-design/tokens/document.css ships a [data-theme="dark"] block, and
+ * an attribute selector beats :root. If anyone sets data-theme="dark" on a Data
+ * Alchemy page, Nova's dark bookends would win and the brand would silently
+ * turn navy. Re-asserting the light values here means the attribute is inert
+ * rather than destructive. */
+[data-theme="dark"] {
+  --dn-bookend-bg:    var(--das-ink);
+  --dn-bookend-text:  var(--das-parchment);
+  --dn-bookend-muted: rgba(232, 224, 208, 0.72);
+  --dn-separator:        var(--das-ink-tint-08);
+  --dn-separator-strong: var(--das-ink-tint-12);
+}

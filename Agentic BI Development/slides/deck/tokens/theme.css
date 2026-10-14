@@ -1,0 +1,143 @@
+/* SEMANTIC COLOR TOKENS
+ *
+ * What components ask for. Every value resolves to a primitive in colors.css
+ * and is picked per mode so it passes contrast on that mode's surfaces.
+ *
+ * Light is the default. Add data-theme="dark" to any ancestor (<html>, or a
+ * single section) to flip that subtree; the whole set is redefined below, so
+ * a subtree flip is complete rather than partial.
+ *
+ * THE FILL / INK RULE
+ * -------------------
+ * --dn-accent and --dn-highlight are FILLS: a block of colour with nothing
+ * meaningful read off it. --dn-accent-ink and --dn-highlight-ink are the same
+ * colours as TEXT or as a stroke that carries meaning. In light mode the ink
+ * variants are darkened, because the brand teal is 2.21:1 and the gold 1.93:1
+ * on the page background. In dark mode the bright originals are the ones that
+ * pass, so the two converge.
+ *
+ * Every text token below clears 4.5:1 on all three surfaces of its mode, and
+ * every border and focus token clears 3:1. Recheck with rules/validate.html
+ * after changing any of them.
+ */
+
+:root {
+  /* --- Surfaces ---------------------------------------------------------- */
+  --dn-surface: var(--dn-off-white);         /* the page */
+  --dn-surface-raised: var(--dn-white);      /* cards sitting on the page */
+  --dn-surface-subtle: var(--dn-lavender);   /* tinted panels, quiet CTAs */
+  /* For chrome that sits over scrolling content (the site header). Kept at
+     96% rather than fully opaque so content shows through slightly, and
+     defined per mode so it never leaks the wrong ground colour. */
+  --dn-surface-translucent: color-mix(in srgb, var(--dn-surface) 96%, transparent);
+
+  /* --- Ink -------------------------------------------------------------- */
+  --dn-text-strong: var(--dn-navy);          /* 15.32:1 worst surface */
+  --dn-text: var(--dn-charcoal);             /* 7.72:1 */
+  --dn-text-muted: #666666;                  /* 5.00:1, at the limit, do not lighten */
+  --dn-text-on-fill: var(--dn-off-white);    /* on a navy or accent fill */
+
+  /* --- Accents: fills --------------------------------------------------- */
+  --dn-accent: var(--dn-teal);
+  --dn-accent-secondary: var(--dn-violet);
+  --dn-highlight: var(--dn-nova-gold);
+
+  /* --- Accents: inks ---------------------------------------------------- */
+  --dn-accent-ink: var(--dn-teal-700);       /* 5.55:1 */
+  --dn-accent-secondary-ink: var(--dn-violet); /* 6.28:1, passes as-is */
+  --dn-highlight-ink: var(--dn-gold-700);    /* 5.15:1 */
+  --dn-success-ink: var(--dn-success-700);   /* 5.35:1 */
+  --dn-warning-ink: var(--dn-warning-700);   /* 5.15:1 */
+  --dn-error-ink: var(--dn-error-700);       /* 4.74:1 */
+
+  /* --- Borders ---------------------------------------------------------- */
+  /* subtle and strong are DECORATIVE: 1.22:1 and 1.53:1. They separate
+     regions that are already distinguishable by surface and spacing.
+     --dn-border-input is the one that carries meaning (the only boundary of
+     a control), so it clears 3:1. Never use subtle/strong for that. */
+  --dn-border: rgba(26, 21, 48, 0.1);
+  --dn-border-strong: rgba(26, 21, 48, 0.2);
+  --dn-border-input: var(--dn-grey-500);     /* 3.87:1 */
+
+  /* An INLINE RULE is a different role from a CONTAINER EDGE, even where the
+     two share a value. In this brand they do. In data-alchemy-design they do
+     not: there a card edge is a 12% ink tint and an inline rule an 8% one, so
+     a brand layer needs both names to re-point. Use --dn-border for the edge
+     of a box and --dn-separator for a rule between blocks of content. */
+  --dn-separator: var(--dn-border);
+  --dn-separator-strong: var(--dn-border-strong);
+
+  /* --- Focus ------------------------------------------------------------ */
+  /* Two-tone by design. The halo is the surface colour, so the ring stays
+     visible where the focused element is dark (a navy button) as well as
+     where it is light. A single-colour ring cannot clear 3:1 against both. */
+  --dn-focus-color: var(--dn-accent-ink);    /* 5.69:1 on the page */
+  --dn-focus-halo: var(--dn-surface-raised);
+  --dn-focus-width: 3px;
+  --dn-focus-offset: 2px;
+  --dn-focus-outline: var(--dn-focus-width) solid var(--dn-focus-color);
+  --dn-focus-halo-shadow: 0 0 0 var(--dn-focus-offset) var(--dn-focus-halo);
+  /* The whole indicator as a single box-shadow, for a control that cannot use
+     outline (a component setting boxShadow from script, an element inside
+     overflow: hidden). Same two tones, same tokens. */
+  --dn-focus-ring:
+    var(--dn-focus-halo-shadow),
+    0 0 0 calc(var(--dn-focus-offset) + var(--dn-focus-width)) var(--dn-focus-color);
+
+  /* --- Link ------------------------------------------------------------- */
+  --dn-link: var(--dn-accent-ink);
+  --dn-link-underline: color-mix(in srgb, var(--dn-accent-ink) 45%, transparent);
+
+  /* --- Buttons ---------------------------------------------------------- */
+  /* Solid navy with light text, as on data-nova.io. Teal is an accent for
+     links and highlights, not a button fill. */
+  --dn-button-fill: var(--dn-navy);
+  --dn-button-fill-hover: var(--dn-navy-700);
+  --dn-button-text: var(--dn-off-white);     /* 15.71:1, 13.01:1 on hover */
+
+  /* --- Scrim ------------------------------------------------------------ */
+  --dn-scrim: color-mix(in srgb, var(--dn-navy) 72%, transparent);
+}
+
+[data-theme="dark"] {
+  --dn-surface: var(--dn-navy);
+  --dn-surface-raised: var(--dn-navy-800);
+  --dn-surface-subtle: var(--dn-navy-700);
+  --dn-surface-translucent: color-mix(in srgb, var(--dn-surface) 96%, transparent);
+
+  --dn-text-strong: var(--dn-off-white);     /* 13.01:1 worst surface */
+  --dn-text: var(--dn-navy-100);             /* 10.07:1 */
+  --dn-text-muted: var(--dn-navy-200);       /* 5.00:1, at the limit */
+  --dn-text-on-fill: var(--dn-navy);
+
+  --dn-accent: var(--dn-teal);
+  --dn-accent-secondary: var(--dn-violet-300);
+  --dn-highlight: var(--dn-nova-gold);
+
+  /* On dark surfaces the bright brand values are the ones that pass, so ink
+     and fill converge. */
+  --dn-accent-ink: var(--dn-teal);           /* 5.88:1 */
+  --dn-accent-secondary-ink: var(--dn-violet-300); /* 5.77:1 */
+  --dn-highlight-ink: var(--dn-nova-gold);   /* 6.75:1 */
+  --dn-success-ink: var(--dn-success);        /* 6.93:1 */
+  --dn-warning-ink: var(--dn-warning);        /* 8.16:1 */
+  --dn-error-ink: var(--dn-error-300);        /* 5.72:1 */
+
+  --dn-border: rgba(242, 242, 242, 0.14);
+  --dn-border-strong: rgba(242, 242, 242, 0.25);
+  --dn-border-input: var(--dn-grey-400);      /* 3.80:1 */
+  --dn-separator: var(--dn-border);
+  --dn-separator-strong: var(--dn-border-strong);
+
+  --dn-focus-color: var(--dn-teal);           /* 7.11:1 on the dark page */
+  --dn-focus-halo: var(--dn-navy);
+
+  --dn-link: var(--dn-teal);
+  --dn-link-underline: color-mix(in srgb, var(--dn-teal) 45%, transparent);
+
+  --dn-button-fill: var(--dn-off-white);
+  --dn-button-fill-hover: var(--dn-navy-100);
+  --dn-button-text: var(--dn-navy);
+
+  --dn-scrim: color-mix(in srgb, var(--dn-navy-900) 80%, transparent);
+}

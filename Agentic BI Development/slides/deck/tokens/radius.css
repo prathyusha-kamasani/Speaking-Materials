@@ -1,0 +1,20 @@
+/* BORDER RADIUS TOKENS
+ *
+ * Three steps and a pill. Radius scales with the size of the box: a badge
+ * takes sm, a button takes md, a card takes lg.
+ *
+ * THE CEILING IS DELIBERATE. Rule 7 of the design system (see
+ * guidelines/design-rules-*.html, enforced by public/rules/check.js) forbids a
+ * radius of 16px or more on a panel, because past that the corner starts reading as
+ * a soft consumer-app shape rather than a document. So there is no xl step to
+ * reach for. --dn-radius-full is for circles and pills only (avatars, chips),
+ * never for a panel.
+ */
+
+:root {
+  --dn-radius-none: 0;
+  --dn-radius-sm: 4px;    /* badges, chips, small inline blocks */
+  --dn-radius-md: 8px;    /* buttons, inputs, small panels */
+  --dn-radius-lg: 12px;   /* cards, dialogs, image frames */
+  --dn-radius-full: 9999px;
+}

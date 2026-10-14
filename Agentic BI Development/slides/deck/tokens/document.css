@@ -1,0 +1,27 @@
+/* DOCUMENT SHELL TOKENS
+ *
+ * For client deliverables rendered as standalone HTML documents: the dark
+ * bookend header and footer, and the document's own measure.
+ *
+ * Rules that hold in a document as much as on the site: flat colour only, no
+ * gradients, and rules between blocks come from --dn-separator in theme.css,
+ * while the edge of a box comes from --dn-border. They resolve to the same
+ * value in this brand and to different ones in data-alchemy-design, which is
+ * why both names exist.
+ */
+
+:root {
+  --dn-doc-max-width: var(--dn-layout-max);
+  --dn-doc-gutter: var(--dn-layout-gutter);
+  --dn-doc-section-gap: var(--dn-space-2xl);
+
+  --dn-bookend-bg: var(--dn-navy);
+  --dn-bookend-text: var(--dn-off-white);   /* 15.71:1 */
+  --dn-bookend-muted: var(--dn-navy-200);   /* 6.04:1 */
+}
+
+[data-theme="dark"] {
+  --dn-bookend-bg: var(--dn-navy-900);
+  --dn-bookend-text: var(--dn-off-white);   /* 16.97:1 */
+  --dn-bookend-muted: var(--dn-navy-200);   /* 6.53:1 */
+}

@@ -1,0 +1,46 @@
+/* SIZING TOKENS
+ *
+ * Fixed dimensions for interface objects: icons, controls, avatars.
+ *
+ * --dn-control-height is 44px because that is the minimum comfortable touch
+ * target, and every interactive control uses it. --dn-control-height-sm is
+ * 40px and is only for controls that are never the primary action and always
+ * sit beside a full-size one, and it is still above the 40px floor for a
+ * secondary target. Nothing goes below 40px.
+ *
+ * Icon and mark sizes scale with the output, so they follow the same
+ * data-type-context switch as the type roles (see typography.css). A 24px
+ * icon reads correctly in a browser and vanishes on a projected slide.
+ */
+
+:root {
+  /* --- Icons ------------------------------------------------------------- */
+  --dn-icon-sm: 16px;
+  --dn-icon-md: 20px;
+  --dn-icon-lg: 24px;
+  --dn-icon-xl: 40px;    /* platform and product marks in the architecture strip */
+
+  /* --- Controls ---------------------------------------------------------- */
+  --dn-control-height: 44px;
+  --dn-control-height-sm: 40px;
+  --dn-control-padding-block: var(--dn-space-sm);
+  --dn-control-padding-inline: var(--dn-space-md);
+
+  /* --- Marks -------------------------------------------------------------- */
+  --dn-brand-mark-size: 36px;
+
+  /* --- Decorative rules --------------------------------------------------- */
+  --dn-rule-length: 48px;   /* the short gold rule above a card heading */
+  --dn-rule-thickness: 4px;
+}
+
+/* Slide scale: authored at 1920x1080. */
+[data-type-context="slide"] {
+  --dn-icon-sm: 24px;
+  --dn-icon-md: 32px;
+  --dn-icon-lg: 36px;
+  --dn-icon-xl: 64px;
+  --dn-brand-mark-size: 96px;
+  --dn-rule-length: 120px;
+  --dn-rule-thickness: 8px;
+}

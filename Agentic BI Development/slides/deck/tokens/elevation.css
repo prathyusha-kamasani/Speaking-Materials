@@ -1,0 +1,23 @@
+/* ELEVATION TOKENS
+ *
+ * Three levels and a none. Shadow is used to say "this sits above the page",
+ * never for decoration, so the set is small on purpose.
+ *
+ * Dark mode drops card and raised to none: on a dark surface a shadow reads
+ * as dirt rather than lift, and the surface step (--dn-surface ->
+ * --dn-surface-raised) already does the separating. Overlay survives, because
+ * a dialog needs to detach from the scrim.
+ */
+
+:root {
+  --dn-shadow-none: none;
+  --dn-shadow-card: 0 2px 8px rgba(26, 21, 48, 0.04);
+  --dn-shadow-raised: 0 6px 20px rgba(26, 21, 48, 0.1);
+  --dn-shadow-overlay: 0 24px 60px rgba(26, 21, 48, 0.24);
+}
+
+[data-theme="dark"] {
+  --dn-shadow-card: none;
+  --dn-shadow-raised: none;
+  --dn-shadow-overlay: 0 24px 60px rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,22 @@
+/* Z-INDEX TOKENS
+ *
+ * A named ladder, so a new layer is placed by intent rather than by picking a
+ * number that happens to win. Gaps between the steps are deliberate: they
+ * leave room for a local stacking context inside a level without reaching for
+ * the next one.
+ *
+ * Never write a literal z-index. If nothing here fits, the layer is new and
+ * belongs in this file.
+ */
+
+:root {
+  --dn-z-below: -1;      /* decorative art behind content */
+  --dn-z-base: 0;
+  --dn-z-raised: 1;      /* an element lifted within its own section */
+  --dn-z-above: 2;       /* overlapping composition, e.g. the hero portrait */
+  --dn-z-header: 10;     /* the site header */
+  --dn-z-topbar: 20;     /* the fixed accent rule at the top of the viewport */
+  --dn-z-overlay: 100;   /* dropdowns, popovers */
+  --dn-z-modal: 1000;    /* dialogs and their scrim */
+  --dn-z-toast: 1100;    /* transient messages, above everything */
+}

@@ -1,0 +1,25 @@
+/* SPACING TOKENS
+ *
+ * One scale, used for every gap, padding and margin in the system. The steps
+ * double from 4px to 32px and then step in 16s, which keeps the vertical
+ * rhythm of a page predictable without needing an in-between value at every
+ * size.
+ *
+ * There is deliberately no 12px, 20px, 40px or 52px step. When a value feels
+ * like it wants one of those, the fix is to pick the neighbouring step, not to
+ * add a rung. An off-scale one-off is how a spacing system stops being one.
+ * Layout dimensions that genuinely are not spacing (content width, gutters,
+ * header height) live in layout.css.
+ */
+
+:root {
+  --dn-space-2xs: 2px;   /* optical nudges only: badge padding, icon baseline */
+  --dn-space-xs: 4px;
+  --dn-space-sm: 8px;
+  --dn-space-md: 16px;
+  --dn-space-lg: 24px;
+  --dn-space-xl: 32px;
+  --dn-space-2xl: 48px;
+  --dn-space-3xl: 64px;
+  --dn-space-4xl: 80px;
+}

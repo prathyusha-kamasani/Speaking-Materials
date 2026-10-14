@@ -1,0 +1,54 @@
+/* DATA NOVA DESIGN SYSTEM: entry point
+ *
+ * Import order matters for the CASCADE (later component rules win), not for
+ * token resolution: a var() resolves when it is used, so a token may
+ * reference one declared in a file imported later. The order below is
+ * nonetheless meaningful as documentation: primitives, then the semantic
+ * layer that maps onto them, then structure, then base, then components.
+ *
+ * TOKEN LAYERS
+ *   fonts        font loading (holds no tokens)
+ *   typography   type primitives + semantic roles, per output context
+ *   colors       colour primitives, the only literal colours in the system
+ *   theme        semantic colour, light + dark
+ *   charts       data-visualisation colour, light + dark
+ *   spacing      the one spacing scale
+ *   radius       corner radius steps
+ *   borders      border widths
+ *   elevation    shadow levels
+ *   sizing       icon, control and mark dimensions
+ *   layout       content widths, gutters, measure, breakpoint reference
+ *   z-index      the stacking ladder
+ *   motion       durations, easings, composed transitions
+ *   document     the client-deliverable shell
+ *
+ * TWO ATTRIBUTES SWITCH CONTEXT, both on <body>:
+ *   data-theme="dark"            flips the semantic colour set
+ *   data-type-context="slide"    flips the type roles to the slide scale
+ *                     ="print"   flips them to the A4 / PDF scale
+ */
+
+@import "tokens/fonts.css";
+@import "tokens/typography.css";
+@import "tokens/colors.css";
+@import "tokens/theme.css";
+@import "tokens/charts.css";
+@import "tokens/spacing.css";
+@import "tokens/radius.css";
+@import "tokens/borders.css";
+@import "tokens/elevation.css";
+@import "tokens/sizing.css";
+@import "tokens/layout.css";
+@import "tokens/z-index.css";
+@import "tokens/motion.css";
+@import "tokens/document.css";
+
+/* Data Alchemy Studio colour layer: overrides the --dn-* surface, text and semantic tokens. Light only. */
+@import "alchemy/colors.css";
+@import "alchemy/theme.css";
+
+/* Base layer: inherited defaults, after the tokens. */
+@import "base.css";
+
+/* Component layers, after every token file. */
+@import "components/document/document-components.css";

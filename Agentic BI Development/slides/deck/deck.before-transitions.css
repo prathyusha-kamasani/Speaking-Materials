@@ -1,0 +1,230 @@
+/* Deck layer on top of the Data Nova design system. Uses tokens only: no literal colours, fonts or off-scale spacing.
+   Slides are authored at 1920x1080 and scaled to fit the window (see deck.js). */
+
+html, body { margin: 0; height: 100%; }
+body { background: var(--dn-surface); overflow: hidden; }
+body.all { overflow: auto; height: auto; }
+
+/* ---- presentation frame ------------------------------------------------ */
+.frame { position: fixed; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center center; }
+.slide { display: none; width: 1920px; height: 1080px; position: relative; box-sizing: border-box; overflow: hidden;
+  padding: 96px 112px; background: var(--dn-surface); color: var(--dn-text); font-family: var(--dn-font-body);
+  font-size: var(--dn-text-body-size); line-height: 1.5; }
+.slide.active { display: block; }
+body.all .frame { position: static; transform: none !important; width: auto; height: auto; }
+body.all .slide { display: block; margin: 0 auto 48px; }
+
+/* ---- type -------------------------------------------------------------- */
+.eyebrow { font-family: var(--dn-font-mono); font-size: var(--dn-text-label-size); font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--dn-accent-ink); }
+
+.h1 { font-family: var(--dn-font-heading); font-weight: 700; font-size: var(--dn-text-h1-size); line-height: 1.08;
+  color: var(--dn-text-strong); margin: 48px 0 0; max-width: 1500px; }
+.h1c { font-family: var(--dn-font-heading); font-weight: 700; font-size: var(--dn-text-h1-compact-size); line-height: 1.1;
+  color: var(--dn-text-strong); margin: 0; }
+.h2 { font-family: var(--dn-font-heading); font-weight: 700; font-size: var(--dn-text-h2-size); line-height: 1.15;
+  color: var(--dn-text-strong); margin: 24px 0 0; max-width: 1600px; }
+.h3 { font-family: var(--dn-font-heading); font-weight: 700; font-size: var(--dn-text-h3-size); line-height: 1.15;
+  color: var(--dn-text-strong); margin: 0; }
+.h4 { font-family: var(--dn-font-heading); font-weight: 600; font-size: var(--dn-text-h4-size); line-height: 1.2;
+  color: var(--dn-text-strong); margin: 0; }
+.body { font-size: var(--dn-text-body-size); line-height: 1.5; color: var(--dn-text); }
+.small { font-size: var(--dn-text-small-size); line-height: 1.4; color: var(--dn-text); }
+.muted { color: var(--dn-text-muted); }
+.label { font-family: var(--dn-font-mono); font-size: var(--dn-text-label-size); font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--dn-text-muted); }
+.mono { font-family: var(--dn-font-mono); font-size: var(--dn-text-small-size); color: var(--dn-accent-secondary); }
+.strong { color: var(--dn-text-strong); font-weight: 600; }
+.takeaway { position: absolute; left: 112px; right: 112px; bottom: 136px; padding: 24px 32px; background: var(--das-band); border-radius: 12px;
+  font-family: var(--dn-font-heading); font-weight: 600; font-size: var(--dn-slide-size-300); line-height: 1.25; color: var(--dn-text-strong); margin: 0;
+  max-width: none; box-sizing: border-box; }
+.takeaway.legend { font-family: var(--dn-font-body); font-weight: 400; font-size: var(--dn-text-small-size); color: var(--dn-text); }
+.ink-ok { color: var(--dn-success-ink); }
+.ink-warn { color: var(--dn-warning-ink); }
+.ink-bad { color: var(--dn-error-ink); }
+.ink-accent { color: var(--dn-accent-ink); }
+.ink-violet { color: var(--dn-accent-secondary); }
+
+/* ---- furniture --------------------------------------------------------- */
+.credit { position: absolute; left: 112px; bottom: 64px; font-family: var(--dn-font-mono); font-size: var(--dn-text-label-size);
+  color: var(--dn-text-strong); }
+.credit span { opacity: 0.65; }
+.pageno { position: absolute; right: 112px; bottom: 64px; font-family: var(--dn-font-mono); font-size: var(--dn-text-label-size);
+  color: var(--dn-text-muted); }
+.mark { width: var(--dn-brand-mark-size); height: var(--dn-brand-mark-size); border-radius: var(--dn-radius-full);
+  border: 2px solid var(--dn-border-strong); display: block; }
+.rule { width: 64px; height: 2px; background: var(--dn-accent); flex: none; }
+
+/* ---- layout helpers ---------------------------------------------------- */
+.stack { display: flex; flex-direction: column; }
+.row { display: flex; align-items: center; }
+.g8 { gap: 8px; } .g16 { gap: 16px; } .g24 { gap: 24px; } .g32 { gap: 32px; } .g48 { gap: 48px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.mt24 { margin-top: 24px; } .mt32 { margin-top: 32px; } .mt48 { margin-top: 48px; } .mt64 { margin-top: 64px; }
+.center-v { box-sizing: border-box; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+
+.card { background: var(--dn-surface-raised); border: 1px solid var(--dn-border); border-radius: 12px;
+  box-shadow: var(--dn-shadow-card); padding: 32px; box-sizing: border-box; }
+.card.flat { box-shadow: none; }
+.card.roomy { padding: 40px 32px; }
+.card.snug { padding: 24px 32px; }
+.card.navy { background: var(--dn-surface); border-color: var(--dn-border); }
+
+.icon { width: var(--dn-icon-lg); height: var(--dn-icon-lg); flex: none; }
+.icon-xl { width: var(--dn-icon-xl); height: var(--dn-icon-xl); flex: none; }
+.item { display: flex; gap: 24px; align-items: flex-start; }
+.item .icon { margin-top: 4px; }
+.list { display: flex; flex-direction: column; gap: 16px; }
+
+/* ---- table ------------------------------------------------------------- */
+table.cmp { width: 100%; border-collapse: collapse; margin-top: 48px; }
+table.cmp th { font-family: var(--dn-font-mono); font-size: var(--dn-text-label-size); letter-spacing: 0.08em; text-transform: uppercase;
+  text-align: left; color: var(--dn-text-muted); padding: 16px 24px; border-bottom: 2px solid var(--dn-border-strong); }
+table.cmp td { font-size: var(--dn-text-small-size); padding: 32px 24px; border-bottom: 1px solid var(--dn-border); color: var(--dn-text);
+  vertical-align: middle; }
+table.cmp.tight td { padding: 20px 24px; }
+table.cmp td:first-child { font-family: var(--dn-font-heading); font-weight: 600; color: var(--dn-text-strong); width: 440px; }
+
+/* ---- map --------------------------------------------------------------- */
+.plot { position: relative; width: 1696px; height: 648px; margin-top: 24px; }
+.plot .box { position: absolute; left: 208px; top: 0; right: 0; bottom: 64px; border: 1px solid var(--dn-border-strong);
+  border-radius: 12px; background: var(--dn-surface-raised); }
+.plot .vline { position: absolute; left: 952px; top: 0; bottom: 64px; width: 1px; background: var(--dn-border-input); }
+.plot .hline { position: absolute; left: 208px; right: 0; top: 292px; height: 1px; background: var(--dn-border-input); }
+.plot .ax { position: absolute; font-family: var(--dn-font-mono); font-size: var(--dn-slide-size-200); font-weight: 700; color: var(--dn-text); }
+.pt { position: absolute; display: flex; align-items: center; gap: 24px; font-family: var(--dn-font-heading); font-weight: 600;
+  font-size: var(--dn-text-h4-size); color: var(--dn-text-strong); white-space: nowrap; }
+.pt b { width: 72px; height: 72px; border-radius: var(--dn-radius-full); display: flex; align-items: center; justify-content: center;
+  background: var(--dn-surface-raised); color: var(--dn-text-strong); border: 2px solid var(--dn-text-strong); font-family: var(--dn-font-heading); font-size: var(--dn-text-small-size); }
+.pt.hot b { border-color: var(--dn-highlight-ink); color: var(--dn-text-strong); }
+
+/* ---- speaker notes (not part of the slide) ------------------------------ */
+#notes { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; max-height: 38vh; overflow: auto;
+  padding: 24px 48px; background: var(--dn-surface-subtle); color: var(--dn-text); border-top: 1px solid var(--dn-border-strong);
+  font-family: var(--dn-font-body); font-size: 20px; line-height: 1.5; }
+#notes.on { display: block; }
+#hint { position: fixed; right: 24px; top: 16px; z-index: 10; font-family: var(--dn-font-mono); font-size: 14px; color: var(--dn-text-muted);
+  opacity: 0; transition: opacity var(--dn-duration-base, 180ms); }
+body:hover #hint { opacity: 1; }
+body.all #hint, body.all #notes { display: none; }
+@media print {
+  body { overflow: visible; }
+  .frame { position: static; transform: none !important; }
+  .slide { display: block; page-break-after: always; margin: 0; }
+  #notes, #hint { display: none !important; }
+  @page { size: 1920px 1080px; margin: 0; }
+}
+
+/* ---- additions: examples, badge, vocab table, map ----------------------------------------------------- */
+.nowrap { white-space: nowrap; }
+.ex { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: stretch; }
+.ex .stack { min-width: 0; }
+.shot { flex: 1; min-height: 360px; border: 2px dashed var(--dn-border-strong); border-radius: 12px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 16px; background: var(--dn-surface-subtle); }
+.card.stretch { display: flex; flex-direction: column; }
+.split { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--dn-separator); }
+.trap { padding-bottom: 0; }
+table.vocab td:first-child { width: 260px; }
+table.vocab td:nth-child(2) { width: 180px; }
+table.vocab td:nth-child(3) { width: 560px; }
+table.cmp.vocab td { padding: 12px 24px; }
+
+/* ---- section dividers: giant numeral, title overlaid ---------------------------------------------------- */
+.sect { position: relative; height: 100%; }
+.sect-num { position: absolute; left: -12px; top: 50%; transform: translateY(-56%); font-family: var(--dn-font-heading); font-weight: 700;
+  font-size: 640px; line-height: 0.8; letter-spacing: -0.04em; color: var(--dn-text-muted); }
+/* title and subtitle share one panel in the page colour, which cuts the numeral behind them */
+.sect-title { position: absolute; left: 488px; top: 50%; transform: translateY(44%); background: var(--dn-surface); padding: 24px 32px 24px 32px; max-width: 1160px; }
+.sect-sub { margin-top: 24px; }
+
+/* title slide: the three chapters as a quiet row above the credit line */
+.agenda { position: absolute; left: 112px; right: 112px; bottom: 136px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+.agenda .ag { border-top: 1px solid var(--dn-border-strong); padding-top: 16px; }
+.agenda .ag .h4 { margin-top: 8px; }
+
+/* closing slide: the speaker and where to find them */
+.bye { height: 100%; display: flex; align-items: center; gap: 96px; padding-bottom: 64px; box-sizing: border-box; }
+.portrait { width: 520px; height: 520px; flex: none; object-fit: cover; border-radius: var(--dn-radius-full); border: 2px solid var(--dn-border-strong); display: block; }
+.bye-text { flex: 1; min-width: 0; }
+.links { margin-top: 48px; border-top: 1px solid var(--dn-separator-strong); }
+.link { display: flex; align-items: baseline; gap: 32px; padding: 20px 0; border-bottom: 1px solid var(--dn-separator-strong); }
+.link .label { width: 200px; flex: none; }
+.link .mono-url { font-family: var(--dn-font-mono); font-size: var(--dn-text-small-size); color: var(--dn-text-strong); }
+
+/* plain typographic lists: a hairline between items, no boxes or icons */
+.lines { margin-top: 16px; border-top: 1px solid var(--dn-separator-strong); }
+.line { padding: 24px 0; border-bottom: 1px solid var(--dn-separator-strong); }
+
+/* ---- Data Alchemy: rose-gold openers, ink cards ---------------------------------------------------------- */
+.slide.opener { background: var(--das-rose-gold); }
+.sect-title { background: var(--das-rose-gold); }
+.sect-num { color: var(--dn-accent); }
+.inkcard { background: var(--das-ink); border-color: var(--das-ink); box-shadow: none;
+  --dn-text-strong: var(--das-parchment); --dn-text: var(--das-parchment); --dn-text-muted: var(--dn-bookend-muted); }
+.rose { color: var(--das-rose-gold); }
+.opener .label { color: var(--dn-text-muted); }
+.plot .vline, .plot .hline { background: var(--dn-text-muted); }
+
+/* code panels */
+.codecard { display: flex; flex-direction: column; padding: 24px 32px; }
+.code { margin: 16px 0 0; font-family: var(--dn-font-mono); font-size: var(--dn-slide-size-100); line-height: 1.45; color: var(--dn-text-strong);
+  white-space: pre; overflow: hidden; }
+.code mark { background: var(--das-gold-tint-15); color: var(--dn-text-strong); padding: 0 4px; border-radius: 4px; }
+
+/* agenda: three chapters, numbered, hairline between */
+.agenda-list { margin-top: 48px; border-top: 1px solid var(--dn-border-strong); }
+.chap { display: flex; align-items: baseline; gap: 48px; padding: 28px 0; border-bottom: 1px solid var(--dn-border-strong); }
+.chap-num { font-family: var(--dn-font-heading); font-weight: 700; font-size: var(--dn-slide-size-400); color: var(--dn-accent); width: 120px; flex: none; }
+/* recordings in the example slot */
+.clip { width: 100%; flex: 1; min-height: 0; border-radius: 12px; background: var(--das-ink); object-fit: contain; display: block; }
+.ex.wide { grid-template-columns: 2fr 1fr; gap: 32px; height: 616px; }
+.ex.wide { grid-template-rows: minmax(0, 1fr); }
+.ex.wide .stack { min-height: 0; height: 100%; }
+.ex.wide .clip { height: 100%; flex: none; }
+/* divider panel anchored at the bottom, so a two-line title grows upward instead of off the slide */
+.sect .sect-title { top: auto; bottom: 108px; transform: none; }
+/* agenda with four chapters */
+.agenda-list { margin-top: 32px; }
+.chap { padding: 20px 0; }
+
+/* who does what: step, agent, you */
+table.cmp.who th { font-size: var(--dn-text-label-size); }
+table.cmp.who th .icon { width: var(--dn-icon-lg); height: var(--dn-icon-lg); }
+table.cmp.who td { padding: 20px 24px; }
+table.cmp.who td:first-child { width: 240px; }
+table.cmp.who td:last-child { color: var(--dn-accent-ink); }
+
+/* ---- four-up grid and flow diagram (concepts and roles) ----------------- */
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; align-items: stretch; }
+.grid4 > .card { padding: 40px 32px; }
+.flow { display: flex; align-items: stretch; gap: 12px; }
+.fnode { flex: 1; background: var(--dn-surface-raised); border: 1px solid var(--dn-border); border-radius: 12px; padding: 20px 20px;
+  box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+.fnode.you { border: 2px solid var(--dn-text-strong); }
+.fnode.gate { background: var(--das-band); border-color: var(--dn-border-strong); }
+.farrow { display: flex; align-items: center; flex: none; }
+table.cmp.vtight td { padding: 12px 24px; }
+table.cmp.vtight th { padding: 12px 24px; }
+table.cmp.vtight td:first-child { width: 280px; }
+/* agenda with five or six chapters */
+.agenda-list.dense { margin-top: 24px; }
+.agenda-list.dense .chap { padding: 12px 0; gap: 40px; }
+.agenda-list.dense .h3 { font-size: var(--dn-text-h4-size); }
+.agenda-list.dense .chap-num { font-size: var(--dn-slide-size-300); width: 96px; }
+.hold { visibility: hidden; }
+/* a column added on this step of a build fades in when its slide opens */
+.slide.active .fresh { animation: dn-reveal 0.6s ease-out both; }
+@keyframes dn-reveal { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .slide.active .fresh { animation: none; } }
+/* morph between slides: the moving names travel, the rest of the new slide fades in behind them */
+.slide.morphing .morph-fade { animation: dn-fade 0.5s 0.35s ease-out both; }
+.slide.morphing table.cmp td:not(.fresh), .slide.morphing table.cmp th:not(.fresh) { animation: dn-rule 0.6s 0.25s ease-out both; }
+.slide.morphing .fresh { animation: dn-reveal 0.6s 0.7s ease-out both; }
+@keyframes dn-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes dn-rule { from { border-color: transparent; } }
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 48px; }
+.tile { background: var(--dn-surface-raised); border: 1px solid var(--dn-border); border-radius: 12px; box-shadow: var(--dn-shadow-card);
+  height: 300px; padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; }
+.tile .name { font-family: var(--dn-font-heading); font-weight: 700; font-size: var(--dn-text-h3-size); color: var(--dn-text-strong); align-self: flex-start; }
+.blkname { display: inline-block; }

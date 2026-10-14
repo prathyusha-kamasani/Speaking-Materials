@@ -1,0 +1,54 @@
+New page for uk-trade-data: page 07, report name "UK Trade - Trade stripes". The brief is below. Run it end to end without me: I will not answer questions during this run.
+
+You are the operator: run the tool and write only under clients/uk-trade-data/ (and ENGINE-GAPS.md). Never edit engine/, scripts/, algorithms/, bundle/, schemas/, tests/ or .claude/; the repo refuses it on a client branch. When the tool cannot do something, or does it badly, log a row in ENGINE-GAPS.md with what you needed and why, use the nearest supported option that still meets the brief, and carry on. A builder works through those rows separately; never wait for it.
+
+Delegation is granted to claude-fable-5-1, all gates; second checker claude-sonnet-5-5. Every decision and every gate is the delegate's. The model tool is already declared in workspaces.yaml and targets SM_UKT_Import. Run the full rail, Discovery to Govern, on the current branch:
+- the feasibility pass (check_feasibility.py --write) before the Discovery gate and at the design contract: rewrite, mark optional or declare as a deviation anything not plainly buildable, before the gate;
+- new measures through model_requests.yaml (status proposed, live table names), written with write_model.py and verified against the live model; tag them only with GAP ids the stories already cite;
+- the data sample (capture_data_sample.py) at the mockup step, so the mockup draws real values;
+- deploy only through run_pipeline, canary to Fabric Friday Demo only;
+- after every canary, the live-render check and the render review; fix render problems yourself (render fixes go in your rationale, not the contract) and redeploy until both pass;
+- QA with the repo's own runner (qa_runner.py);
+- commit each step's files before recording its decision.
+Where the brief leaves a choice open, decide it, record the assumption in the design log, and carry on. Never ask me.
+
+---
+
+I need a one-page Power BI report that shows the whole history of the UK trade balance at a glance.
+
+Who it is for
+Anyone who sees it for five seconds, on a screen or printed: they should come away knowing whether the UK has mostly bought more than it sold, and when that changed. Analysts should be able to check the numbers behind it.
+
+The data
+Use the semantic model SM_UKT_Import in the Fabric workspace "UK Trade Data Reports".
+- The balance: [Trade Balance (GBP bn)] by 'Date'[Year Month]. 'Trade Total Monthly' holds one basis (balance of payments, seasonally adjusted) and one period type (monthly), so the measure needs no basis or period filter. Never sum across Basis or Period Type if more are ever added.
+- 'Date' is a reserved word in DAX, so always quote it.
+- Use every month that has a value. Leave out any row with a blank Year Month, so no "(Blank)" column appears.
+- Never change or delete anything already in the model. New measures this page needs (the headline sentence, the annotation labels and values, the stripe colour as a hex, the period label) are added as new objects through model_requests.yaml, each verified against the live model.
+- Text boxes take no visual filters (G-19), so each text measure applies its own window in DAX.
+
+What to build
+1. Trade stripes: one column per month for the whole history, columns with no gap, no axes and no gridlines, each column coloured by the sign of the balance from a model measure returning a hex. The shape of the history is the message. Declared deviation G-36: the no-gap setting and the per-month column width are emitted but unverified until the first canary render; check them there.
+2. A one-sentence headline that states what the stripes show, computed by a model measure, not typed.
+3. Three or four short annotations at turning points the data itself shows (for example the first month of a long deficit run, or the largest deficit), placed at fixed positions. Each names the month and the value, both computed by model measures.
+4. A small key: what each colour means, and the period covered, from model measures.
+
+Done means
+- The number of columns equals the number of months with a value.
+- Every column's colour comes from a measure, so it still holds after a refresh.
+- Each annotation's month and value match a DAX query against the model.
+- The live-render check and the render review pass on the final canary: all text fully visible, readable at a glance, no scrollbar on the stripes.
+
+Constraints
+- Portrait page, 1080 by 1920, shown fit to width.
+- Colours from the report theme, not typed into visuals (the stripe colour measure returns theme hex values).
+- Native Power BI visuals only.
+
+Out of scope
+Drill-through, other pages, partner or commodity breakdowns, services and FDI data, and any change to existing model objects.
+
+What to hand back
+- The deployed canary report and its Service render.
+- The checks you ran and what each one returned.
+- The assumptions you recorded.
+- The engine gaps you logged.

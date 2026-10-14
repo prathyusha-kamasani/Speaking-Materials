@@ -1,0 +1,31 @@
+/* MOTION TOKENS
+ *
+ * Durations, easings, and the composed transitions that use them. Motion here
+ * is functional: it shows that a state changed. Nothing decorative, nothing
+ * longer than 260ms.
+ *
+ * Every one of these is neutralised under prefers-reduced-motion (see
+ * base.css), so a transition built from these tokens honours that preference
+ * automatically. A transition written with a literal duration does not.
+ */
+
+:root {
+  /* --- Durations --------------------------------------------------------- */
+  --dn-duration-instant: 0ms;
+  --dn-duration-fast: 120ms;    /* colour and background on hover */
+  --dn-duration-base: 180ms;    /* size, position, opacity */
+  --dn-duration-slow: 260ms;    /* an element entering or leaving */
+
+  /* --- Easings ----------------------------------------------------------- */
+  --dn-ease: cubic-bezier(0.2, 0, 0.2, 1);        /* the default, both ways */
+  --dn-ease-out: cubic-bezier(0, 0, 0.2, 1);      /* entering */
+  --dn-ease-in: cubic-bezier(0.4, 0, 1, 1);       /* leaving */
+
+  /* --- Composed transitions ---------------------------------------------- */
+  --dn-transition-color: color var(--dn-duration-fast) var(--dn-ease);
+  --dn-transition-background: background var(--dn-duration-fast) var(--dn-ease);
+  --dn-transition-transform: transform var(--dn-duration-fast) var(--dn-ease);
+  --dn-transition-control:
+    background var(--dn-duration-fast) var(--dn-ease),
+    transform var(--dn-duration-fast) var(--dn-ease);
+}

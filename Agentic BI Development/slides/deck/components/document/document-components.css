@@ -1,0 +1,723 @@
+/* ==========================================================================
+   Data Nova Design System: document components
+   --------------------------------------------------------------------------
+   The document-specific components used by client HTML deliverables
+   (discovery reports, model audits, architecture docs, handovers). This file
+   is the authoritative CSS for them: the client-html-docs skill describes
+   WHEN to use each one, it does not re-author the CSS per document.
+
+   Imported by styles.css AFTER every token file, so every token below is
+   already resolved. Link styles.css and these classes are available.
+
+   Discipline this file holds to:
+   - Zero literal colour values. Every colour is a --dn-* token, or a
+     color-mix() of one, so both themes come from the same markup.
+   - No coloured left borders (rule 1). Emphasis comes from a full border, a
+     flat tint, or a top header bar.
+   - Radius only 4 / 8 / 12px, via --dn-radius-sm / -md / -lg (rule 2).
+   - No gradients, no glows (rule 4). Flat colour and --dn-shadow-card only.
+   - Brand accents are fills; anything carrying text or a stroke uses the
+     matching -ink token (rule 6). This is why the header-bar card is a flat
+     tint with ink text rather than a saturated bar with white text: the raw
+     fills fail contrast as a text ground in one theme or the other.
+   - Padding and gaps sit on the 4px scale (rule 6 of the checker).
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   Section labels
+   Small uppercase kicker above a heading, plus the one-line description under
+   it. Included here because every document component sits inside a section.
+   -------------------------------------------------------------------------- */
+
+.section-label {
+  font-family: var(--dn-font-body);
+  font-size: var(--dn-text-micro-size);
+  font-weight: var(--dn-font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dn-accent-ink);
+  margin-bottom: var(--dn-space-xs);
+}
+
+.section-desc {
+  font-size: var(--dn-text-small-size);
+  line-height: var(--dn-text-small-line);
+  color: var(--dn-text);
+  margin: var(--dn-space-xs) 0 var(--dn-space-lg);
+}
+
+
+/* --------------------------------------------------------------------------
+   Stats / KPI row
+   "At a glance" band at the top of a discovery or audit document.
+   Semantic ink on the numeral marks a warning or a failure.
+   -------------------------------------------------------------------------- */
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--dn-space-md);
+  margin-bottom: var(--dn-space-xl);
+}
+
+.stat-card {
+  background: var(--dn-surface-raised);
+  border: var(--dn-border-width) solid var(--dn-separator);
+  border-radius: var(--dn-radius-lg);
+  box-shadow: var(--dn-shadow-card);
+  padding: var(--dn-space-md) var(--dn-space-lg);
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--dn-font-mono);
+  font-size: var(--dn-text-stat-size);
+  font-weight: var(--dn-font-weight-bold);
+  line-height: 1;
+  color: var(--dn-accent-ink);
+}
+
+.stat-card.danger  .stat-value { color: var(--dn-error-ink); }
+.stat-card.warning .stat-value { color: var(--dn-warning-ink); }
+.stat-card.success .stat-value { color: var(--dn-success-ink); }
+
+.stat-label {
+  font-family: var(--dn-font-body);
+  font-size: var(--dn-text-micro-size);
+  font-weight: var(--dn-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--dn-text);
+  margin-top: var(--dn-space-sm);
+}
+
+
+/* --------------------------------------------------------------------------
+   Callouts: notice and inline warning
+   Two of the four callout patterns. Neither has a box, a border or a radius.
+   The icon inside inherits colour from the block, except the warning glyph.
+   -------------------------------------------------------------------------- */
+
+.notice,
+.inline-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--dn-space-sm);
+  margin: var(--dn-space-md) 0;
+  font-size: var(--dn-text-small-size);
+  line-height: var(--dn-text-small-line);
+  color: var(--dn-text);
+}
+
+/* A notice is the quiet one of the four, and having no box was doing all of
+   that work on its own: it was set in --dn-text, the same ink as the paragraph
+   above it, so next to running text it was not quieter at all, only unboxed.
+   Muted ink is 5.00:1, which clears 4.5:1 for text of this size. A warning
+   keeps the full ink, because quiet is the opposite of its job. */
+.notice { color: var(--dn-text-muted); }
+
+.inline-warning { margin: var(--dn-space-sm) 0; }
+.inline-warning svg { color: var(--dn-warning-ink); flex: none; }
+.notice svg { flex: none; }
+
+
+/* --------------------------------------------------------------------------
+   Recommendation list
+   The third callout pattern: a linear stack of findings on the subtle
+   surface. Replaces the deprecated .alert-stack and the intelligence card.
+   -------------------------------------------------------------------------- */
+
+.recommendation-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--dn-space-md) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dn-space-sm);
+}
+
+.recommendation {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--dn-space-sm);
+  padding: var(--dn-space-sm) var(--dn-space-md);
+  border-radius: var(--dn-radius-md);
+  background: var(--dn-surface-subtle);
+  font-size: var(--dn-text-small-size);
+  line-height: var(--dn-text-small-line);
+  color: var(--dn-text-strong);
+}
+
+.recommendation svg { flex: none; margin-top: var(--dn-space-2xs); }
+.recommendation.warn svg   { color: var(--dn-warning-ink); }
+.recommendation.danger svg { color: var(--dn-error-ink); }
+.recommendation.good svg   { color: var(--dn-success-ink); }
+.recommendation.info svg   { color: var(--dn-accent-ink); }
+
+.rec-detail {
+  display: block;
+  font-size: var(--dn-text-small-size);
+  color: var(--dn-text);
+  margin-top: var(--dn-space-2xs);
+}
+
+
+/* --------------------------------------------------------------------------
+   Status chip
+   The fourth callout pattern: a small tinted pill for pass/fail,
+   enabled/disabled, present/absent. Tint is a mix of the ink token into the
+   raised surface, so it stays readable in both themes.
+   -------------------------------------------------------------------------- */
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dn-space-xs);
+  padding: var(--dn-space-2xs) var(--dn-space-sm);
+  border-radius: var(--dn-radius-sm);
+  font-family: var(--dn-font-body);
+  font-size: var(--dn-text-micro-size);
+  font-weight: var(--dn-font-weight-semibold);
+  white-space: nowrap;
+}
+
+.status-chip svg { flex: none; }
+
+.status-chip.good {
+  background: color-mix(in srgb, var(--dn-success-ink) 12%, var(--dn-surface-raised));
+  color: var(--dn-success-ink);
+}
+
+.status-chip.warn {
+  background: color-mix(in srgb, var(--dn-warning-ink) 12%, var(--dn-surface-raised));
+  color: var(--dn-warning-ink);
+}
+
+.status-chip.danger {
+  background: color-mix(in srgb, var(--dn-error-ink) 12%, var(--dn-surface-raised));
+  color: var(--dn-error-ink);
+}
+
+.status-chip.info {
+  background: color-mix(in srgb, var(--dn-accent-ink) 12%, var(--dn-surface-raised));
+  color: var(--dn-accent-ink);
+}
+
+
+/* --------------------------------------------------------------------------
+   Semantic status cards
+   Three patterns over one shared card. Pick by hierarchy, not by taste:
+     .status-border  peer-level items, least weight
+     .status-tint    grouped or categorised content, medium weight
+     .status-header  distinct sections needing separation, most weight
+   State classes: .dev (informational), .test (warning), .prod (success),
+   .danger (error). Never a left-border accent.
+   -------------------------------------------------------------------------- */
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--dn-space-md);
+  margin-bottom: var(--dn-space-lg);
+}
+
+.status-card {
+  background: var(--dn-surface-raised);
+  border-radius: var(--dn-radius-lg);
+  box-shadow: var(--dn-shadow-card);
+  padding: var(--dn-space-md) var(--dn-space-lg);
+}
+
+.status-title {
+  font-size: var(--dn-text-h4-size);
+  font-weight: var(--dn-text-h4-weight);
+  line-height: var(--dn-text-h4-line);
+  color: var(--dn-text-strong);
+  margin-bottom: var(--dn-space-sm);
+}
+
+.status-meta {
+  font-size: var(--dn-text-small-size);
+  color: var(--dn-text);
+  margin-bottom: var(--dn-space-sm);
+}
+
+.status-card p {
+  font-size: var(--dn-text-small-size);
+  line-height: var(--dn-text-small-line);
+  color: var(--dn-text);
+  margin: 0 0 var(--dn-space-sm);
+}
+
+.status-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.status-list li {
+  font-size: var(--dn-text-small-size);
+  line-height: var(--dn-text-small-line);
+  color: var(--dn-text);
+  padding: var(--dn-space-2xs) 0;
+}
+
+.status-list li:before {
+  content: "\2022";
+  margin-right: var(--dn-space-sm);
+  color: var(--dn-text-muted);
+}
+
+/* 1. Bordered: a full 2px border, all four sides. Ink tokens only, so the
+      stroke clears 3:1 against the card. */
+.status-card.status-border { border: var(--dn-border-width-thick) solid var(--dn-separator-strong); }
+.status-card.status-border.dev    { border-color: var(--dn-accent-ink); }
+.status-card.status-border.test   { border-color: var(--dn-warning-ink); }
+.status-card.status-border.prod   { border-color: var(--dn-success-ink); }
+.status-card.status-border.danger { border-color: var(--dn-error-ink); }
+
+/* 2. Tinted: a flat semantic tint, no border. Flat, never a gradient. */
+.status-card.status-tint.dev {
+  background: color-mix(in srgb, var(--dn-accent-ink) 10%, var(--dn-surface-raised));
+}
+.status-card.status-tint.test {
+  background: color-mix(in srgb, var(--dn-warning-ink) 10%, var(--dn-surface-raised));
+}
+.status-card.status-tint.prod {
+  background: color-mix(in srgb, var(--dn-success-ink) 10%, var(--dn-surface-raised));
+}
+.status-card.status-tint.danger {
+  background: color-mix(in srgb, var(--dn-error-ink) 10%, var(--dn-surface-raised));
+}
+
+/* 3. Header bar: a tinted band across the TOP of the card, with the semantic
+      ink as its text. The raw fills fail contrast under white text in one
+      theme or the other, so the band is a tint and the label is ink. */
+.status-card.status-header {
+  padding: 0;
+  overflow: hidden;
+}
+
+.status-header-bar {
+  padding: var(--dn-space-sm) var(--dn-space-md);
+  font-family: var(--dn-font-heading);
+  font-size: var(--dn-text-h4-size);
+  font-weight: var(--dn-text-h4-weight);
+  color: var(--dn-accent-ink);
+  background: color-mix(in srgb, var(--dn-accent-ink) 14%, var(--dn-surface-raised));
+  border-bottom: var(--dn-border-width) solid var(--dn-separator);
+}
+
+.status-card.status-header.test .status-header-bar {
+  color: var(--dn-warning-ink);
+  background: color-mix(in srgb, var(--dn-warning-ink) 14%, var(--dn-surface-raised));
+}
+.status-card.status-header.prod .status-header-bar {
+  color: var(--dn-success-ink);
+  background: color-mix(in srgb, var(--dn-success-ink) 14%, var(--dn-surface-raised));
+}
+.status-card.status-header.danger .status-header-bar {
+  color: var(--dn-error-ink);
+  background: color-mix(in srgb, var(--dn-error-ink) 14%, var(--dn-surface-raised));
+}
+
+.status-content { padding: var(--dn-space-md) var(--dn-space-lg); color: var(--dn-text); }
+
+
+/* --------------------------------------------------------------------------
+   Issue / audit cards
+   Issues-found sections, scored audits, risk registers. The severity badge
+   carries the colour; the card itself stays neutral.
+   -------------------------------------------------------------------------- */
+
+.issue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--dn-space-md);
+  margin-bottom: var(--dn-space-lg);
+}
+
+.issue-card {
+  background: var(--dn-surface-raised);
+  border: var(--dn-border-width) solid var(--dn-separator);
+  border-radius: var(--dn-radius-lg);
+  box-shadow: var(--dn-shadow-card);
+  padding: var(--dn-space-md) var(--dn-space-md);
+}
+
+.issue-head {
+  display: flex;
+  align-items: center;
+  gap: var(--dn-space-sm);
+  margin-bottom: var(--dn-space-sm);
+}
+
+.issue-title {
+  font-size: var(--dn-text-body-size);
+  font-weight: var(--dn-font-weight-semibold);
+  color: var(--dn-text-strong);
+}
+
+.issue-card p {
+  font-size: var(--dn-text-small-size);
+  line-height: var(--dn-text-small-line);
+  color: var(--dn-text);
+  margin: 0 0 var(--dn-space-sm);
+}
+
+.issue-meta {
+  font-family: var(--dn-font-mono);
+  font-size: var(--dn-text-micro-size);
+  color: var(--dn-text-muted);
+}
+
+
+/* --------------------------------------------------------------------------
+   Inventory grid
+   Table inventories, notebook inventories, column listings: a labelled
+   count with the member names as code chips underneath.
+   -------------------------------------------------------------------------- */
+
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--dn-space-md);
+  margin-bottom: var(--dn-space-lg);
+}
+
+.inv-card {
+  background: var(--dn-surface-raised);
+  border: var(--dn-border-width) solid var(--dn-separator);
+  border-radius: var(--dn-radius-lg);
+  box-shadow: var(--dn-shadow-card);
+  padding: var(--dn-space-md) var(--dn-space-lg);
+}
+
+.inv-label {
+  font-family: var(--dn-font-body);
+  font-size: var(--dn-text-micro-size);
+  font-weight: var(--dn-font-weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dn-accent-ink);
+  margin-bottom: var(--dn-space-xs);
+}
+
+.inv-count {
+  font-family: var(--dn-font-mono);
+  font-size: var(--dn-text-stat-sm-size);
+  font-weight: var(--dn-font-weight-bold);
+  line-height: 1;
+  color: var(--dn-text-strong);
+  margin-bottom: var(--dn-space-sm);
+}
+
+.inv-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dn-space-xs);
+}
+
+.inv-items code {
+  font-family: var(--dn-font-mono);
+  font-size: var(--dn-text-micro-size);
+  color: var(--dn-text);
+  background: color-mix(in srgb, var(--dn-accent) 12%, var(--dn-surface-raised));
+  padding: var(--dn-space-2xs) var(--dn-space-sm);
+  border-radius: var(--dn-radius-sm);
+}
+
+
+/* --------------------------------------------------------------------------
+   Mermaid diagram cards
+   Toolbar (title plus zoom / expand / Save PNG), then the zoom wrapper. The
+   wrapper carries NO card treatment of its own: the parent card provides the
+   background, radius and shadow. Card inside a card is the anti-pattern.
+   -------------------------------------------------------------------------- */
+
+.diagram-card {
+  background: var(--dn-surface-raised);
+  border: var(--dn-border-width) solid var(--dn-separator);
+  border-radius: var(--dn-radius-lg);
+  box-shadow: var(--dn-shadow-card);
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: var(--dn-space-lg);
+}
+
+.diagram-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--dn-space-md);
+  padding: var(--dn-space-sm) var(--dn-space-md);
+  background: var(--dn-surface-subtle);
+  border-bottom: var(--dn-border-width) solid var(--dn-separator);
+}
+
+.diag-title {
+  font-size: var(--dn-text-small-size);
+  font-weight: var(--dn-font-weight-semibold);
+  color: var(--dn-text-strong);
+}
+
+.diag-btns {
+  display: flex;
+  gap: var(--dn-space-sm);
+}
+
+.diag-btns button {
+  background: color-mix(in srgb, var(--dn-accent) 12%, var(--dn-surface-raised));
+  color: var(--dn-accent-ink);
+  border: none;
+  border-radius: var(--dn-radius-md);
+  padding: var(--dn-space-xs) var(--dn-space-sm);
+  font-family: var(--dn-font-body);
+  font-size: var(--dn-text-micro-size);
+  font-weight: var(--dn-font-weight-medium);
+  min-height: var(--dn-control-height-sm);
+  cursor: pointer;
+  transition: var(--dn-transition-background);
+}
+
+.diag-btns button:hover {
+  background: color-mix(in srgb, var(--dn-accent) 22%, var(--dn-surface-raised));
+}
+
+/* Focus comes from the base layer; see the note on .copy-btn. */
+
+.diagram-zoom-wrapper {
+  overflow: auto;
+  max-height: 560px;
+  padding: var(--dn-space-lg);
+  /* No background, radius or shadow: the parent .diagram-card owns those. */
+}
+
+
+/* --------------------------------------------------------------------------
+   Data tables
+   Always wrapped so the rounded corners clip the square table. Table styles
+   are scoped to the wrapper so they never leak onto other tables.
+   -------------------------------------------------------------------------- */
+
+.table-wrap {
+  background: var(--dn-surface-raised);
+  border: var(--dn-border-width) solid var(--dn-separator);
+  border-radius: var(--dn-radius-lg);
+  box-shadow: var(--dn-shadow-card);
+  overflow: hidden;
+  margin-bottom: var(--dn-space-lg);
+}
+
+.table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--dn-text-small-size);
+}
+
+.table-wrap thead th {
+  background: var(--dn-surface-subtle);
+  padding: var(--dn-space-sm) var(--dn-space-md);
+  text-align: left;
+  font-family: var(--dn-font-body);
+  font-size: var(--dn-text-micro-size);
+  font-weight: var(--dn-font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dn-text);
+  border-bottom: var(--dn-border-width) solid var(--dn-separator);
+}
+
+.table-wrap tbody td {
+  padding: var(--dn-space-sm) var(--dn-space-md);
+  border-bottom: var(--dn-border-width) solid var(--dn-separator);
+  color: var(--dn-text-strong);
+}
+
+.table-wrap tbody tr:last-child td { border-bottom: none; }
+.table-wrap tbody tr:hover { background: var(--dn-surface-subtle); }
+
+.text-right { text-align: right; }
+
+.mono {
+  font-family: var(--dn-font-mono);
+  font-size: var(--dn-text-code-size);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bus matrix: an empty cell is marked, not left blank, so a gap reads as a
+   deliberate "not applicable" rather than as missing data. Put &ndash;
+   inside the cell. */
+.bm-none {
+  color: var(--dn-text-muted);
+  text-align: center;
+}
+
+
+/* --------------------------------------------------------------------------
+   Key-value lists
+   Workspace names, item counts, config values. A definition-list grid,
+   never a two-column table.
+   -------------------------------------------------------------------------- */
+
+.qs-dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--dn-space-sm) var(--dn-space-md);
+  margin: var(--dn-space-md) 0;
+  font-size: var(--dn-text-small-size);
+  line-height: var(--dn-text-small-line);
+}
+
+.qs-dl dt {
+  font-weight: var(--dn-font-weight-semibold);
+  color: var(--dn-text);
+}
+
+.qs-dl dd {
+  margin: 0;
+  color: var(--dn-text-strong);
+}
+
+
+/* --------------------------------------------------------------------------
+   Code template blocks
+   Copy-paste commands on instructional pages. The copy button sits on the
+   small control height and inherits the focus indicator from the base layer.
+   -------------------------------------------------------------------------- */
+
+.pre-wrap {
+  position: relative;
+  background: var(--dn-surface-subtle);
+  border-radius: var(--dn-radius-md);
+  padding: var(--dn-space-md);
+  margin: var(--dn-space-md) 0;
+  overflow-x: auto;
+}
+
+.pre-wrap pre {
+  margin: 0;
+  font-family: var(--dn-font-mono);
+  font-size: var(--dn-text-code-size);
+  line-height: var(--dn-text-code-line);
+  color: var(--dn-text-strong);
+}
+
+.copy-btn {
+  position: absolute;
+  top: var(--dn-space-sm);
+  right: var(--dn-space-sm);
+  border: var(--dn-border-width) solid var(--dn-separator);
+  border-radius: var(--dn-radius-md);
+  background: var(--dn-surface-raised);
+  color: var(--dn-text);
+  font-family: var(--dn-font-body);
+  font-size: var(--dn-text-micro-size);
+  font-weight: var(--dn-font-weight-semibold);
+  padding: var(--dn-space-sm) var(--dn-space-md);
+  min-height: var(--dn-control-height-sm);
+  cursor: pointer;
+  transition: var(--dn-transition-color);
+}
+
+.copy-btn:hover { color: var(--dn-text-strong); }
+
+/* No :focus-visible rule here on purpose. The base layer supplies the one
+   indicator for the whole system; overriding it with `outline: none` plus a
+   shadow is what rule 14 forbids. */
+
+
+/* --------------------------------------------------------------------------
+   Responsive and print
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .status-grid,
+  .issue-grid,
+  .inventory-grid { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .diagram-card,
+  .status-card,
+  .stat-card,
+  .issue-card,
+  .inv-card,
+  .table-wrap { break-inside: avoid; }
+  .diag-btns,
+  .copy-btn { display: none; }
+  .diagram-zoom-wrapper { max-height: none; overflow: visible; }
+}
+
+/* --------------------------------------------------------------------------
+   Plotly figures: make a baked figure follow the theme
+
+   A Python generator resolves the tokens at build time and writes literal
+   colours into the SVG, so a figure generated in light mode keeps its light
+   axis colour when the reader flips to dark, and the tick labels drop to about
+   2.8:1 against the dark surface. Re-asserting the chrome colours here lets one
+   generated figure be correct in both themes. Series colours are deliberately
+   left alone: those carry data, and the generator picks them per theme.
+
+   Only chrome is overridden, so !important is limited to properties Plotly
+   writes as presentation attributes on its own nodes.
+   -------------------------------------------------------------------------- */
+
+.js-plotly-plot .xtick text,
+.js-plotly-plot .ytick text,
+.js-plotly-plot .legendtext,
+.js-plotly-plot .annotation-text {
+  fill: var(--dn-chart-axis) !important;
+}
+
+.js-plotly-plot .gridlayer path,
+.js-plotly-plot .zerolinelayer path {
+  stroke: var(--dn-chart-grid) !important;
+}
+
+.js-plotly-plot .xaxislayer-above path.domain,
+.js-plotly-plot .yaxislayer-above path.domain,
+.js-plotly-plot .xlines-above,
+.js-plotly-plot .ylines-above {
+  stroke: var(--dn-chart-axis) !important;
+}
+
+/* Plotly paints its own backgrounds; the card behind it supplies the surface. */
+.js-plotly-plot .bg,
+.js-plotly-plot .main-svg > rect.bg {
+  fill: transparent !important;
+}
+
+/* --------------------------------------------------------------------------
+   Notice and inline warning: never let them degrade to plain text
+
+   Both are deliberately box-free, so their whole distinctiveness rests on the
+   leading icon. Omit the icon and they render identical to body copy: same ink,
+   no background, no border, no padding, differing only by two pixels of font
+   size. That is a pattern which fails silently, and silently is the worst way
+   for a warning to fail.
+
+   :has() supplies a marker only when no icon was provided, so correct usage is
+   untouched and forgetful usage still reads as a notice.
+   -------------------------------------------------------------------------- */
+
+.notice:not(:has(svg)):not(:has(img))::before,
+.inline-warning:not(:has(svg)):not(:has(img))::before {
+  content: "";
+  flex: none;
+  width: 3px;
+  align-self: stretch;
+  border-radius: var(--dn-radius-sm);
+  background: var(--dn-text-muted);
+}
+
+.inline-warning:not(:has(svg)):not(:has(img))::before {
+  background: var(--dn-warning-ink);
+}
+
+/* The marker is a leading rule on a box-free run of text, not an accent on a
+   card, panel or block, so it is outside the no-left-border rule. Applying that
+   rule here would leave the two patterns indistinguishable from body copy,
+   which the rule exists to prevent, not to cause. */

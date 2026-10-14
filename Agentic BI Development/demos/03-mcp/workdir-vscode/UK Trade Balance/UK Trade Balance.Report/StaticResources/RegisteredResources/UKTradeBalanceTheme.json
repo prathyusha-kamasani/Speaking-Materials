@@ -1,0 +1,43 @@
+{
+  "name": "UKTradeBalanceTheme.json",
+  "dataColors": [
+    "#1F7A5C",
+    "#C25A3C",
+    "#FFFFFF",
+    "#1A7786",
+    "#D3A13B",
+    "#526A78"
+  ],
+  "good": "#1F7A5C",
+  "neutral": "#D3A13B",
+  "bad": "#C25A3C",
+  "maximum": "#1F7A5C",
+  "center": "#D3A13B",
+  "minimum": "#C25A3C",
+  "null": "#B8C0C7",
+  "foreground": "#18343B",
+  "background": "#F7F8F6",
+  "tableAccent": "#1F7A5C",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 16,
+      "color": "#18343B"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#18343B"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#526A78"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 32,
+      "color": "#FFFFFF"
+    }
+  }
+}

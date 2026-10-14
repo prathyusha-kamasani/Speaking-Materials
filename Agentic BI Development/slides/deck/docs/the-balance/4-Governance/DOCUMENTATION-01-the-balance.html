@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Balance · Report Guide</title>
+<style>
+:root {
+  --header-gradient: linear-gradient(135deg, #1C2230 0%, #1F7A5C 100%);
+  --accent: #1F7A5C; --accent-deep: #155c45; --accent-light: rgba(31,122,92,0.10);
+  --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Consolas, monospace;
+}
+[data-theme="light"] {
+  --bg-page: linear-gradient(145deg, #eef1f6 0%, #e6eaf2 100%);
+  --card-bg: linear-gradient(135deg, #f9fafb 0%, #f3f6f9 100%);
+  --card-shadow: 0px 8px 24px rgba(149,157,165,0.15); --card-shadow-sm: 0px 4px 14px rgba(149,157,165,0.12);
+  --card-shadow-xs: 0px 4px 12px rgba(149,157,165,0.10); --card-radius: 12px;
+  --bookend-bg: var(--header-gradient); --bookend-text: #fff;
+  --bookend-muted: rgba(255,255,255,0.55); --bookend-brand: rgba(255,255,255,0.85);
+  --ink: #2d3748; --ink-muted: #718096; --ink-faint: #a0aec0;
+  --rule: #e2e8f0; --rule-strong: #cbd5e0; --paper: #fff; --paper-warm: #f8f9fb;
+  --success: #15803d; --success-bg: #f0fdf4; --warning: #92400e; --warning-bg: #fffbeb;
+  --danger: #b91c1c; --danger-bg: #fef2f2; --info: #1d4ed8; --info-bg: #eff6ff;
+}
+[data-theme="dark"] {
+  --bg-page: #14201b; --card-bg: #1a2621;
+  --card-shadow: 0 2px 12px rgba(0,0,0,0.35); --card-shadow-sm: 0 1px 6px rgba(0,0,0,0.25);
+  --card-shadow-xs: 0 1px 4px rgba(0,0,0,0.20); --card-radius: 12px;
+  --bookend-bg: linear-gradient(135deg, #0d0b14 0%, #10201a 100%); --bookend-text: #e6f0ea;
+  --bookend-muted: rgba(255,255,255,0.35); --bookend-brand: rgba(255,255,255,0.75);
+  --ink: #e6f0ea; --ink-muted: #97a79f; --ink-faint: #74857c;
+  --rule: rgba(255,255,255,0.08); --rule-strong: rgba(255,255,255,0.15);
+  --paper: #1f2c26; --paper-warm: #1a2621;
+  --accent: #4fb489; --accent-deep: #7fcfa9; --accent-light: rgba(79,180,137,0.12);
+  --success: #4ade80; --success-bg: rgba(74,222,128,0.08); --warning: #fbbf24; --warning-bg: rgba(251,191,36,0.08);
+  --danger: #f87171; --danger-bg: rgba(248,113,113,0.08); --info: #60a5fa; --info-bg: rgba(96,165,250,0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg-page); color: var(--ink); font-family: var(--font-stack); line-height: 1.6; min-height: 100vh; }
+main { max-width: 1120px; margin: 0 auto; padding: 36px 40px 80px; }
+section { margin-bottom: 48px; scroll-margin-top: 20px; }
+.header-bar { background: var(--bookend-bg); color: var(--bookend-text); padding: 28px 40px 22px; border-radius: 0 0 8px 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.brand { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; color: var(--bookend-muted); margin-bottom: 10px; }
+.brand-nova { color: var(--bookend-brand); }
+.main-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.cap-name { font-size: 1.5rem; font-weight: 500; }
+.tags { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sku-tag { background: rgba(255,255,255,0.15); border-radius: 12px; padding: 4px 12px; font-size: 0.72rem; font-weight: 600; }
+.health-tag { border-radius: 12px; padding: 4px 12px; font-size: 0.72rem; font-weight: 700; background: rgba(74,222,128,0.25); }
+.theme-toggle { background: rgba(255,255,255,0.15); border: none; border-radius: 8px; padding: 4px 10px; color: var(--bookend-text); cursor: pointer; font-size: 0.9rem; }
+.header-meta { display: flex; background: var(--paper); border-bottom: 1px solid var(--rule); }
+.meta-item { flex: 1; padding: 12px 24px; border-right: 1px solid var(--rule); }
+.meta-item:last-child { border-right: none; }
+.meta-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 3px; }
+.meta-value { font-size: 0.82rem; font-weight: 500; color: var(--ink); }
+.section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.section-desc { font-size: 0.84rem; color: var(--ink-muted); margin: 4px 0 20px; }
+h2 { font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+h3 { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin: 18px 0 8px; }
+p { font-size: 0.86rem; color: var(--ink-muted); margin-bottom: 12px; }
+ul.plain { list-style: none; padding: 0; margin: 0 0 12px; }
+ul.plain li { font-size: 0.85rem; color: var(--ink-muted); padding: 6px 0; border-bottom: 1px solid var(--rule); }
+ul.plain li:last-child { border-bottom: none; }
+ul.plain strong { color: var(--ink); font-weight: 600; }
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 12px; margin-bottom: 24px; }
+.stat-card { background: var(--card-bg); border-radius: 12px; box-shadow: var(--card-shadow-sm); padding: 18px 20px; text-align: center; }
+.stat-value { font-size: 1.7rem; font-weight: 700; color: var(--accent); font-family: var(--font-mono); line-height: 1; }
+.stat-card.hero .stat-value { color: var(--ink); }
+.stat-card.deficit .stat-value { color: #C25A3C; }
+.stat-label { font-size: 0.72rem; font-weight: 600; color: var(--ink-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+.table-wrap { background: var(--card-bg); border-radius: var(--card-radius); box-shadow: var(--card-shadow); overflow: hidden; margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+thead th { background: var(--paper-warm); padding: 10px 16px; text-align: left; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); border-bottom: 1px solid var(--rule); }
+tbody td { padding: 10px 16px; border-bottom: 1px solid var(--rule); color: var(--ink); }
+tbody tr:last-child td { border-bottom: none; }
+.text-right { text-align: right; } .mono { font-family: var(--font-mono); }
+.status-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; }
+.status-chip.good { background: var(--success-bg); color: var(--success); }
+.status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 14px; }
+.status-card { background: var(--card-bg); border-radius: var(--card-radius); box-shadow: var(--card-shadow-sm); padding: 18px 20px; }
+.status-title { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.status-card p { font-size: 0.83rem; margin: 0; }
+.notice { display: flex; align-items: flex-start; gap: 8px; margin: 14px 0; font-size: 0.82rem; color: var(--ink-muted); }
+.notice svg { color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.footer-bar { background: var(--bookend-bg); color: var(--bookend-muted); padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; font-size: 0.72rem; flex-wrap: wrap; gap: 8px; }
+.footer-brand { font-weight: 600; } .footer-link { color: var(--bookend-brand); text-decoration: none; margin-right: 16px; }
+.toc-fab { position: fixed; bottom: 24px; right: 24px; z-index: 900; width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--bookend-bg); color: #fff; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+.toc-panel { position: fixed; bottom: 78px; right: 24px; z-index: 901; width: 230px; max-height: 60vh; background: var(--card-bg); border-radius: 12px; box-shadow: var(--card-shadow); overflow-y: auto; display: none; padding: 8px 0; }
+.toc-panel.open { display: block; }
+.toc-panel-head { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); padding: 10px 16px 6px; }
+.toc-panel ul { list-style: none; margin: 0; padding: 0 8px 8px; }
+.toc-panel a { display: block; padding: 6px 8px; font-size: 0.78rem; color: var(--ink-muted); text-decoration: none; border-radius: 6px; }
+.toc-panel a:hover, .toc-panel a.toc-active { color: var(--accent); background: var(--accent-light); font-weight: 600; }
+.print-btn { position: fixed; bottom: 24px; left: 24px; z-index: 900; display: flex; align-items: center; gap: 8px; background: var(--card-bg); border: 1px solid var(--rule); border-radius: 10px; padding: 8px 16px; font-size: 0.78rem; font-weight: 500; color: var(--ink-muted); cursor: pointer; box-shadow: var(--card-shadow-xs); }
+.print-btn:hover { color: var(--ink); }
+@media (max-width: 900px) { main { padding: 24px 20px 60px; } .header-meta { flex-wrap: wrap; } .stats-row { grid-template-columns: repeat(2,1fr); } }
+@media print { body { background: #fff !important; font-size: 11px; } .toc-fab, .toc-panel, .print-btn, .theme-toggle { display: none !important; } .header-bar, .footer-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; } main { max-width: none; } }
+</style>
+</head>
+<body>
+<div class="header-bar">
+  <div class="brand"><span class="brand-nova">Data Nova</span> · UK Trade Intelligence</div>
+  <div class="main-row">
+    <div class="cap-name">The Balance · Report Guide</div>
+    <div class="tags">
+      <div class="sku-tag">Customs House</div>
+      <div class="health-tag">Validated to gov.uk</div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode"><span class="theme-icon">&#9728;</span></button>
+    </div>
+  </div>
+</div>
+<div class="header-meta">
+  <div class="meta-item"><div class="meta-label">Data source</div><div class="meta-value">ONS MRET · HMRC Overseas Trade</div></div>
+  <div class="meta-item"><div class="meta-label">Period shown</div><div class="meta-value">Rolling 12 months to Mar 2026</div></div>
+  <div class="meta-item"><div class="meta-label">Basis</div><div class="meta-value">Single, consistent trade basis</div></div>
+  <div class="meta-item"><div class="meta-label">Accuracy</div><div class="meta-value">Within 0.005% of gov.uk</div></div>
+</div>
+
+<main>
+  <section id="overview">
+    <div class="section-label">Overview</div>
+    <h2>What this report tells you</h2>
+    <p class="section-desc">Is Britain selling more than it buys, by how much, and how has it moved?</p>
+    <p>The Balance answers that in one glance. It opens with a plain-English verdict and a one-line summary, shows the four headline numbers, and then lets you see the trade gap and how it has behaved year on year.</p>
+  </section>
+
+  <section id="headline">
+    <div class="section-label">The headline</div>
+    <h2>In the 12 months to March 2026</h2>
+    <div class="stats-row">
+      <div class="stat-card hero"><div class="stat-value">£1,917.3 bn</div><div class="stat-label">Total trade</div></div>
+      <div class="stat-card"><div class="stat-value">£937.0 bn</div><div class="stat-label">Exports</div></div>
+      <div class="stat-card"><div class="stat-value">£980.4 bn</div><div class="stat-label">Imports</div></div>
+      <div class="stat-card deficit"><div class="stat-value">−£43.4 bn</div><div class="stat-label">Trade balance (deficit)</div></div>
+    </div>
+    <p class="notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg> Every figure matches the published gov.uk UK Trade in Numbers headline to within 0.005%. The numbers are computed live and refresh with the data, so the verdict, colour and wording update themselves if the position changes. nothing is written in by hand.</p>
+  </section>
+
+  <section id="rationale">
+    <div class="section-label">The thinking</div>
+    <h2>The idea behind the design</h2>
+    <div class="status-grid">
+      <div class="status-card"><div class="status-title">One sentence, five seconds</div><p>Britain buys more than it sells. An executive reads the verdict and the four numbers and knows the position without touching anything. thirty seconds more and the trend confirms it.</p></div>
+      <div class="status-card"><div class="status-title">The gap is the story</div><p>A deficit is naturally a gap, so the trend chart draws it as the shaded space between exports and imports. drawn, not stated. and the year-by-year bars show it has persisted.</p></div>
+      <div class="status-card"><div class="status-title">Colour carries meaning</div><p>Exports and surplus are green, imports and deficit are clay. Colour appears only where a number is signed, so the story is legible at a glance without a legend.</p></div>
+      <div class="status-card"><div class="status-title">Honest by design</div><p>One consistent trade basis, the source named on the page. A goods-vs-services split was left out because it isn't reliable at this level and would imply precision the data can't support.</p></div>
+    </div>
+  </section>
+
+  <section id="pages">
+    <div class="section-label">The report</div>
+    <h2>What's on each page</h2>
+
+    <h3>The Balance (main page)</h3>
+    <ul class="plain">
+      <li><strong>Verdict + summary line</strong>: a plain-English statement of the position, with the deficit figure picked out in clay.</li>
+      <li><strong>Period caption</strong>: the exact 12-month window shown.</li>
+      <li><strong>Four headline cards</strong>: Total Trade (the hero number), Exports (green), Imports (clay) and Trade Balance. the balance card's colour flips with the sign, and each card carries a small 12-month trend.</li>
+      <li><strong>Deficit / surplus chip</strong>: a one-word status.</li>
+      <li><strong>Exports vs imports</strong>: the two series over recent years, with the deficit shown as the shaded gap between them.</li>
+      <li><strong>The deficit, year by year</strong>: the balance for each recent year, latest year emphasised.</li>
+      <li><strong>Source line</strong>: the report's own provenance footer.</li>
+    </ul>
+
+    <h3>Year detail (drill into a year)</h3>
+    <p>Right-click a year and choose drill-through to open a focused view of that year: the same three headline figures re-scoped to the year, a month-by-month exports-vs-imports trend in calendar order, and a table of the monthly numbers behind it. A back arrow returns you to the main page.</p>
+
+    <h3>Hover tooltip</h3>
+    <p>Hovering a point on the charts shows a compact card with that year's exports, imports and balance.</p>
+  </section>
+
+  <section id="look">
+    <div class="section-label">Preview</div>
+    <h2>What the report looks like</h2>
+    <p class="section-desc">A faithful preview of the finished report.</p>
+    <div class="table-wrap" style="overflow:hidden;">
+      <iframe src="../2-Design/wireframes/01-the-balance/mockup.html" title="The Balance report preview" style="width:100%; height:600px; border:0; display:block;" loading="lazy"></iframe>
+    </div>
+    <p class="notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> <a href="../2-Design/wireframes/01-the-balance/mockup.html" target="_blank" rel="noopener" style="color:var(--accent)">Open the full-size preview</a></p>
+  </section>
+
+  <section id="data">
+    <div class="section-label">Data</div>
+    <h2>Data &amp; sources</h2>
+    <ul class="plain">
+      <li><strong>Where the numbers come from</strong>: ONS Monthly Trade (MRET, seasonally adjusted) for the headline totals, and HMRC Overseas Trade for goods detail.</li>
+      <li><strong>Consistency</strong>: a single, consistent trade basis throughout, so exports, imports and the balance always reconcile.</li>
+      <li><strong>Period</strong>: always the rolling latest 12 months, anchored on the most recent month with data. never a stale or future month.</li>
+      <li><strong>Refresh</strong>: every number, and the verdict, colour and wording that depend on it, updates automatically when the data refreshes.</li>
+    </ul>
+  </section>
+
+  <section id="quality">
+    <div class="section-label">Assurance</div>
+    <h2>How we know it is right</h2>
+    <ul class="plain">
+      <li>The four headline figures reproduce the published gov.uk UK Trade in Numbers headline to within <strong>0.005%</strong>, checked against the live report.</li>
+      <li>Every visual on every page was confirmed to return data on the live report.</li>
+      <li>The report was reviewed for accessibility (colour contrast and colour-blind safety) and for a clean, consistent layout.</li>
+    </ul>
+  </section>
+
+  <section id="limitations">
+    <div class="section-label">Transparency</div>
+    <h2>Known limitations</h2>
+    <p>None outstanding. The report's figures, colours (including the Year-detail table's export-green / import-clay value columns) and layout all render as designed on the live report.</p>
+  </section>
+</main>
+
+<button class="print-btn" onclick="printDoc()" aria-label="Print or save as PDF">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Print / Save PDF
+</button>
+<button class="toc-fab" id="toc-fab" aria-label="Table of contents">&#9776;</button>
+<nav class="toc-panel" id="toc-panel" aria-label="Page contents">
+  <div class="toc-panel-head">Navigate</div>
+  <ul>
+    <li><a href="#overview">What it tells you</a></li>
+    <li><a href="#headline">The headline</a></li>
+    <li><a href="#rationale">The idea behind it</a></li>
+    <li><a href="#pages">What's on each page</a></li>
+    <li><a href="#look">Preview</a></li>
+    <li><a href="#data">Data &amp; sources</a></li>
+    <li><a href="#quality">How we know it's right</a></li>
+    <li><a href="#limitations">Known limitations</a></li>
+  </ul>
+</nav>
+
+<div class="footer-bar">
+  <div class="footer-brand"><span class="brand-nova">Data Nova</span> · UK Trade Intelligence</div>
+  <div class="footer-right"><a href="https://data-nova.io" class="footer-link" target="_blank" rel="noopener">data-nova.io</a><span>Confidential · UK Trade Data</span></div>
+</div>
+
+<script>
+function toggleTheme(){var h=document.documentElement;var n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);var i=document.querySelector('.theme-icon');if(i)i.innerHTML=n==='dark'?'&#9728;':'&#9790;';try{localStorage.setItem('theme',n);}catch(e){}}
+(function(){var s;try{s=localStorage.getItem('theme');}catch(e){}s=s||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',s);})();
+function printDoc(){var p=document.documentElement.getAttribute('data-theme');document.documentElement.setAttribute('data-theme','light');window.print();document.documentElement.setAttribute('data-theme',p);}
+document.getElementById('toc-fab').addEventListener('click',function(){document.getElementById('toc-panel').classList.toggle('open');});
+document.addEventListener('click',function(e){var f=document.getElementById('toc-fab'),p=document.getElementById('toc-panel');if(!f.contains(e.target)&&!p.contains(e.target))p.classList.remove('open');});
+document.querySelectorAll('.toc-panel a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('toc-panel').classList.remove('open');});});
+if('IntersectionObserver' in window){var links=document.querySelectorAll('.toc-panel a[href^="#"]');var ob=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var id=en.target.getAttribute('id');links.forEach(function(a){a.classList.remove('toc-active');});var ac=document.querySelector('.toc-panel a[href="#'+id+'"]');if(ac)ac.classList.add('toc-active');}});},{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('section[id]').forEach(function(s){ob.observe(s);});}
+</script>
+</body>
+</html>

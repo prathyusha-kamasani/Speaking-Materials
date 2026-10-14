@@ -1,0 +1,50 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/reportExtension/1.0.0/schema.json",
+  "name": "UKTradeBalanceReportMeasures",
+  "entities": [
+    {
+      "name": "Trade Total Monthly",
+      "measures": [
+        {
+          "name": "Headline Trend",
+          "dataType": "Decimal",
+          "expression": "VAR selectedFlow = SELECTEDVALUE('_Flow Parameter'[Parameter], \"Total\") RETURN SWITCH(selectedFlow, \"Exports\", [Total Exports (GBP bn)], \"Imports\", [Total Imports (GBP bn)], \"Total\", [Total Trade (GBP bn)], [Total Trade (GBP bn)])",
+          "formatString": "£#,0.0 \"bn\";-£#,0.0 \"bn\"",
+          "description": "Report-level selector measure. Uses the existing _Flow Parameter labels to switch the headline trend among model exports, imports, and total trade measures.",
+          "references": {
+            "unrecognizedReferences": false,
+            "measures": [
+              {
+                "entity": "Trade Total Monthly",
+                "name": "Total Exports (GBP bn)"
+              },
+              {
+                "entity": "Trade Total Monthly",
+                "name": "Total Imports (GBP bn)"
+              },
+              {
+                "entity": "Trade Total Monthly",
+                "name": "Total Trade (GBP bn)"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Balance State",
+          "dataType": "Integer",
+          "expression": "IF([Trade Balance] < 0, 0, 1)",
+          "description": "0 is deficit and 1 is surplus; drives the headline card fill from the report theme.",
+          "references": {
+            "unrecognizedReferences": false,
+            "measures": [
+              {
+                "entity": "Trade Total Monthly",
+                "name": "Trade Balance"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

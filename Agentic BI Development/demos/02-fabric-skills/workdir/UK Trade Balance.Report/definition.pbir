@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definitionProperties/2.0.0/schema.json",
+  "version": "4.0",
+  "datasetReference": {
+    "byConnection": {
+      "connectionString": "Data Source=powerbi://api.powerbi.com/v1.0/myorg/UK Trade Data;Initial Catalog=SM_UKT_DirectLake;Integrated Security=ClaimsToken;semanticModelId=ffac1347-8ac8-4019-9dd7-6d38dc941df7"
+    }
+  }
+}

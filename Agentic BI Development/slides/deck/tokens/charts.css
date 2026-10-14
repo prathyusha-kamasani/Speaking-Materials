@@ -1,0 +1,87 @@
+/* CHART TOKENS
+ *
+ * THE ARITHMETIC, STATED ONCE
+ * ---------------------------
+ * A categorical series colour has two jobs: clear 3:1 against the surface it
+ * sits on, and be distinguishable from the other series. Those two pull
+ * against each other. Requiring 3:1 against a white page caps a colour's
+ * relative luminance, which caps the whole set inside a band running from
+ * 3:1 to 21:1 against white. Spreading N colours evenly across that band
+ * leaves each neighbour about (21/3)^(1/(N-1)) apart:
+ *
+ *   4 series -> ~1.9:1 between neighbours
+ *   6 series -> ~1.5:1
+ *   8 series -> ~1.3:1, which is not a difference anyone can see
+ *
+ * So six is the honest maximum and four is the comfortable one. Past four,
+ * add direct labels or patterns; do not add colours.
+ *
+ * HOW THIS SET IS BUILT
+ * ---------------------
+ * Series 1-4 sit on widely spaced rungs of that luminance ladder; 5 and 6
+ * fill the gaps between them. A four-series chart therefore gets the widest
+ * separation available (worst pair 1.63:1 light, 1.44:1 dark) and a
+ * six-series chart still separates every pair by at least 1.30:1, where the
+ * previous set had three colours sharing one luminance and a worst pair of
+ * 1.00:1, invisible in greyscale or to a monochromatic viewer.
+ *
+ * Hue per series index is IDENTICAL in light and dark: series 3 is violet in
+ * both. Only lightness moves between modes. A chart must not change which
+ * colour means which series when the theme flips.
+ *
+ * Every value clears 3:1 on all three surfaces of its mode.
+ */
+
+:root {
+  /* Categorical. Use in order. Four is the comfortable maximum, six the hard one. */
+  --dn-chart-1: #27998D;   /* teal,   3.03:1 worst surface */
+  --dn-chart-2: #894E65;   /* rose,   5.47:1 */
+  --dn-chart-3: #3B2E62;   /* violet, 10.43:1 */
+  --dn-chart-4: #0F0C0B;   /* ink,    16.97:1 */
+  --dn-chart-5: #9E6C20;   /* gold,   3.96:1 */
+  --dn-chart-6: #304C74;   /* blue,   7.58:1 */
+
+  /* Sequential, one measure, low to high.
+     The low end is a tint and is NOT readable as a stroke or a small mark.
+     It is an area fill only, and it needs a border against a white card.
+     Steps 4 and 5 are the only two that clear 3:1 on their own. */
+  --dn-chart-seq-1: #D9F0ED;
+  --dn-chart-seq-2: #9EDCD4;
+  --dn-chart-seq-3: #5AC5B8;
+  --dn-chart-seq-4: #20B8A8;
+  --dn-chart-seq-5: #14766C;
+
+  /* Diverging. Gold negative, teal positive, neutral midpoint. */
+  --dn-chart-div-neg: #9E6C20;
+  --dn-chart-div-mid: #E8E6EE;
+  --dn-chart-div-pos: #27998D;
+
+  /* Chrome. Grid is deliberately faint: it is a reference, not data. */
+  --dn-chart-grid: rgba(26, 21, 48, 0.08);
+  --dn-chart-axis: #666666;        /* 5.74:1, same ink as muted text */
+  --dn-chart-label: #4A4A4A;
+}
+
+[data-theme="dark"] {
+  /* Same hues, lightness re-solved against the dark surfaces. */
+  --dn-chart-1: #59E0CE;   /* teal,   9.00:1 worst surface */
+  --dn-chart-2: #9A6276;   /* rose,   3.04:1 */
+  --dn-chart-3: #A092CB;   /* violet, 5.18:1 */
+  --dn-chart-4: #FAF0EB;   /* ink,    12.99:1 */
+  --dn-chart-5: #B7790E;   /* gold,   3.99:1 */
+  --dn-chart-6: #91B3E8;   /* blue,   6.81:1 */
+
+  --dn-chart-seq-1: #14766C;
+  --dn-chart-seq-2: #199185;
+  --dn-chart-seq-3: #20B8A8;
+  --dn-chart-seq-4: #5AC5B8;
+  --dn-chart-seq-5: #9EDCD4;
+
+  --dn-chart-div-neg: #B7790E;
+  --dn-chart-div-mid: #3A3454;
+  --dn-chart-div-pos: #59E0CE;
+
+  --dn-chart-grid: rgba(242, 242, 242, 0.1);
+  --dn-chart-axis: #9A94AD;
+  --dn-chart-label: #D8D5E0;
+}

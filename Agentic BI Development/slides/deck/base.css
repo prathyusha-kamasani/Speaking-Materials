@@ -1,0 +1,67 @@
+/* BASE LAYER: the defaults every page inherits.
+ *
+ * Why this exists: a page that does not set `color` on the body leaves text at
+ * the browser default (black). In light mode that looks fine, so the mistake is
+ * invisible; in dark mode it renders black on a dark surface at about 1.3:1 and
+ * fails rule 2. Setting the inherited defaults once here means an element that
+ * forgets to declare a colour still lands on a theme-aware token.
+ *
+ * Imported by styles.css after the tokens and before the component layers.
+ */
+
+body {
+  background: var(--dn-surface);
+  color: var(--dn-text);
+  font-family: var(--dn-font-body);
+  font-size: var(--dn-text-body-size);
+  font-weight: var(--dn-text-body-weight);
+  line-height: var(--dn-text-body-line);
+}
+
+/* Headings default to the strong ink and the heading face. */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dn-text-strong);
+  font-family: var(--dn-font-heading);
+}
+
+/* Links use accent ink, never the raw fill accent, per rule 6. */
+a { color: var(--dn-link); }
+
+code, pre, kbd, samp { font-family: var(--dn-font-mono); }
+
+/* FOCUS: visible on every background, per rule 7.
+ *
+ * Two parts, and both are load-bearing:
+ *   outline     carries the colour, and survives Windows High Contrast /
+ *               forced-colors mode, where box-shadow is discarded.
+ *   box-shadow  paints a halo in the surface colour between the element and
+ *               the outline, so the ring stays visible on a dark fill (a navy
+ *               button) as well as on the light page. A single-colour ring
+ *               cannot clear 3:1 against both.
+ *
+ * Do not replace this with `outline: none` plus a colour change. Do not add a
+ * second :focus-visible rule elsewhere. One indicator, defined here, driven
+ * by the tokens in theme.css.
+ */
+:focus-visible {
+  border-radius: var(--dn-radius-sm);
+  outline: var(--dn-focus-outline);
+  outline-offset: var(--dn-focus-offset);
+  box-shadow: var(--dn-focus-halo-shadow);
+}
+
+/* REDUCED MOTION
+ *
+ * Neutralise transitions, animations and smooth scrolling. scroll-behavior is
+ * set on <html>, so it has to be reset on the element itself, because a universal
+ * selector does not reach it.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    transition-duration: var(--dn-duration-instant) !important;
+    animation-duration: var(--dn-duration-instant) !important;
+    animation-iteration-count: 1 !important;
+  }
+}
